@@ -3,7 +3,7 @@ A Manim project for the relativistic addition of velocity.
 
 # Requisites
 - [Python 3.x](https://www.python.org/downloads/)
-- pip
+- pip (latest version)
 ```sh
 # download get-pip.py
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
