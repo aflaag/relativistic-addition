@@ -3,19 +3,8 @@ A Manim project for the relativistic addition of velocity.
 
 # Requisites
 - [Python 3.x](https://www.python.org/downloads/)
-- pip (latest version)
-```sh
-# download get-pip.py
-curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-
-# install pip with get-pip.py
-python get-pip.py
-```
-- Manim (latest version)
-```sh
-# install manim with pip (1st May 2021, it may change in the future)
-pip install manim
-```
+- [pip](https://pip.pypa.io/en/stable/installing/) (latest version)
+- [Manim](https://github.com/3b1b/manim) (latest version)
 - [FFmpeg](https://github.com/BtbN/FFmpeg-Builds/releases)
 - [LaTex](https://www.latex-project.org/get/) 
 
