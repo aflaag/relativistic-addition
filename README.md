@@ -16,7 +16,7 @@ python get-pip.py
 # install manim
 pip install manim
 ```
-- [FFmpeg](https://github.com/FFmpeg/FFmpeg/)
+- [FFmpeg](https://github.com/BtbN/FFmpeg-Builds/releases)
 - LaTex (or [MiKTex](https://miktex.org/download))
 
 # Run
