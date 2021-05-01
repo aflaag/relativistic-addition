@@ -13,7 +13,7 @@ python get-pip.py
 ```
 - Manim (latest version)
 ```sh
-# install manim
+# install manim (updated 05/01/2021, it may change in the future)
 pip install manim
 ```
 - [FFmpeg](https://github.com/BtbN/FFmpeg-Builds/releases)
