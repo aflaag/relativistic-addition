@@ -2,8 +2,8 @@
 A Manim project for the relativistic addition of velocity
 
 # Requisites
-- python3
+- Python 3.x
 - pip3
-- manim
-- ffmpeg
-- latex
+- Manim (latest version, `pip install manim`)
+- FFmpeg
+- LaTex (or MiKTex)
