@@ -10,7 +10,7 @@ A Manim project for the relativistic addition of velocity
 
 # Run
 If you have every requisite that are listed above (on Windows, you must have everything in `PATH`), by calling
-
-```manim video.py [SCENE NAME]```
-
+-
+`manim video.py [SCENE NAME]`
+-
 you should be able to generate every scene of the script.
