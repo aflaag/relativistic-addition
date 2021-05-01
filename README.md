@@ -1,5 +1,5 @@
 # relativistic-addition
-A Manim project for the relativistic addition of velocity
+A Manim project for the relativistic addition of velocity.
 
 # Requisites
 - [Python 3.x](https://www.python.org/downloads/)
