@@ -169,14 +169,14 @@ class Demonstration2(Scene):
         self.play(ReplacementTransform(formula4, formula5, run_time=1.5))
         self.wait()
 
-        formula6 = MathTex("u\'=\\frac{u(t_2-t_1)-v(t_2-t_1)}{(t_2-t_1)-\\frac{vu}{c^2}(t_2-t_1)")
+        formula6 = MathTex("u\'=\\frac{u(t_2-t_1)-v(t_2-t_1)}{(t_2-t_1)-\\frac{uv}{c^2}(t_2-t_1)")
         self.play(ReplacementTransform(formula5, formula6, run_time=1.5))
         self.wait()
 
-        formula7 = MathTex("u\'=\\frac{(t_2-t_1)(u-v)}{(t_2-t_1)(1-\\frac{vu}{c^2})")
+        formula7 = MathTex("u\'=\\frac{(t_2-t_1)(u-v)}{(t_2-t_1)(1-\\frac{uv}{c^2})")
         self.play(ReplacementTransform(formula6, formula7, run_time=1.5))
         self.wait()
 
-        formula8 = MathTex("u\'=\\frac{u-v}{1-\\frac{vu}{c^2}")
+        formula8 = MathTex("u\'=\\frac{u-v}{1-\\frac{uv}{c^2}")
         self.play(ReplacementTransform(formula7, formula8, run_time=1.5))
         self.wait()
