@@ -88,7 +88,7 @@ class VerySmallSpeed(Scene):
         self.wait()
 
         text = Text("Trasformazione di Galileo")
-        text.next_to(approx2, DOWN)
+        text.next_to(approx2, UP)
         self.play(Write(text, run_time=1.5))
 
 class Demonstration(GraphScene):
