@@ -92,6 +92,7 @@ class VerySmallSpeed(Scene):
         self.play(Write(text, run_time=1.5))
 
 class Demonstration(GraphScene):
+    """ Shows the first part of the demonstration of the relativity addition formula. """
     def construct(self):
         self.x_axis_label = "$t$"
         self.y_axis_label = "$x$"
@@ -114,4 +115,68 @@ class Demonstration(GraphScene):
         text1.to_edge(UP)
 
         self.play(Write(text1, run_time=2), Create(sec, run_time=2))
+        self.wait()
+
+        text2 = MathTex("u\'=\\frac{\\Delta x\'}{\\Delta t\'}=\\frac{x_2\'-x_1\'}{t_2\'-t_1\'}")
+        text2.to_edge(UP)
+        self.play(ReplacementTransform(text1, text2, run_time=1.5))
+        self.wait()
+
+class Demonstration2(Scene):
+    """ Shows the second part of the demonstration of the relativity addition formula. """
+    def construct(self):
+        group = VGroup(
+            Text("Per"),
+            MathTex("x=x\'=0m"),
+            Text(" e "),
+            MathTex("t=t\'=0s"),
+            Text(" :")
+        )
+        # the order matters!
+        group.arrange(RIGHT)
+        group.to_edge(UP)
+
+        self.play(Create(group, run_time=1.5))
+        self.wait()
+
+        system = MathTex("""
+\\left\{\\begin{matrix} x\'=\\gamma (x-vt)
+\\\ y\'=y
+\\\ z\'=z
+\\\ t\'=\\gamma (t-\\frac{vx}{c^2})
+\\end{matrix}\\right.
+        """)
+        self.play(Write(system, run_time=1.5))
+        self.wait()
+
+        formula = MathTex("\\frac{x\'}{t\'}=\\frac{\\gamma (x-vt)}{\\gamma (t-\\frac{vx}{c^2})}")
+        self.play(ReplacementTransform(system, formula, run_time=1.5))
+        self.wait()
+
+        formula2 = MathTex("\\frac{x\'}{t\'}=\\frac{x-vt}{t-\\frac{vx}{c^2}}")
+        self.play(ReplacementTransform(formula, formula2, run_time=1.5))
+        self.wait()
+
+        formula3 = MathTex("\\frac{\\Delta x\'}{\\Delta t\'}=\\frac{(x_2-vt_2)-(x_1-vt_1)}{(t_2-\\frac{vx_2}{c^2})-(t_1-\\frac{vx_1}{c^2})}")
+        self.play(ReplacementTransform(formula2, formula3, run_time=1.5))
+        self.wait()
+
+        formula4 = MathTex("u\'=\\frac{x_2-vt_2-x_1+vt_1}{t_2-\\frac{vx_2}{c^2}-t_1+\\frac{vx_1}{c^2}}")
+        self.play(ReplacementTransform(formula3, formula4, run_time=1.5))
+        self.wait()
+
+        formula5 = MathTex("u\'=\\frac{(x_2-x_1)-v(t_2-t_1)}{(t_2-t_1)-\\frac{v}{c^2}(x_2-x_1)")
+        self.play(ReplacementTransform(formula4, formula5, run_time=1.5))
+        self.wait()
+
+        formula6 = MathTex("u\'=\\frac{u(t_2-t_1)-v(t_2-t_1)}{(t_2-t_1)-\\frac{vu}{c^2}(t_2-t_1)")
+        self.play(ReplacementTransform(formula5, formula6, run_time=1.5))
+        self.wait()
+
+        formula7 = MathTex("u\'=\\frac{(t_2-t_1)(u-v)}{(t_2-t_1)(1-\\frac{vu}{c^2})")
+        self.play(ReplacementTransform(formula6, formula7, run_time=1.5))
+        self.wait()
+
+        formula8 = MathTex("u\'=\\frac{u-v}{1-\\frac{vu}{c^2}")
+        self.play(ReplacementTransform(formula7, formula8, run_time=1.5))
         self.wait()
