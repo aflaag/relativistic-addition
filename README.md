@@ -5,13 +5,15 @@ A Manim project for the relativistic addition of velocity.
 - [Python 3.x](https://www.python.org/downloads/)
 - pip
 ```sh
-# Install pip
+# download get-pip.py
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+
+# install pip with get-pip.py
 python get-pip.py
 ```
 - Manim (latest version)
 ```sh
-# Install manim
+# install manim
 pip install manim
 ```
 - [FFmpeg](https://ffmpeg.org/download.html)
