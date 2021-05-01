@@ -94,7 +94,7 @@ class VerySmallSpeed(Scene):
 class Demonstration(GraphScene):
     def construct(self):
         self.x_axis_label = "$t$"
-        self.x_axis_label = "$x$"
+        self.y_axis_label = "$x$"
         
         self.setup_axes(animate=True)
 
