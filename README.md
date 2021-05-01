@@ -28,4 +28,4 @@ manim video.py [SCENE NAME]
 
 you should be able to generate every scene of the script.
 
-**Note**: if you didn't clone the repository, you must put `video.py` into a folder, and execute the command above from inside the folder (Manim generates animations under the specified folder).
+**Note**: if you didn't clone the repository, you must put `video.py` into a folder, and execute the command above from inside this folder (Manim generates animations under the specified folder).
