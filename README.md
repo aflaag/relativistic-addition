@@ -16,6 +16,3 @@ manim video.py [SCENE NAME]
 ```
 
 you should be able to generate every scene of the script.
-
-
-
