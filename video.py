@@ -76,7 +76,7 @@ class VerySmallSpeed(Scene):
         lower_text = MathTex("u\'=\\frac{u-v}{1-\\frac{uv}{c^2}}") 
         lower_text.to_edge(DOWN)
 
-        self.play(FadeTransform(upper_text, lower_text), Create(group, run_time=1))
+        self.play(FadeTransform(upper_text, lower_text, run_time=1.5), Write(group, run_time=1.5))
         self.wait()
 
         approx1 = MathTex("u\'\\approx\\frac{u-v}{1-0}")
@@ -179,4 +179,93 @@ class Demonstration2(Scene):
 
         formula8 = MathTex("u\'=\\frac{u-v}{1-\\frac{uv}{c^2}")
         self.play(ReplacementTransform(formula7, formula8, run_time=1.5))
+        self.wait()
+
+class Limit(Scene):
+    """ Shows how to derive the asymptotes of the relativistic addition of velocities function. """
+    def construct(self):
+        domain = MathTex("\\mathrm{D}:\\forall x\mid \\frac{u\'v}{c^2}+1 \\neq 0")
+
+        upper_text = MathTex("u=\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}")
+        self.play(Write(upper_text, run_time=1.5))
+        self.wait()
+
+        lower_text = MathTex("u=\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}")
+        lower_text.to_edge(UP)
+        lower_text.to_edge(LEFT)
+
+        self.play(FadeTransform(upper_text, lower_text, run_time=1.5), Write(domain, run_time=1.5))
+        self.wait()
+
+        domain2 = MathTex("\\mathrm{D}:\\forall x\mid \\frac{u\'v}{c^2} \\neq -1")
+        self.play(ReplacementTransform(domain, domain2, run_time=1.5))
+        self.wait()
+
+        domain3 = MathTex("\\mathrm{D}:\\forall x\mid u\'v \\neq -c^2")
+        self.play(ReplacementTransform(domain2, domain3, run_time=1.5))
+        self.wait()
+
+        domain4 = MathTex("\\mathrm{D}:\\forall x\mid u\' \\neq - \\frac{c^2}{v}")
+        self.play(ReplacementTransform(domain3, domain4, run_time=1.5))
+        self.wait()
+
+        domain5 = MathTex("\\mathrm{D}:\\forall x\mid u\' \\neq - \\frac{c}{\\beta}")
+        self.play(ReplacementTransform(domain4, domain5, run_time=1.5))
+        self.wait()
+
+        lower_domain = MathTex("\\mathrm{D}:\\forall x\mid u\' \\neq - \\frac{c}{\\beta}")
+
+        lower_domain.to_edge(UP)
+        lower_domain.to_edge(RIGHT)
+
+        limit = MathTex("\\lim_{u\' \\rightarrow - \\frac{c}{ \\beta} } {\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}}")
+        self.play(FadeTransform(domain5, lower_domain, run_time=1.5), Write(limit, run_time=1.5))
+        self.wait()
+
+        limit2 = MathTex("\\frac{- \\frac{c}{ \\beta}+v}{-\\frac{cv}{\\beta c^2}+1}")
+        self.play(ReplacementTransform(limit, limit2, run_time=1.5))
+        self.wait()
+
+        limit3 = MathTex("\\frac{- \\frac{c^2}{ v}+v}{-\\frac{v}{\\beta c}+1}")
+        self.play(ReplacementTransform(limit2, limit3, run_time=1.5))
+        self.wait()
+
+        limit4 = MathTex("\\frac{ \\frac{-c^2+v} {v} }{-\\frac{cv}{vc}+1}")
+        self.play(ReplacementTransform(limit3, limit4, run_time=1.5))
+        self.wait()
+
+        limit5 = MathTex("\\frac{-c^2+v}{v(-1+1)}")
+        self.play(ReplacementTransform(limit4, limit5, run_time=1.5))
+        self.wait()
+
+        limit6 = MathTex("\\frac{v-c^2}{0}")
+        self.play(ReplacementTransform(limit5, limit6, run_time=1.5))
+        self.wait()
+
+        limit6_lower = MathTex("\\frac{v-c^2}{0}")
+        limit6_lower.to_edge(UP)
+
+        system = MathTex("""
+\\left\{\\begin{matrix} v > 0: v - c^2 < 0 (0 < v < c)
+\\\ v < 0: v - c^2 < 0
+\\end{matrix}\\right.
+        """)
+        system.shift(1.3 * LEFT)
+
+        self.play(FadeTransform(limit6, limit6_lower, run_time=1.5), Write(system, run_time=1.5))
+        self.wait()
+
+        results = MathTex("""
+\\begin{matrix}
+\\\ -: + \infty
+\\\ +: - \infty
+\\end{matrix}
+        """)
+        arrow = MathTex("\\Rightarrow")
+
+        arrow.next_to(system)
+        results.next_to(arrow)
+
+        #self.play(ReplacementTransform(system, results, run_time=1.5))
+        self.play(Write(arrow), Write(results, run_time=1.5))
         self.wait()
