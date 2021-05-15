@@ -448,7 +448,7 @@ class StudyDerivative(GraphScene):
         self.play(Create(rect))
         self.play(Uncreate(rect))
 
-        den6 = MathTex(r"u' \neq - \frac{c}{ \beta}", color="#babaff")
+        den6 = MathTex(r"u' = - \frac{c}{ \beta}", color="#babaff")
         den6.to_edge(RIGHT)
 
         self.play(FadeTransform(den4, den6), Uncreate(den5))
