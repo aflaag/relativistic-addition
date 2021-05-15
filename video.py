@@ -186,7 +186,7 @@ class Demonstration2(Scene):
         self.wait()
 
 class Limit(Scene):
-    """ Shows how to derive the vertical asymptote of the relativistic addition of velocities function. """
+    """ Shows how to derive the vertical asymptote of the function of the relativistic addition of velocities. """
     def construct(self):
         domain = MathTex("\\mathrm{D}:\\forall x\mid \\frac{u\'v}{c^2}+1 \\neq 0")
 
@@ -286,7 +286,7 @@ class Limit(Scene):
         self.wait()
 
 class HLimit(Scene):
-    """ Shows how to derive the horizontal asymptote of the relativistic addition of velocities function. """
+    """ Shows how to derive the horizontal asymptote of the function of the relativistic addition of velocities. """
     def construct(self):
         limit = MathTex("\\lim_{u\' \\rightarrow \infty } {\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}}")
         
