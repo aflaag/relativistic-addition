@@ -356,6 +356,8 @@ class StudyDerivative(GraphScene):
         self.y_min = -2
         self.y_max = 12
         self.graph_origin = ORIGIN + 3 * DOWN + 1.5 * LEFT
+        self.x_axis_config = { "tick_frequency": 5 }
+        self.y_axis_config = { "tick_frequency": 2 }
 
         segno = MathTex(r"\frac{d}{du'} u = \frac{1 - \beta^2}{(1 + \frac{\beta}{c} u')^2}", color=GREEN)
         segno.to_edge(UP)
@@ -451,7 +453,7 @@ class StudyDerivative(GraphScene):
         den6 = MathTex(r"u' = - \frac{c}{ \beta}", color="#babaff")
         den6.to_edge(RIGHT)
 
-        self.play(FadeTransform(den4, den6), Uncreate(den5))
+        self.play(FadeTransform(den4, den6), Unwrite(den5))
 
         self.setup_axes(animate=True)
 
@@ -473,4 +475,96 @@ class StudyDerivative(GraphScene):
         self.wait()
 
         self.play(Create(asymptote, run_time=1))
+        self.wait()
+
+class UGraph(GraphScene):
+    def construct(self):
+        self.x_axis_label = "$u\'$"
+        self.y_axis_label = "$u$"
+        self.x_min = -40
+        self.x_max = 40
+        self.y_min = -40
+        self.y_max = 40
+        self.graph_origin = ORIGIN
+        self.x_axis_config = { "tick_frequency": 10 }
+        self.y_axis_config = { "tick_frequency": 10 }
+
+        self.setup_axes(animate=True)
+
+        v = 1
+        c = 3
+
+        beta = v / c
+
+        u_func = lambda x: (x + v) / (1 + (x * v) / c ** 2)
+
+        u = MathTex(r"u = \frac{u'+v}{1+\frac{u'v}{c^2}}", color=GREEN)
+        u.to_edge(UP)
+        u.to_edge(RIGHT)
+
+        graph_before1 = self.get_graph(u_func, x_min=-40, x_max=1.1 * - c / beta, y_min=-40, y_max=40, color=GREEN)
+        graph_after1 = self.get_graph(u_func, x_min=0.9 * - c / beta, x_max=40, y_min=-40, y_max=40, color=GREEN)
+
+        self.play(Create(graph_before1, run_time=0.75))
+        self.play(Create(graph_after1, run_time=0.75), Write(u, run_time=1))
+        self.wait()
+
+        v_label = MathTex("v", color=GREEN)
+        v_label.to_edge(RIGHT)
+        v_label.shift(DOWN * 2 + LEFT * 3)
+
+        c_label = MathTex("c", color=GREEN)
+        c_label.next_to(v_label, RIGHT)
+        c_label.shift(RIGHT * 1.5 + DOWN * 0.1)
+
+        # it's used v = beta (c) because v is set to 1 and c is set to 3, thus beta corresponds to the ratio 
+        on_screen_var = Variable(beta, v_label, num_decimal_places=2)
+        on_screen_var.set_color(GREEN)
+        
+        self.play(Write(on_screen_var, run_time=1.2))
+        self.play(Write(c_label, run_time=0.5))
+        self.wait()
+
+        v = 1.35
+        beta = v / c
+
+        var_tracker = on_screen_var.tracker
+
+        graph_before2 = self.get_graph(u_func, x_min=-40, x_max=1.05 * - c / beta, y_min=-80, y_max=80, color=GREEN)
+        graph_after2 = self.get_graph(u_func, x_min=0.957 * - c / beta, x_max=40, y_min=-80, y_max=80, color=GREEN)
+
+        self.play(var_tracker.animate.set_value(beta), ReplacementTransform(graph_before1, graph_before2), ReplacementTransform(graph_after1, graph_after2))
+        self.wait()
+
+        v = 0.6
+        beta = v / c
+
+        graph_before3 = self.get_graph(u_func, x_min=-40, x_max=1.05 * - c / beta, y_min=-80, y_max=80, color=GREEN)
+        graph_after3 = self.get_graph(u_func, x_min=0.955 * - c / beta, x_max=40, y_min=-80, y_max=80, color=GREEN)
+        
+        var_tracker = on_screen_var.tracker
+
+        self.play(var_tracker.animate.set_value(beta), ReplacementTransform(graph_before2, graph_before3), ReplacementTransform(graph_after2, graph_after3))
+        self.wait()
+
+        v = 1.8
+        beta = v / c
+
+        graph_before4 = self.get_graph(u_func, x_min=-40, x_max=1.05 * - c / beta, y_min=-80, y_max=80, color=GREEN)
+        graph_after4 = self.get_graph(u_func, x_min=0.95 * - c / beta, x_max=40, y_min=-80, y_max=80, color=GREEN)
+        
+        var_tracker = on_screen_var.tracker
+
+        self.play(var_tracker.animate.set_value(beta), ReplacementTransform(graph_before3, graph_before4), ReplacementTransform(graph_after3, graph_after4))
+        self.wait()
+
+        v = 1.5
+        beta = v / c
+
+        graph_before5 = self.get_graph(u_func, x_min=-40, x_max=1.05 * - c / beta, y_min=-80, y_max=80, color=GREEN)
+        graph_after5 = self.get_graph(u_func, x_min=0.95 * - c / beta, x_max=40, y_min=-80, y_max=80, color=GREEN)
+        
+        var_tracker = on_screen_var.tracker
+
+        self.play(var_tracker.animate.set_value(beta), ReplacementTransform(graph_before4, graph_before5), ReplacementTransform(graph_after4, graph_after5))
         self.wait()
