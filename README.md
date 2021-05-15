@@ -8,11 +8,17 @@ A Manim project for the relativistic addition of velocity.
 - [FFmpeg](https://github.com/BtbN/FFmpeg-Builds/releases)
 - [LaTeX](https://www.latex-project.org/get/) 
 
-# Run
+# Running
 If you have every requisite listed above (on Windows, you must have everything added to `PATH`), by calling
 
 ```sh
 manim video.py [SCENE NAME]
 ```
 
-you should be able to generate every scene of the script.
+you should be able to generate every scene of the script one by one, or with
+
+```sh
+manim video.py -a
+```
+
+you can create every scene with one command.
