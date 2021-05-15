@@ -1,3 +1,5 @@
+# GRAPHS CAN BE FOUND AT https://www.desmos.com/calculator/kgjbfb4nze
+
 from manim import *
 
 class V(Scene):
@@ -188,7 +190,7 @@ class Demonstration2(Scene):
 class Limit(Scene):
     """ Shows how to derive the vertical asymptote of the function of the relativistic addition of velocities. """
     def construct(self):
-        domain = MathTex("\\mathrm{D}:\\forall x\mid \\frac{u\'v}{c^2}+1 \\neq 0")
+        domain = MathTex("\\mathrm{D}:\\forall u\' \mid \\frac{u\'v}{c^2}+1 \\neq 0")
 
         upper_text = MathTex("u=\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}")
         self.play(Write(upper_text, run_time=1.5))
@@ -201,23 +203,23 @@ class Limit(Scene):
         self.play(FadeTransform(upper_text, lower_text, run_time=1.5), Write(domain, run_time=1.5))
         self.wait()
 
-        domain2 = MathTex("\\mathrm{D}:\\forall x\mid \\frac{u\'v}{c^2} \\neq -1")
+        domain2 = MathTex("\\mathrm{D}:\\forall u\' \mid \\frac{u\'v}{c^2} \\neq -1")
         self.play(FadeTransform(domain, domain2, run_time=1.5))
         self.wait()
 
-        domain3 = MathTex("\\mathrm{D}:\\forall x\mid u\'v \\neq -c^2")
+        domain3 = MathTex("\\mathrm{D}:\\forall u\' \mid u\'v \\neq -c^2")
         self.play(FadeTransform(domain2, domain3, run_time=1.5))
         self.wait()
 
-        domain4 = MathTex("\\mathrm{D}:\\forall x\mid u\' \\neq - \\frac{c^2}{v}")
+        domain4 = MathTex("\\mathrm{D}:\\forall u\' \mid u\' \\neq - \\frac{c^2}{v}")
         self.play(FadeTransform(domain3, domain4, run_time=1.5))
         self.wait()
 
-        domain5 = MathTex("\\mathrm{D}:\\forall x\mid u\' \\neq - \\frac{c}{\\beta}")
+        domain5 = MathTex("\\mathrm{D}:\\forall u\' \mid u\' \\neq - \\frac{c}{\\beta}")
         self.play(ReplacementTransform(domain4, domain5, run_time=1.5))
         self.wait()
 
-        lower_domain = MathTex("\\mathrm{D}:\\forall x\mid u\' \\neq - \\frac{c}{\\beta}")
+        lower_domain = MathTex("\\mathrm{D}:\\forall u\' \mid u\' \\neq - \\frac{c}{\\beta}")
 
         lower_domain.to_edge(UP)
         lower_domain.to_edge(RIGHT)
@@ -277,7 +279,7 @@ class Limit(Scene):
         self.wait()
 
         end = VGroup(
-            MathTex("x=- \\frac{c}{ \\beta}"),
+            MathTex(r"u'=- \frac{c}{ \beta}"),
             MathTex("\\mathrm{asintoto\\ verticale}")
         )
         end.arrange(DOWN)
@@ -309,11 +311,166 @@ class HLimit(Scene):
         self.wait()
 
         group = VGroup(
-            MathTex(r"y=\frac{c^2}{v}"),
+            MathTex(r"u=\frac{c}{\beta}"),
             MathTex("\\mathrm{asintoto\\ orizzontale}"),
         )
-        # the order matters!
         group.arrange(DOWN)
 
         self.play(ReplacementTransform(limit3, group, run_time=1.5))
+        self.wait()
+
+class Derivative(Scene):
+    """ Shows how to calculate the derivative of the function of the relativistic addiotion of velocities. """
+    def construct(self):
+        center = MathTex("\\frac{d}{du\'} u = \\frac{d}{du\'} \\frac{u\'+v}{\\frac{u\'v}{c^2}+1}")
+
+        upper_text = MathTex("u=\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}")
+        self.play(Write(upper_text, run_time=1.5))
+        self.wait()
+
+        lower_text = MathTex("u=\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}")
+        lower_text.to_edge(UP)
+
+        self.play(FadeTransform(upper_text, lower_text, run_time=1.5), Write(center, run_time=1.5))
+        self.wait()
+
+        center2 = MathTex(r"\frac{d}{du'} u = \frac{ (1+ \frac{u' v}{c^2} ) - (u'+v) \frac{v}{c^2} } {(1+ \frac{u' v} {c^2})^2}")
+        self.play(ReplacementTransform(center, center2, run_time=1.5))
+        self.wait()
+
+        center3 = MathTex(r"\frac{d}{du'} u = \frac{ 1+ \frac{u' v}{c^2} - \frac{u'v}{c^2} - \frac{v^2}{c^2} } {(1+ \frac{u' v} {c^2})^2}")
+        self.play(FadeTransform(center2, center3, run_time=1.5))
+        self.wait()
+
+        center4 = MathTex(r"\frac{d}{du'} u = \frac{ 1 - \beta^2 } {(1+ \frac{\beta}{c} u')^2}")
+        self.play(ReplacementTransform(center3, center4, run_time=1.5))
+        self.wait()
+
+class StudyDerivative(GraphScene):
+    """ Studies the graph of the derivative of the function of the relativistic addition of velocities, and then shows it. """
+    def construct(self):
+        self.x_axis_label = "$u\'$"
+        self.y_axis_label = "$u$"
+        self.x_min = -20
+        self.x_max = 20
+        self.y_min = -5
+        self.y_max = 20
+        self.graph_origin = ORIGIN + 3 * DOWN + 1.5 * LEFT
+
+        segno = MathTex(r"\frac{d}{du'} u = \frac{1 - \beta^2}{(1 + \frac{\beta}{c} u')^2}", color=GREEN)
+        segno.to_edge(UP)
+
+        self.play(Write(segno, run_time=1.5))
+        self.wait()
+
+        domain = MathTex(r"\mathrm{D_{u } } : \forall u' \mid u' \neq - \frac{c}{\beta}", color="#f2aa00")
+        domain.to_edge(UP)
+        domain.to_edge(RIGHT)
+        domain.shift(DOWN * 0.2)
+
+        self.play(Write(domain, run_time=1.5))
+        
+        segno2 = MathTex(r"\mathrm{Numeratore:\ } 1 - \beta^2", color="#ddccaa")
+
+        self.play(Write(segno2, run_time=1.5))
+        self.wait()
+
+        self.play(Unwrite(segno2, run_time=0.6))
+
+        segno3 = MathTex(r"1 - \beta^2 > 0", color="#ddccaa")
+
+        self.play(Write(segno3, run_time=1.5))
+        self.wait()
+
+        segno4 = MathTex(r"\beta^2 < 1", color="#ddccaa")
+
+        self.play(FadeTransform(segno3, segno4, run_time=1.5))
+        self.wait()
+
+        segno5 = MathTex(r"-1 < \beta < 1", color="#ddccaa")
+
+        self.play(FadeTransform(segno4, segno5, run_time=1.5))
+        self.wait()
+
+        segno6 = MathTex(r"-1 < \frac{v}{c} < 1", color="#ddccaa")
+
+        self.play(ReplacementTransform(segno5, segno6, run_time=1.5))
+        self.wait()
+
+        segno7 = MathTex(r"-c < v < c", color="#ddccaa")
+
+        self.play(FadeTransform(segno6, segno7, run_time=1.5))
+        self.wait()
+
+        segno8 = MathTex(r"\Rightarrow 1 - \beta^2 > 0 \ \forall v", color="#ddccaa")
+        segno8.next_to(segno7, DOWN)
+
+        self.play(Write(segno8, run_time=1.5))
+        self.wait()
+
+        self.play(Unwrite(segno7, run_time=0.6), Unwrite(segno8, run_time=0.6))
+        self.wait()
+
+        den = MathTex(r"\mathrm{Denominatore:\ } (1 + \frac{\beta}{c} u')^2", color="#babaff")
+
+        self.play(Write(den, run_time=1.5))
+        self.wait()        
+
+        self.play(Unwrite(den, run_time=0.6))
+
+        den2 = MathTex(r"(1 + \frac{\beta}{c} u')^2 > 0", color="#babaff")
+
+        self.play(Write(den2, run_time=1.5))
+        self.wait()
+
+        den3 = MathTex(r"\forall u' \mid 1 + \frac{\beta}{c} u' \neq 0", color="#babaff")
+        den3.next_to(den2, DOWN)
+
+        self.play(Write(den3, run_time=1.5))
+        self.wait()
+
+        den4 = MathTex(r"u' \neq - \frac{c}{ \beta}", color="#babaff")
+
+        self.play(Unwrite(den2, run_time=0.7), ReplacementTransform(den3, den4, run_time=1.5))
+        self.wait()
+
+        den5 = MathTex(r"u' = - \frac{c}{\beta} \notin \mathrm{D_{u}}", color="#f2aa00")
+        den5.next_to(den5, DOWN)
+
+        self.play(Write(den5, run_time=1.5))
+        self.wait()
+
+        rect = Rectangle(color="#f2aa00", height=2.0, width=4.5)
+        rect.to_edge(UP)
+        rect.to_edge(RIGHT)
+        rect.shift(RIGHT * 0.25 + UP * 0.35)
+
+        self.play(Create(rect))
+        self.play(Uncreate(rect))
+
+        den6 = MathTex(r"u' \neq - \frac{c}{ \beta}", color="#babaff")
+        den6.to_edge(RIGHT)
+
+        self.play(FadeTransform(den4, den6), Uncreate(den5))
+
+        self.setup_axes(animate=True)
+
+        v = 1
+        c = 3
+
+        beta = v / c
+        n = 1 - beta ** 2
+
+        derivative = lambda x: n / (1 + beta * x / c) ** 2
+
+        graph_before = self.get_graph(derivative, x_min=-20, x_max=1.1 * - c / beta, y_min=-5, y_max=20, color=GREEN)
+        graph_after = self.get_graph(derivative, x_min=0.9 * - c / beta, x_max=20, y_min=-5, y_max=20, color=GREEN)
+
+        asymptote = self.get_vertical_line_to_graph(1.001 * -c / beta, graph_before, color="#babaff")
+
+        self.play(Create(graph_before, run_time=0.75))
+        self.play(Create(graph_after, run_time=0.75))
+        self.wait()
+
+        self.play(Create(asymptote, run_time=1))
         self.wait()
