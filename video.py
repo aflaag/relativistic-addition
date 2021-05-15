@@ -39,7 +39,7 @@ class CSubstitution(Scene):
         self.wait()
 
         text3 = MathTex("u\'=\\frac{c-v}{1-\\frac{v}{c}}")
-        self.play(ReplacementTransform(text2, text3, run_time=1.5))
+        self.play(FadeTransform(text2, text3, run_time=1.5))
         self.wait()
 
         text4 = MathTex("u\'=\\frac{c-v}{\\frac{c-v}{c}}")
@@ -60,11 +60,11 @@ class VerySmallSpeed(Scene):
         upper_text = MathTex("u\'=\\frac{u-v}{1-\\frac{uv}{c^2}}")        
 
         group = VGroup(
-            Text("Se "),
+            MathTex("\mathrm{Se\\ }"),
             MathTex("v<<c"),
-            Text(" e "),
+            MathTex("\mathrm{\\ e\\ }"),
             MathTex("u<<c"),
-            Text(", allora")
+            MathTex("\mathrm{,\\ allora}")
         )
         # the order matters!
         group.arrange(RIGHT)
@@ -87,7 +87,7 @@ class VerySmallSpeed(Scene):
         self.play(ReplacementTransform(approx1, approx2, run_time=1.5))
         self.wait()
 
-        text = Text("Trasformazione di Galileo")
+        text = MathTex("\mathrm{Trasformazione\\ di\\ Galileo}")
         text.next_to(approx2, UP)
         self.play(Write(text, run_time=1.5))
 
@@ -119,24 +119,24 @@ class Demonstration(GraphScene):
 
         text2 = MathTex("u\'=\\frac{\\Delta x\'}{\\Delta t\'}=\\frac{x_2\'-x_1\'}{t_2\'-t_1\'}")
         text2.to_edge(UP)
-        self.play(ReplacementTransform(text1, text2, run_time=1.5))
+        self.play(FadeTransform(text1, text2, run_time=1.5))
         self.wait()
 
 class Demonstration2(Scene):
     """ Shows the second part of the demonstration of the relativity addition formula. """
     def construct(self):
         group = VGroup(
-            Text("Per"),
-            MathTex("x=x\'=0m"),
-            Text(" e "),
-            MathTex("t=t\'=0s"),
-            Text(" :")
+            MathTex("\mathrm{Per\\ }"),
+            MathTex("x=x\'=0 \mathrm{m}"),
+            MathTex("\mathrm{\\ e\\ }"),
+            MathTex("t=t\'=0 \mathrm{s}"),
+            MathTex("\mathrm{\\ :}")
         )
         # the order matters!
         group.arrange(RIGHT)
         group.to_edge(UP)
 
-        self.play(Create(group, run_time=1.5))
+        self.play(Write(group, run_time=1.5))
         self.wait()
 
         system = MathTex("""
@@ -154,23 +154,27 @@ class Demonstration2(Scene):
         self.wait()
 
         formula2 = MathTex("\\frac{x\'}{t\'}=\\frac{x-vt}{t-\\frac{vx}{c^2}}")
-        self.play(ReplacementTransform(formula, formula2, run_time=1.5))
+        self.play(FadeTransform(formula, formula2, run_time=1.5))
         self.wait()
 
         formula3 = MathTex("\\frac{\\Delta x\'}{\\Delta t\'}=\\frac{(x_2-vt_2)-(x_1-vt_1)}{(t_2-\\frac{vx_2}{c^2})-(t_1-\\frac{vx_1}{c^2})}")
-        self.play(ReplacementTransform(formula2, formula3, run_time=1.5))
+
+        lower_text = MathTex("\\frac{x\'}{t\'}=\\frac{x-vt}{t-\\frac{vx}{c^2}}")
+        lower_text.to_edge(DOWN)
+
+        self.play(FadeTransform(formula2, lower_text, run_time=1.5), Write(formula3, run_time=1.5))
         self.wait()
 
         formula4 = MathTex("u\'=\\frac{x_2-vt_2-x_1+vt_1}{t_2-\\frac{vx_2}{c^2}-t_1+\\frac{vx_1}{c^2}}")
-        self.play(ReplacementTransform(formula3, formula4, run_time=1.5))
+        self.play(FadeTransform(formula3, formula4, run_time=1.5))
         self.wait()
 
         formula5 = MathTex("u\'=\\frac{(x_2-x_1)-v(t_2-t_1)}{(t_2-t_1)-\\frac{v}{c^2}(x_2-x_1)")
-        self.play(ReplacementTransform(formula4, formula5, run_time=1.5))
+        self.play(FadeTransform(formula4, formula5, run_time=1.5))
         self.wait()
 
         formula6 = MathTex("u\'=\\frac{u(t_2-t_1)-v(t_2-t_1)}{(t_2-t_1)-\\frac{uv}{c^2}(t_2-t_1)")
-        self.play(ReplacementTransform(formula5, formula6, run_time=1.5))
+        self.play(FadeTransform(formula5, formula6, run_time=1.5))
         self.wait()
 
         formula7 = MathTex("u\'=\\frac{(t_2-t_1)(u-v)}{(t_2-t_1)(1-\\frac{uv}{c^2})")
@@ -182,7 +186,7 @@ class Demonstration2(Scene):
         self.wait()
 
 class Limit(Scene):
-    """ Shows how to derive the asymptotes of the relativistic addition of velocities function. """
+    """ Shows how to derive the vertical asymptote of the relativistic addition of velocities function. """
     def construct(self):
         domain = MathTex("\\mathrm{D}:\\forall x\mid \\frac{u\'v}{c^2}+1 \\neq 0")
 
@@ -198,15 +202,15 @@ class Limit(Scene):
         self.wait()
 
         domain2 = MathTex("\\mathrm{D}:\\forall x\mid \\frac{u\'v}{c^2} \\neq -1")
-        self.play(ReplacementTransform(domain, domain2, run_time=1.5))
+        self.play(FadeTransform(domain, domain2, run_time=1.5))
         self.wait()
 
         domain3 = MathTex("\\mathrm{D}:\\forall x\mid u\'v \\neq -c^2")
-        self.play(ReplacementTransform(domain2, domain3, run_time=1.5))
+        self.play(FadeTransform(domain2, domain3, run_time=1.5))
         self.wait()
 
         domain4 = MathTex("\\mathrm{D}:\\forall x\mid u\' \\neq - \\frac{c^2}{v}")
-        self.play(ReplacementTransform(domain3, domain4, run_time=1.5))
+        self.play(FadeTransform(domain3, domain4, run_time=1.5))
         self.wait()
 
         domain5 = MathTex("\\mathrm{D}:\\forall x\mid u\' \\neq - \\frac{c}{\\beta}")
@@ -227,11 +231,11 @@ class Limit(Scene):
         self.wait()
 
         limit3 = MathTex("\\frac{- \\frac{c^2}{ v}+v}{-\\frac{v}{\\beta c}+1}")
-        self.play(ReplacementTransform(limit2, limit3, run_time=1.5))
+        self.play(FadeTransform(limit2, limit3, run_time=1.5))
         self.wait()
 
         limit4 = MathTex("\\frac{ \\frac{-c^2+v} {v} }{-\\frac{cv}{vc}+1}")
-        self.play(ReplacementTransform(limit3, limit4, run_time=1.5))
+        self.play(FadeTransform(limit3, limit4, run_time=1.5))
         self.wait()
 
         limit5 = MathTex("\\frac{-c^2+v}{v(-1+1)}")
@@ -239,12 +243,13 @@ class Limit(Scene):
         self.wait()
 
         limit6 = MathTex("\\frac{v-c^2}{0}")
-        self.play(ReplacementTransform(limit5, limit6, run_time=1.5))
+        self.play(FadeTransform(limit5, limit6, run_time=1.5))
         self.wait()
 
         limit6_lower = MathTex("\\frac{v-c^2}{0}")
         limit6_lower.to_edge(UP)
 
+        # FIXME: THIS IS BROKEN
         system = MathTex("""
 \\left\{\\begin{matrix} v > 0: v - c^2 < 0 (0 < v < c)
 \\\ v < 0: v - c^2 < 0
@@ -261,11 +266,54 @@ class Limit(Scene):
 \\\ +: - \infty
 \\end{matrix}
         """)
+        #results.arrange(LEFT)
         arrow = MathTex("\\Rightarrow")
 
         arrow.next_to(system)
         results.next_to(arrow)
 
         #self.play(ReplacementTransform(system, results, run_time=1.5))
-        self.play(Write(arrow), Write(results, run_time=1.5))
+        self.play(Write(arrow, run_time=1.5), Write(results, run_time=1.5))
+        self.wait()
+
+        end = VGroup(
+            MathTex("x=- \\frac{c}{ \\beta}"),
+            MathTex("\\mathrm{asintoto\\ verticale}")
+        )
+        end.arrange(DOWN)
+
+        self.play(Unwrite(system, run_time=1.5), Unwrite(results, run_time=1.5), Unwrite(arrow, run_time=1.5), Write(end, run_time=1.5))
+        self.wait()
+
+class HLimit(Scene):
+    """ Shows how to derive the horizontal asymptote of the relativistic addition of velocities function. """
+    def construct(self):
+        limit = MathTex("\\lim_{u\' \\rightarrow \infty } {\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}}")
+        
+        upper_text = MathTex("u=\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}")
+        self.play(Write(upper_text, run_time=1.5))
+        self.wait()
+
+        lower_text = MathTex("u=\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}")
+        lower_text.to_edge(UP)
+
+        self.play(FadeTransform(upper_text, lower_text, run_time=1.5), Write(limit, run_time=1.5))
+        self.wait()
+
+        limit2 = MathTex(r"\lim_{u' \rightarrow \infty} {\frac{\frac{d}{du'}(u'+v)}{\frac{d}{du'}(\frac{u'v}{c^2}+1)}}")
+        self.play(FadeTransform(limit, limit2, run_time=1.5))
+        self.wait()
+
+        limit3 = MathTex(r"\frac{1}{\frac{v}{c^2}}")
+        self.play(ReplacementTransform(limit2, limit3, run_time=1.5))
+        self.wait()
+
+        group = VGroup(
+            MathTex(r"y=\frac{c^2}{v}"),
+            MathTex("\\mathrm{asintoto\\ orizzontale}"),
+        )
+        # the order matters!
+        group.arrange(DOWN)
+
+        self.play(ReplacementTransform(limit3, group, run_time=1.5))
         self.wait()
