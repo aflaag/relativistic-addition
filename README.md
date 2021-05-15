@@ -15,10 +15,10 @@ If you have every requisite listed above (on Windows, you must have everything a
 manim video.py [SCENE NAME]
 ```
 
-you should be able to generate every scene of the script one by one, or with
+you should be able to generate every scene of the script one by one, or if you prefer
 
 ```sh
 manim video.py -a
 ```
 
-you can create every scene with one command.
+allows you to create every scene with one command.
