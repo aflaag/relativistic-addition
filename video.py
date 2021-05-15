@@ -353,8 +353,8 @@ class StudyDerivative(GraphScene):
         self.y_axis_label = "$u$"
         self.x_min = -20
         self.x_max = 20
-        self.y_min = -5
-        self.y_max = 20
+        self.y_min = -2
+        self.y_max = 12
         self.graph_origin = ORIGIN + 3 * DOWN + 1.5 * LEFT
 
         segno = MathTex(r"\frac{d}{du'} u = \frac{1 - \beta^2}{(1 + \frac{\beta}{c} u')^2}", color=GREEN)
