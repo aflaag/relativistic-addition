@@ -162,6 +162,7 @@ class VerySmallSpeed(Scene):
         text = MathTex("\mathrm{Trasformazione\\ di\\ Galileo}", color=BLUE)
         text.next_to(approx2, UP)
         self.play(Write(text, run_time=1.5), Indicate(approx2, color=BLUE))
+        self.wait()
 
 class Demonstration(GraphScene):
     """ Shows the first part of the demonstration of the relativity addition formula. """
@@ -317,50 +318,7 @@ class Demonstration2(Scene): # this scene is a mess!
         self.play(ReplacementTransform(forgot, formula3, run_time=1.5))
         self.wait()
 
-        self.play(
-            formula3[0][8].animate.set_color(WHITE),
-            formula3[0][9].animate.set_color(WHITE),
-            formula3[0][10].animate.set_color(WHITE),
-            formula3[0][11].animate.set_color(WHITE),
-            formula3[0][12].animate.set_color(WHITE),
-            formula3[0][13].animate.set_color(WHITE),
-            formula3[0][14].animate.set_color(WHITE),
-            formula3[0][15].animate.set_color(WHITE),
-            formula3[0][16].animate.set_color(WHITE),
-            formula3[0][18].animate.set_color(WHITE),
-            formula3[0][19].animate.set_color(WHITE),
-            formula3[0][20].animate.set_color(WHITE),
-            formula3[0][21].animate.set_color(WHITE),
-            formula3[0][22].animate.set_color(WHITE),
-            formula3[0][23].animate.set_color(WHITE),
-            formula3[0][24].animate.set_color(WHITE),
-            formula3[0][25].animate.set_color(WHITE),
-            formula3[0][26].animate.set_color(WHITE),
-            formula3[0][28].animate.set_color(WHITE),
-            formula3[0][29].animate.set_color(WHITE),
-            formula3[0][30].animate.set_color(WHITE),
-            formula3[0][31].animate.set_color(WHITE),
-            formula3[0][32].animate.set_color(WHITE),
-            formula3[0][33].animate.set_color(WHITE),
-            formula3[0][34].animate.set_color(WHITE),
-            formula3[0][35].animate.set_color(WHITE),
-            formula3[0][36].animate.set_color(WHITE),
-            formula3[0][37].animate.set_color(WHITE),
-            formula3[0][38].animate.set_color(WHITE),
-            formula3[0][39].animate.set_color(WHITE),
-            formula3[0][41].animate.set_color(WHITE),
-            formula3[0][42].animate.set_color(WHITE),
-            formula3[0][43].animate.set_color(WHITE),
-            formula3[0][44].animate.set_color(WHITE),
-            formula3[0][45].animate.set_color(WHITE),
-            formula3[0][46].animate.set_color(WHITE),
-            formula3[0][47].animate.set_color(WHITE),
-            formula3[0][48].animate.set_color(WHITE),
-            formula3[0][49].animate.set_color(WHITE),
-            formula3[0][50].animate.set_color(WHITE),
-            formula3[0][51].animate.set_color(WHITE),
-            formula3[0][52].animate.set_color(WHITE)
-        )
+        self.play(formula3[0].animate.set_color(WHITE))
         self.wait()
 
         self.play(
@@ -407,42 +365,202 @@ class Demonstration2(Scene): # this scene is a mess!
         self.wait()
 
         self.play(
+            formula4[0][0].animate.set_color(WHITE),
             formula4[0][1].animate.set_color(WHITE),
-            formula4[0][0].animate.set_color(WHITE)
+            formula4[0][3].animate.set_color("#ff8e2b"),
+            formula4[0][4].animate.set_color("#ff8e2b"),
+
+            formula4[0][5].animate.set_color("#c29cff"),
+            formula4[0][6].animate.set_color("#c29cff"),
+            formula4[0][7].animate.set_color("#c29cff"),
+            formula4[0][8].animate.set_color("#c29cff"),
+
+            formula4[0][9].animate.set_color("#ff8e2b"),
+            formula4[0][10].animate.set_color("#ff8e2b"),
+            formula4[0][11].animate.set_color("#ff8e2b"),
+
+            formula4[0][12].animate.set_color("#c29cff"),
+            formula4[0][13].animate.set_color("#c29cff"),
+            formula4[0][14].animate.set_color("#c29cff"),
+            formula4[0][15].animate.set_color("#c29cff"),
+            formula4[0][17].animate.set_color("#c29cff"),
+            formula4[0][18].animate.set_color("#c29cff"),
+
+            formula4[0][19].animate.set_color("#ff8e2b"),
+            formula4[0][20].animate.set_color("#ff8e2b"),
+            formula4[0][21].animate.set_color("#ff8e2b"),
+            formula4[0][22].animate.set_color("#ff8e2b"),
+            formula4[0][23].animate.set_color("#ff8e2b"),
+            formula4[0][24].animate.set_color("#ff8e2b"),
+            formula4[0][25].animate.set_color("#ff8e2b"),
+
+            formula4[0][26].animate.set_color("#c29cff"),
+            formula4[0][27].animate.set_color("#c29cff"),
+            formula4[0][28].animate.set_color("#c29cff"),
+
+            formula4[0][29].animate.set_color("#ff8e2b"),
+            formula4[0][30].animate.set_color("#ff8e2b"),
+            formula4[0][31].animate.set_color("#ff8e2b"),
+            formula4[0][32].animate.set_color("#ff8e2b"),
+            formula4[0][33].animate.set_color("#ff8e2b"),
+            formula4[0][34].animate.set_color("#ff8e2b"),
+            formula4[0][35].animate.set_color("#ff8e2b")
         )
         self.wait()
 
-        # TODO: FINISH STARTING FROM HERE
-
         formula5 = MathTex("u\'=\\frac{(x_2-x_1)-v(t_2-t_1)}{(t_2-t_1)-\\frac{v}{c^2}(x_2-x_1)")
+
+        formula5[0][3].set_color("#ff8e2b")
+        formula5[0][4].set_color("#ff8e2b")
+        formula5[0][5].set_color("#ff8e2b")
+        formula5[0][6].set_color("#ff8e2b")
+        formula5[0][7].set_color("#ff8e2b")
+        formula5[0][8].set_color("#ff8e2b")
+        formula5[0][9].set_color("#ff8e2b")
+
+        formula5[0][10].set_color("#c29cff")
+        formula5[0][11].set_color("#c29cff")
+        formula5[0][12].set_color("#c29cff")
+        formula5[0][13].set_color("#c29cff")
+        formula5[0][14].set_color("#c29cff")
+        formula5[0][15].set_color("#c29cff")
+        formula5[0][16].set_color("#c29cff")
+        formula5[0][17].set_color("#c29cff")
+        formula5[0][18].set_color("#c29cff")
+
+        formula5[0][20].set_color("#c29cff")
+        formula5[0][21].set_color("#c29cff")
+        formula5[0][22].set_color("#c29cff")
+        formula5[0][23].set_color("#c29cff")
+        formula5[0][24].set_color("#c29cff")
+        formula5[0][25].set_color("#c29cff")
+        formula5[0][26].set_color("#c29cff")
+
+        formula5[0][27].set_color("#ff8e2b")
+        formula5[0][28].set_color("#ff8e2b")
+        formula5[0][29].set_color("#ff8e2b")
+        formula5[0][30].set_color("#ff8e2b")
+        formula5[0][31].set_color("#ff8e2b")
+        formula5[0][32].set_color("#ff8e2b")
+        formula5[0][33].set_color("#ff8e2b")
+        formula5[0][34].set_color("#ff8e2b")
+        formula5[0][35].set_color("#ff8e2b")
+        formula5[0][36].set_color("#ff8e2b")
+        formula5[0][37].set_color("#ff8e2b")
+        formula5[0][38].set_color("#ff8e2b")
+
+        self.wait()
+
         self.play(FadeTransform(formula4, formula5, run_time=1.5))
         self.wait()
 
+        self.play(formula5[0].animate.set_color(WHITE))
+        self.wait()
+        
+        missing = MathTex(r"x = ut \Rightarrow \Delta x = u \Delta t", color="#7cbf00")
+        missing.next_to(formula5, UP)
+
+        self.play(
+            Write(missing, run_time=1.5),
+
+            formula5[0][3].animate.set_color("#7cbf00"),
+            formula5[0][4].animate.set_color("#7cbf00"),
+            formula5[0][5].animate.set_color("#7cbf00"),
+            formula5[0][6].animate.set_color("#7cbf00"),
+            formula5[0][7].animate.set_color("#7cbf00"),
+            formula5[0][8].animate.set_color("#7cbf00"),
+            formula5[0][9].animate.set_color("#7cbf00"),
+
+            formula5[0][32].animate.set_color("#7cbf00"), # TODO: HERE
+            formula5[0][33].animate.set_color("#7cbf00"),
+            formula5[0][34].animate.set_color("#7cbf00"),
+            formula5[0][35].animate.set_color("#7cbf00"),
+            formula5[0][36].animate.set_color("#7cbf00"),
+            formula5[0][37].animate.set_color("#7cbf00"),
+            formula5[0][38].animate.set_color("#7cbf00"),
+        )
+        self.wait()
+
         formula6 = MathTex("u\'=\\frac{u(t_2-t_1)-v(t_2-t_1)}{(t_2-t_1)-\\frac{uv}{c^2}(t_2-t_1)")
+
+        formula6[0][3].set_color("#7cbf00")
+        formula6[0][4].set_color("#7cbf00")
+        formula6[0][5].set_color("#7cbf00")
+        formula6[0][6].set_color("#7cbf00")
+        formula6[0][7].set_color("#7cbf00")
+        formula6[0][8].set_color("#7cbf00")
+        formula6[0][9].set_color("#7cbf00")
+        formula6[0][10].set_color("#7cbf00")
+
+        # TODO: HERE
+        formula6[0][29].set_color("#7cbf00")
+        formula6[0][34].set_color("#7cbf00")
+        formula6[0][35].set_color("#7cbf00")
+        formula6[0][36].set_color("#7cbf00")
+        formula6[0][37].set_color("#7cbf00")
+        formula6[0][38].set_color("#7cbf00")
+        formula6[0][39].set_color("#7cbf00")
+        formula6[0][40].set_color("#7cbf00")
+
         self.play(FadeTransform(formula5, formula6, run_time=1.5))
+        self.wait()
+
+        self.play(formula6[0].animate.set_color(WHITE), Unwrite(missing, run_time=1.5))
+        self.wait()
+
+        self.play(
+            formula6[0][4].animate.set_color("#7cbf00"),
+            formula6[0][5].animate.set_color("#7cbf00"),
+            formula6[0][6].animate.set_color("#7cbf00"),
+            formula6[0][7].animate.set_color("#7cbf00"),
+            formula6[0][8].animate.set_color("#7cbf00"),
+            formula6[0][9].animate.set_color("#7cbf00"),
+            formula6[0][10].animate.set_color("#7cbf00"),
+
+            formula6[0][13].animate.set_color("#7cbf00"),
+            formula6[0][14].animate.set_color("#7cbf00"),
+            formula6[0][15].animate.set_color("#7cbf00"),
+            formula6[0][16].animate.set_color("#7cbf00"),
+            formula6[0][17].animate.set_color("#7cbf00"),
+            formula6[0][18].animate.set_color("#7cbf00"),
+            formula6[0][19].animate.set_color("#7cbf00"),
+
+            formula6[0][21].animate.set_color("#7cbf00"),
+            formula6[0][22].animate.set_color("#7cbf00"),
+            formula6[0][23].animate.set_color("#7cbf00"),
+            formula6[0][24].animate.set_color("#7cbf00"),
+            formula6[0][25].animate.set_color("#7cbf00"),
+            formula6[0][26].animate.set_color("#7cbf00"),
+            formula6[0][27].animate.set_color("#7cbf00"),
+            
+            formula6[0][34].animate.set_color("#7cbf00"),
+            formula6[0][35].animate.set_color("#7cbf00"),
+            formula6[0][36].animate.set_color("#7cbf00"),
+            formula6[0][37].animate.set_color("#7cbf00"),
+            formula6[0][38].animate.set_color("#7cbf00"),
+            formula6[0][39].animate.set_color("#7cbf00"),
+            formula6[0][40].animate.set_color("#7cbf00")
+        )
         self.wait()
 
         formula7 = MathTex("u\'=\\frac{(t_2-t_1)(u-v)}{(t_2-t_1)(1-\\frac{uv}{c^2})")
 
+        formula7[0][3].set_color("#7cbf00")
+        formula7[0][4].set_color("#7cbf00")
+        formula7[0][5].set_color("#7cbf00")
+        formula7[0][6].set_color("#7cbf00")
+        formula7[0][7].set_color("#7cbf00")
+        formula7[0][8].set_color("#7cbf00")
+        formula7[0][9].set_color("#7cbf00")
+        formula7[0][16].set_color("#7cbf00")
+        formula7[0][17].set_color("#7cbf00")
+        formula7[0][18].set_color("#7cbf00")
+        formula7[0][19].set_color("#7cbf00")
+        formula7[0][20].set_color("#7cbf00")
+        formula7[0][21].set_color("#7cbf00")
+        formula7[0][22].set_color("#7cbf00")
+
         self.play(ReplacementTransform(formula6, formula7, run_time=1.5))
-        self.wait()
-        
-        self.play(
-            formula7[0][3].animate.set_color("#7cbf00"),
-            formula7[0][4].animate.set_color("#7cbf00"),
-            formula7[0][5].animate.set_color("#7cbf00"),
-            formula7[0][6].animate.set_color("#7cbf00"),
-            formula7[0][7].animate.set_color("#7cbf00"),
-            formula7[0][8].animate.set_color("#7cbf00"),
-            formula7[0][9].animate.set_color("#7cbf00"),
-            formula7[0][16].animate.set_color("#7cbf00"),
-            formula7[0][17].animate.set_color("#7cbf00"),
-            formula7[0][18].animate.set_color("#7cbf00"),
-            formula7[0][19].animate.set_color("#7cbf00"),
-            formula7[0][20].animate.set_color("#7cbf00"),
-            formula7[0][21].animate.set_color("#7cbf00"),
-            formula7[0][22].animate.set_color("#7cbf00")
-        )
         self.wait()
 
         formula8 = MathTex("u\'=\\frac{u-v}{1-\\frac{uv}{c^2}")
@@ -450,6 +568,7 @@ class Demonstration2(Scene): # this scene is a mess!
         self.wait()
 
         self.play(Indicate(formula8, color="#7cbf00"))
+        self.wait()
 
 class Limit(Scene):
     """ Shows how to derive the vertical asymptote of the function of the relativistic addition of velocities. """
