@@ -349,16 +349,6 @@ class Derivative(Scene):
 class StudyDerivative(GraphScene):
     """ Studies the graph of the derivative of the function of the relativistic addition of velocities, and then shows it. """
     def construct(self):
-        self.x_axis_label = "$u\'$"
-        self.y_axis_label = "$u$"
-        self.x_min = -20
-        self.x_max = 20
-        self.y_min = -2
-        self.y_max = 12
-        self.graph_origin = ORIGIN + 3 * DOWN + 1.5 * LEFT
-        self.x_axis_config = { "tick_frequency": 5 }
-        self.y_axis_config = { "tick_frequency": 2 }
-
         segno = MathTex(r"\frac{d}{du'} u = \frac{1 - \beta^2}{(1 + \frac{\beta}{c} u')^2}", color=GREEN)
         segno.to_edge(UP)
 
@@ -455,6 +445,16 @@ class StudyDerivative(GraphScene):
 
         self.play(FadeTransform(den4, den6), Unwrite(den5))
 
+        self.x_axis_label = "$u\'$"
+        self.y_axis_label = "$u$"
+        self.x_min = -20
+        self.x_max = 20
+        self.y_min = -2
+        self.y_max = 12
+        self.graph_origin = ORIGIN + 3 * DOWN + 1.5 * LEFT
+        self.x_axis_config = { "tick_frequency": 5 }
+        self.y_axis_config = { "tick_frequency": 2 }
+
         self.setup_axes(animate=True)
 
         v = 1
@@ -464,6 +464,17 @@ class StudyDerivative(GraphScene):
         n = 1 - beta ** 2
 
         derivative = lambda x: n / (1 + beta * x / c) ** 2
+
+        """ graph = self.get_graph(derivative, x_min=-20, x_max=20, y_min=-5, y_max=20, discontinuities=[-9], color=GREEN)
+
+        asymptote = self.get_vertical_line_to_graph(1.001 * -c / beta, graph, color="#babaff")
+        
+        self.play(Create(graph, run_time=1))
+        self.add(graph)
+        self.wait()
+
+        self.play(Create(asymptote, run_time=1))
+        self.wait() """
 
         graph_before = self.get_graph(derivative, x_min=-20, x_max=1.1 * - c / beta, y_min=-5, y_max=20, color=GREEN)
         graph_after = self.get_graph(derivative, x_min=0.9 * - c / beta, x_max=20, y_min=-5, y_max=20, color=GREEN)
@@ -478,6 +489,7 @@ class StudyDerivative(GraphScene):
         self.wait()
 
 class UGraph(GraphScene):
+    """ Shows the change of v in the function of the relativistic addition of velocities. """
     def construct(self):
         self.x_axis_label = "$u\'$"
         self.y_axis_label = "$u$"
@@ -515,7 +527,7 @@ class UGraph(GraphScene):
 
         c_label = MathTex("c", color=GREEN)
         c_label.next_to(v_label, RIGHT)
-        c_label.shift(RIGHT * 1.5 + DOWN * 0.1)
+        c_label.shift(RIGHT * 1.5 + DOWN * 0.1 + 0.05)
 
         # it's used v = beta (c) because v is set to 1 and c is set to 3, thus beta corresponds to the ratio 
         on_screen_var = Variable(beta, v_label, num_decimal_places=2)
@@ -567,4 +579,87 @@ class UGraph(GraphScene):
         var_tracker = on_screen_var.tracker
 
         self.play(var_tracker.animate.set_value(beta), ReplacementTransform(graph_before4, graph_before5), ReplacementTransform(graph_after4, graph_after5))
+        self.wait()
+
+class HomographicFunction(GraphScene):
+    """ Shows the graph of a general homographic function. """
+    def construct(self):
+        homo = MathTex(r"\mathrm{Funzione\ omografica}", run_time=1.5, color="#96fffc")
+        homo.to_edge(UP)
+
+        fgroup = VGroup(
+            MathTex(r"y = \frac{ax + b}{cx + d}", color="#96fffc"),
+            MathTex(r"(c \neq 0)", color="#96fffc"),
+        )
+        # the order matters!
+        fgroup.next_to(homo, RIGHT)
+        fgroup.arrange(RIGHT)
+        fgroup.to_edge(UP)
+        fgroup.shift(DOWN)
+
+        self.play(Write(homo, run_time=1.5))
+        self.play(Write(fgroup, run_time=1.5))
+        self.wait()
+
+        fgroup_outer = VGroup(
+            MathTex(r"y = \frac{ax + b}{cx + d}", color="#96fffc"),
+            MathTex(r"(c \neq 0)", color="#96fffc"),
+        )
+        # the order matters!
+        fgroup_outer.arrange(RIGHT)
+        fgroup_outer.to_edge(UP)
+        fgroup_outer.to_edge(RIGHT)
+
+        self.play(ReplacementTransform(fgroup, fgroup_outer, run_time=1.5))
+        self.wait()
+
+        self.x_axis_label = "$x$"
+        self.y_axis_label = "$y$"
+        self.x_min = -5
+        self.x_max = 5
+        self.y_min = -10
+        self.y_max = 10
+        self.graph_origin = ORIGIN + LEFT * 2.2 + DOWN * 0.7
+        self.x_axis_config = { "tick_frequency": 1 }
+        self.y_axis_config = { "tick_frequency": 2 }
+
+        self.setup_axes(animate=True)
+        
+        hfunc = lambda x: 1 / x
+
+        graph_1 = self.get_graph(hfunc, x_min=-5, x_max=-0.1, y_min=-0.5, y_max=0.5, color = "#96fffc")
+        graph_2 = self.get_graph(hfunc, x_min=0.1, x_max=5, y_min=-0.5, y_max=0.5, color = "#96fffc")
+        
+        self.play(Create(graph_1), run_time=1)
+        self.play(Create(graph_2), run_time=1)
+        self.wait()
+
+        u_func = MathTex(r"u = \frac{u' + v}{\frac{vu'}{c^2} + 1}", color="#8d88f2")
+        u_func.next_to(fgroup_outer, DOWN)
+        u_func.shift(DOWN)
+
+        self.play(Write(u_func, run_time=1.5))
+        self.wait()
+
+        abcd = VGroup(
+            MathTex("a", "=", "1"),
+            MathTex("b", "=", "v"),
+            MathTex("c", "=", "\\frac{v}{c^2}"),
+            MathTex("d", "=", "1")
+        )
+        abcd.arrange(DOWN)
+        abcd.next_to(u_func, DOWN)
+        abcd.shift(DOWN * 0.5)
+
+        abcd[0][0].set_color("#96fffc")
+        abcd[1][0].set_color("#96fffc")
+        abcd[2][0].set_color("#96fffc")
+        abcd[3][0].set_color("#96fffc")
+
+        abcd[0][2].set_color("#8d88f2")
+        abcd[1][2].set_color("#8d88f2")
+        abcd[2][2].set_color("#8d88f2")
+        abcd[3][2].set_color("#8d88f2")
+
+        self.play(Write(abcd, run_time=1.5))
         self.wait()
