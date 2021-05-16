@@ -36,7 +36,7 @@ class CSubstitution(Scene):
         self.play(Write(text1, run_time=1.5))
         self.wait()
 
-        ueqc = MathTex("u=c", color="#dd4400")
+        ueqc = MathTex("u=c", color=RED)
         ueqc.to_edge(UP)
         ueqc.shift(DOWN * 0.6)
 
@@ -101,13 +101,13 @@ class CSubstitution(Scene):
         self.play(ReplacementTransform(text5, text6, run_time=1.5))
         self.wait(0.8)
 
-        last = MathTex(r"\mathrm{Invarianza\ della\ velocit}", r"\mathrm{\grave a}", r"\ \mathrm{della\ luce}")
+        last = MathTex(r"\mathrm{Invarianza\ della\ velocit}", r"\mathrm{\grave a}", r"\ \mathrm{della\ luce}", color=RED)
         last.next_to(text6, UP)
 
-        lower_upper = MathTex("u=c", color="#dd4400")
+        lower_upper = MathTex("u=c", color=RED)
         lower_upper.next_to(text6, DOWN)
 
-        self.play(Indicate(text6), Write(last, run_time=1.5), ReplacementTransform(ueqc, lower_upper, run_time=1.5))
+        self.play(Indicate(text6, color=RED), Write(last, run_time=1.5), ReplacementTransform(ueqc, lower_upper, run_time=1.5))
         self.wait()
 
 class VerySmallSpeed(Scene):
@@ -132,10 +132,26 @@ class VerySmallSpeed(Scene):
         lower_text = MathTex("u\'=\\frac{u-v}{1-\\frac{uv}{c^2}}") 
         lower_text.to_edge(DOWN)
 
-        self.play(FadeTransform(upper_text, lower_text, run_time=1.5), Write(group, run_time=1.5))
+        upper_text[0][9].set_color(BLUE)
+        upper_text[0][10].set_color(BLUE)
+
+        self.add(upper_text)
+        self.wait()
+
+        lower_text[0][9].set_color(BLUE)
+        lower_text[0][10].set_color(BLUE)
+
+        self.play(FadeTransform(upper_text, lower_text, run_time=1.5))
+        self.play(Write(group, run_time=1))
+
+        self.play(Indicate(group[1], color=BLUE))
+        self.play(Indicate(group[3], color=BLUE))
         self.wait()
 
         approx1 = MathTex("u\'\\approx\\frac{u-v}{1-0}")
+
+        approx1[0][-1].set_color(BLUE)
+
         self.play(Write(approx1, run_time=1.5))
         self.wait()
 
@@ -143,9 +159,9 @@ class VerySmallSpeed(Scene):
         self.play(ReplacementTransform(approx1, approx2, run_time=1.5))
         self.wait()
 
-        text = MathTex("\mathrm{Trasformazione\\ di\\ Galileo}")
+        text = MathTex("\mathrm{Trasformazione\\ di\\ Galileo}", color=BLUE)
         text.next_to(approx2, UP)
-        self.play(Write(text, run_time=1.5))
+        self.play(Write(text, run_time=1.5), Indicate(approx2, color=BLUE))
 
 class Demonstration(GraphScene):
     """ Shows the first part of the demonstration of the relativity addition formula. """
