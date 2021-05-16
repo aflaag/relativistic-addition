@@ -36,25 +36,76 @@ class CSubstitution(Scene):
         self.play(Write(text1, run_time=1.5))
         self.wait()
 
+        ueqc = MathTex("u=c", color="#dd4400")
+        ueqc.to_edge(UP)
+        ueqc.shift(DOWN * 0.6)
+
+        self.play(Write(ueqc, run_time=1))
+        self.wait(0.7)
+
+        text1[0][3].set_color(RED)
+        text1[0][9].set_color(RED)
+
+        self.add(text1)
+        self.wait()
+
         text2 = MathTex("u\'=\\frac{c-v}{1-\\frac{cv}{c^2}}")
         self.play(ReplacementTransform(text1, text2, run_time=1.5))
+        self.wait()
+
+        text2[0][9].set_color(RED)
+        text2[0][13].set_color(RED)
+
+        self.add(text2)
         self.wait()
 
         text3 = MathTex("u\'=\\frac{c-v}{1-\\frac{v}{c}}")
         self.play(FadeTransform(text2, text3, run_time=1.5))
         self.wait()
 
+        text3[0][7].set_color(RED)
+        text3[0][8].set_color(RED)
+        text3[0][9].set_color(RED)
+        text3[0][10].set_color(RED)
+        text3[0][11].set_color(RED)
+
+        self.add(text3)
+        self.wait()
+
         text4 = MathTex("u\'=\\frac{c-v}{\\frac{c-v}{c}}")
         self.play(ReplacementTransform(text3, text4, run_time=1.5))
+        self.wait()
+
+        text4[0][10].set_color(RED)
+        text4[0][11].set_color(RED)
+
+        self.add(text4)
         self.wait()
 
         text5 = MathTex("u\'=\\frac{c-v}{c-v}c")
         self.play(ReplacementTransform(text4, text5, run_time=1.5))
         self.wait()
 
+        text5[0][3].set_color(RED)
+        text5[0][4].set_color(RED)
+        text5[0][5].set_color(RED)
+        text5[0][6].set_color(RED)
+        text5[0][7].set_color(RED)
+        text5[0][8].set_color(RED)
+        text5[0][9].set_color(RED)
+
+        self.add(text5)
+        self.wait()
+
         text6 = MathTex("u\'=c")
         self.play(ReplacementTransform(text5, text6, run_time=1.5))
+
+        last = MathTex(r"\mathrm{Invarianza\ della\ velocit}", "\`{a}", r"\mathrm{della\ luce}")
+        last.next_to(text6, UP)
+
+        self.play(Indicate(text6), Write(last, run_time=1.5))
         self.wait()
+        #r"\`{a}",
 
 class VerySmallSpeed(Scene):
     """ Shows how to derive the Galilean transformation. """
