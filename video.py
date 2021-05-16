@@ -840,17 +840,6 @@ class StudyDerivative(GraphScene):
 
         derivative = lambda x: n / (1 + beta * x / c) ** 2
 
-        """ graph = self.get_graph(derivative, x_min=-20, x_max=20, y_min=-5, y_max=20, discontinuities=[-9], color=GREEN)
-
-        asymptote = self.get_vertical_line_to_graph(1.001 * -c / beta, graph, color="#babaff")
-        
-        self.play(Create(graph, run_time=1))
-        self.add(graph)
-        self.wait()
-
-        self.play(Create(asymptote, run_time=1))
-        self.wait() """
-
         graph_before = self.get_graph(derivative, x_min=-20, x_max=1.1 * - c / beta, y_min=-5, y_max=20, color=GREEN)
         graph_after = self.get_graph(derivative, x_min=0.9 * - c / beta, x_max=20, y_min=-5, y_max=20, color=GREEN)
 
