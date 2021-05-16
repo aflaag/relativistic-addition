@@ -43,58 +43,58 @@ class CSubstitution(Scene):
         self.play(Write(ueqc, run_time=1))
         self.wait(0.7)
 
-        text1[0][3].set_color(RED)
-        text1[0][9].set_color(RED)
-
-        self.add(text1)
+        self.play(
+            text1[0][3].animate.set_color(RED),
+            text1[0][9].animate.set_color(RED)
+        )
         self.wait()
 
         text2 = MathTex("u\'=\\frac{c-v}{1-\\frac{cv}{c^2}}")
         self.play(ReplacementTransform(text1, text2, run_time=1.5))
         self.wait()
 
-        text2[0][9].set_color(RED)
-        text2[0][13].set_color(RED)
-
-        self.add(text2)
+        self.play(
+            text2[0][9].animate.set_color(RED),
+            text2[0][13].animate.set_color(RED),
+        )
         self.wait()
 
         text3 = MathTex("u\'=\\frac{c-v}{1-\\frac{v}{c}}")
         self.play(FadeTransform(text2, text3, run_time=1.5))
         self.wait()
 
-        text3[0][7].set_color(RED)
-        text3[0][8].set_color(RED)
-        text3[0][9].set_color(RED)
-        text3[0][10].set_color(RED)
-        text3[0][11].set_color(RED)
-
-        self.add(text3)
+        self.play(
+            text3[0][7].animate.set_color(RED),
+            text3[0][8].animate.set_color(RED),
+            text3[0][9].animate.set_color(RED),
+            text3[0][10].animate.set_color(RED),
+            text3[0][11].animate.set_color(RED)
+        )
         self.wait()
 
         text4 = MathTex("u\'=\\frac{c-v}{\\frac{c-v}{c}}")
         self.play(ReplacementTransform(text3, text4, run_time=1.5))
         self.wait()
 
-        text4[0][10].set_color(RED)
-        text4[0][11].set_color(RED)
-
-        self.add(text4)
+        self.play(
+            text4[0][10].animate.set_color(RED),
+            text4[0][11].animate.set_color(RED)
+        )
         self.wait()
 
         text5 = MathTex("u\'=\\frac{c-v}{c-v}c")
         self.play(ReplacementTransform(text4, text5, run_time=1.5))
         self.wait()
-
-        text5[0][3].set_color(RED)
-        text5[0][4].set_color(RED)
-        text5[0][5].set_color(RED)
-        text5[0][6].set_color(RED)
-        text5[0][7].set_color(RED)
-        text5[0][8].set_color(RED)
-        text5[0][9].set_color(RED)
-
-        self.add(text5)
+        
+        self.play(
+            text5[0][3].animate.set_color(RED),
+            text5[0][4].animate.set_color(RED),
+            text5[0][5].animate.set_color(RED),
+            text5[0][6].animate.set_color(RED),
+            text5[0][7].animate.set_color(RED),
+            text5[0][8].animate.set_color(RED),
+            text5[0][9].animate.set_color(RED)
+        )
         self.wait()
 
         text6 = MathTex("u\'=c")
@@ -132,10 +132,10 @@ class VerySmallSpeed(Scene):
         lower_text = MathTex("u\'=\\frac{u-v}{1-\\frac{uv}{c^2}}") 
         lower_text.to_edge(DOWN)
 
-        upper_text[0][9].set_color(BLUE)
-        upper_text[0][10].set_color(BLUE)
-
-        self.add(upper_text)
+        self.play(
+            upper_text[0][9].animate.set_color(BLUE),
+            upper_text[0][10].animate.set_color(BLUE)
+        )
         self.wait()
 
         lower_text[0][9].set_color(BLUE)
@@ -194,7 +194,7 @@ class Demonstration(GraphScene):
         self.play(FadeTransform(text1, text2, run_time=1.5))
         self.wait()
 
-class Demonstration2(Scene):
+class Demonstration2(Scene): # this scene is a mess!
     """ Shows the second part of the demonstration of the relativity addition formula. """
     def construct(self):
         group = VGroup(
@@ -209,6 +209,8 @@ class Demonstration2(Scene):
         group.to_edge(UP)
 
         self.play(Write(group, run_time=1.5))
+        self.play(Indicate(group[1], color="#7cbf00"))
+        self.play(Indicate(group[3], color="#7cbf00"))
         self.wait()
 
         system = MathTex("""
@@ -218,28 +220,199 @@ class Demonstration2(Scene):
 \\\ t\'=\\gamma (t-\\frac{vx}{c^2})
 \\end{matrix}\\right.
         """)
+
         self.play(Write(system, run_time=1.5))
         self.wait()
 
-        formula = MathTex("\\frac{x\'}{t\'}=\\frac{\\gamma (x-vt)}{\\gamma (t-\\frac{vx}{c^2})}")
-        self.play(ReplacementTransform(system, formula, run_time=1.5))
-        self.wait()
-
-        formula2 = MathTex("\\frac{x\'}{t\'}=\\frac{x-vt}{t-\\frac{vx}{c^2}}")
-        self.play(FadeTransform(formula, formula2, run_time=1.5))
-        self.wait()
-
-        formula3 = MathTex("\\frac{\\Delta x\'}{\\Delta t\'}=\\frac{(x_2-vt_2)-(x_1-vt_1)}{(t_2-\\frac{vx_2}{c^2})-(t_1-\\frac{vx_1}{c^2})}")
-
-        lower_text = MathTex("\\frac{x\'}{t\'}=\\frac{x-vt}{t-\\frac{vx}{c^2}}")
+        lower_text = VGroup(
+            MathTex(r"x'= \gamma (x-vt)", color="#e3af7f"),
+            MathTex(r"t'= \gamma (t-\frac{vx}{c^2})", color="#e3af7f")
+        )
+        lower_text.arrange(DOWN)
         lower_text.to_edge(DOWN)
+        lower_text.to_edge(RIGHT)
 
-        self.play(FadeTransform(formula2, lower_text, run_time=1.5), Write(formula3, run_time=1.5))
+        rect1 = Rectangle(color="#e3af7f", height=0.55, width=3.1)
+        rect2 = Rectangle(color="#e3af7f", height=0.65, width=3.0)
+        rect1.shift(UP + DOWN * 0.1 + RIGHT * 0.2) # upper
+        rect2.shift(DOWN * 1 + UP * 0.1 + RIGHT * 0.2) # lower
+
+        self.play(Create(rect1, run_time=1.5), Create(rect2, run_time=1.5), Write(lower_text, run_time=1.5))
+        self.play(Uncreate(rect1), Uncreate(rect2))
+        self.wait()
+
+        self.play(Unwrite(system, run_time=1.5))
+        self.wait()
+
+        forgot = MathTex(r"\frac{\Delta x'}{\Delta t'} = \frac{x_2' - x_1'}{t_2' - t_1'}")
+
+        forgot[0][8].set_color("#e3af7f")
+        forgot[0][9].set_color("#e3af7f")
+        forgot[0][10].set_color("#e3af7f")
+
+        forgot[0][12].set_color("#e3af7f")
+        forgot[0][13].set_color("#e3af7f")
+        forgot[0][14].set_color("#e3af7f")
+
+        forgot[0][16].set_color("#e3af7f")
+        forgot[0][17].set_color("#e3af7f")
+        forgot[0][18].set_color("#e3af7f")
+
+        forgot[0][20].set_color("#e3af7f")
+        forgot[0][21].set_color("#e3af7f")
+        forgot[0][22].set_color("#e3af7f")
+
+
+        self.play(Write(forgot, run_time=1.5))
+        self.wait()
+        
+        formula3 = MathTex("\\frac{\\Delta x\'}{\\Delta t\'}=\\frac{\\gamma (x_2-vt_2)- \\gamma (x_1-vt_1)}{\\gamma (t_2-\\frac{vx_2}{c^2})- \\gamma (t_1-\\frac{vx_1}{c^2})}")
+
+        formula3[0][8].set_color("#e3af7f")
+        formula3[0][9].set_color("#e3af7f")
+        formula3[0][10].set_color("#e3af7f")
+        formula3[0][11].set_color("#e3af7f")
+        formula3[0][12].set_color("#e3af7f")
+        formula3[0][13].set_color("#e3af7f")
+        formula3[0][14].set_color("#e3af7f")
+        formula3[0][15].set_color("#e3af7f")
+        formula3[0][16].set_color("#e3af7f")
+
+        formula3[0][18].set_color("#e3af7f")
+        formula3[0][19].set_color("#e3af7f")
+        formula3[0][20].set_color("#e3af7f")
+        formula3[0][21].set_color("#e3af7f")
+        formula3[0][22].set_color("#e3af7f")
+        formula3[0][23].set_color("#e3af7f")
+        formula3[0][24].set_color("#e3af7f")
+        formula3[0][25].set_color("#e3af7f")
+        formula3[0][26].set_color("#e3af7f")
+
+        formula3[0][28].set_color("#e3af7f")
+        formula3[0][29].set_color("#e3af7f")
+        formula3[0][30].set_color("#e3af7f")
+        formula3[0][31].set_color("#e3af7f")
+        formula3[0][32].set_color("#e3af7f")
+        formula3[0][33].set_color("#e3af7f")
+        formula3[0][34].set_color("#e3af7f")
+        formula3[0][35].set_color("#e3af7f")
+        formula3[0][36].set_color("#e3af7f")
+        formula3[0][37].set_color("#e3af7f")
+        formula3[0][38].set_color("#e3af7f")
+        formula3[0][39].set_color("#e3af7f")
+
+        formula3[0][41].set_color("#e3af7f")
+        formula3[0][42].set_color("#e3af7f")
+        formula3[0][43].set_color("#e3af7f")
+        formula3[0][44].set_color("#e3af7f")
+        formula3[0][45].set_color("#e3af7f")
+        formula3[0][46].set_color("#e3af7f")
+        formula3[0][47].set_color("#e3af7f")
+        formula3[0][48].set_color("#e3af7f")
+        formula3[0][49].set_color("#e3af7f")
+        formula3[0][50].set_color("#e3af7f")
+        formula3[0][51].set_color("#e3af7f")
+        formula3[0][52].set_color("#e3af7f")
+
+        self.play(ReplacementTransform(forgot, formula3, run_time=1.5))
+        self.wait()
+
+        self.play(
+            formula3[0][8].animate.set_color(WHITE),
+            formula3[0][9].animate.set_color(WHITE),
+            formula3[0][10].animate.set_color(WHITE),
+            formula3[0][11].animate.set_color(WHITE),
+            formula3[0][12].animate.set_color(WHITE),
+            formula3[0][13].animate.set_color(WHITE),
+            formula3[0][14].animate.set_color(WHITE),
+            formula3[0][15].animate.set_color(WHITE),
+            formula3[0][16].animate.set_color(WHITE),
+            formula3[0][18].animate.set_color(WHITE),
+            formula3[0][19].animate.set_color(WHITE),
+            formula3[0][20].animate.set_color(WHITE),
+            formula3[0][21].animate.set_color(WHITE),
+            formula3[0][22].animate.set_color(WHITE),
+            formula3[0][23].animate.set_color(WHITE),
+            formula3[0][24].animate.set_color(WHITE),
+            formula3[0][25].animate.set_color(WHITE),
+            formula3[0][26].animate.set_color(WHITE),
+            formula3[0][28].animate.set_color(WHITE),
+            formula3[0][29].animate.set_color(WHITE),
+            formula3[0][30].animate.set_color(WHITE),
+            formula3[0][31].animate.set_color(WHITE),
+            formula3[0][32].animate.set_color(WHITE),
+            formula3[0][33].animate.set_color(WHITE),
+            formula3[0][34].animate.set_color(WHITE),
+            formula3[0][35].animate.set_color(WHITE),
+            formula3[0][36].animate.set_color(WHITE),
+            formula3[0][37].animate.set_color(WHITE),
+            formula3[0][38].animate.set_color(WHITE),
+            formula3[0][39].animate.set_color(WHITE),
+            formula3[0][41].animate.set_color(WHITE),
+            formula3[0][42].animate.set_color(WHITE),
+            formula3[0][43].animate.set_color(WHITE),
+            formula3[0][44].animate.set_color(WHITE),
+            formula3[0][45].animate.set_color(WHITE),
+            formula3[0][46].animate.set_color(WHITE),
+            formula3[0][47].animate.set_color(WHITE),
+            formula3[0][48].animate.set_color(WHITE),
+            formula3[0][49].animate.set_color(WHITE),
+            formula3[0][50].animate.set_color(WHITE),
+            formula3[0][51].animate.set_color(WHITE),
+            formula3[0][52].animate.set_color(WHITE)
+        )
+        self.wait()
+
+        self.play(
+            formula3[0][8].animate.set_color("#7cbf00"),
+            formula3[0][18].animate.set_color("#7cbf00"),
+            formula3[0][28].animate.set_color("#7cbf00"),
+            formula3[0][41].animate.set_color("#7cbf00")
+        )
+        self.wait()
+
+        no_gammas = MathTex("\\frac{\\Delta x\'}{\\Delta t\'}=\\frac{(x_2-vt_2)-(x_1-vt_1)}{(t_2-\\frac{vx_2}{c^2})-(t_1-\\frac{vx_1}{c^2})}")
+        self.play(FadeTransform(formula3, no_gammas, run_time=1.5))
+        self.wait()
+
+        forgot3 = MathTex("\\frac{\\Delta x\'}{\\Delta t\'}=\\frac{x_2-vt_2-x_1+vt_1}{t_2-\\frac{vx_2}{c^2}-t_1+\\frac{vx_1}{c^2}}")
+
+        self.play(FadeTransform(no_gammas, forgot3, run_time=1.5))
+        self.wait()
+
+        forgot2 = MathTex(r"u'= \frac{\Delta x'}{\Delta t'}", color="#64bd90")
+        forgot2.to_edge(LEFT)
+        forgot2.to_edge(DOWN)
+
+        self.play(Write(forgot2, run_time=1.5))
+        self.wait()
+
+        self.play(
+            forgot3[0][0].animate.set_color("#64bd90"),
+            forgot3[0][1].animate.set_color("#64bd90"),
+            forgot3[0][2].animate.set_color("#64bd90"),
+            forgot3[0][3].animate.set_color("#64bd90"),
+            forgot3[0][4].animate.set_color("#64bd90"),
+            forgot3[0][5].animate.set_color("#64bd90"),
+            forgot3[0][6].animate.set_color("#64bd90")
+        )
         self.wait()
 
         formula4 = MathTex("u\'=\\frac{x_2-vt_2-x_1+vt_1}{t_2-\\frac{vx_2}{c^2}-t_1+\\frac{vx_1}{c^2}}")
-        self.play(FadeTransform(formula3, formula4, run_time=1.5))
+
+        formula4[0][0].set_color("#64bd90")
+        formula4[0][1].set_color("#64bd90")
+
+        self.play(FadeTransform(forgot3, formula4, run_time=1.5))
         self.wait()
+
+        self.play(
+            formula4[0][1].animate.set_color(WHITE),
+            formula4[0][0].animate.set_color(WHITE)
+        )
+        self.wait()
+
+        # TODO: FINISH STARTING FROM HERE
 
         formula5 = MathTex("u\'=\\frac{(x_2-x_1)-v(t_2-t_1)}{(t_2-t_1)-\\frac{v}{c^2}(x_2-x_1)")
         self.play(FadeTransform(formula4, formula5, run_time=1.5))
@@ -250,12 +423,33 @@ class Demonstration2(Scene):
         self.wait()
 
         formula7 = MathTex("u\'=\\frac{(t_2-t_1)(u-v)}{(t_2-t_1)(1-\\frac{uv}{c^2})")
+
         self.play(ReplacementTransform(formula6, formula7, run_time=1.5))
+        self.wait()
+        
+        self.play(
+            formula7[0][3].animate.set_color("#7cbf00"),
+            formula7[0][4].animate.set_color("#7cbf00"),
+            formula7[0][5].animate.set_color("#7cbf00"),
+            formula7[0][6].animate.set_color("#7cbf00"),
+            formula7[0][7].animate.set_color("#7cbf00"),
+            formula7[0][8].animate.set_color("#7cbf00"),
+            formula7[0][9].animate.set_color("#7cbf00"),
+            formula7[0][16].animate.set_color("#7cbf00"),
+            formula7[0][17].animate.set_color("#7cbf00"),
+            formula7[0][18].animate.set_color("#7cbf00"),
+            formula7[0][19].animate.set_color("#7cbf00"),
+            formula7[0][20].animate.set_color("#7cbf00"),
+            formula7[0][21].animate.set_color("#7cbf00"),
+            formula7[0][22].animate.set_color("#7cbf00")
+        )
         self.wait()
 
         formula8 = MathTex("u\'=\\frac{u-v}{1-\\frac{uv}{c^2}")
         self.play(ReplacementTransform(formula7, formula8, run_time=1.5))
         self.wait()
+
+        self.play(Indicate(formula8, color="#7cbf00"))
 
 class Limit(Scene):
     """ Shows how to derive the vertical asymptote of the function of the relativistic addition of velocities. """
@@ -320,7 +514,7 @@ class Limit(Scene):
 
         limit6_lower = MathTex("\\frac{v-c^2}{0}")
         limit6_lower.to_edge(UP)
-
+        
         # FIXME: THIS IS BROKEN
         system = MathTex("""
 \\left\{\\begin{matrix} v > 0: v - c^2 < 0 (0 < v < c)
