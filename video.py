@@ -99,13 +99,16 @@ class CSubstitution(Scene):
 
         text6 = MathTex("u\'=c")
         self.play(ReplacementTransform(text5, text6, run_time=1.5))
+        self.wait(0.8)
 
-        last = MathTex(r"\mathrm{Invarianza\ della\ velocit}", "\`{a}", r"\mathrm{della\ luce}")
+        last = MathTex(r"\mathrm{Invarianza\ della\ velocit}", r"\mathrm{\grave a}", r"\ \mathrm{della\ luce}")
         last.next_to(text6, UP)
 
-        self.play(Indicate(text6), Write(last, run_time=1.5))
+        lower_upper = MathTex("u=c", color="#dd4400")
+        lower_upper.next_to(text6, DOWN)
+
+        self.play(Indicate(text6), Write(last, run_time=1.5), ReplacementTransform(ueqc, lower_upper, run_time=1.5))
         self.wait()
-        #r"\`{a}",
 
 class VerySmallSpeed(Scene):
     """ Shows how to derive the Galilean transformation. """
@@ -414,34 +417,28 @@ class StudyDerivative(GraphScene):
         self.play(Write(domain, run_time=1.5))
         
         segno2 = MathTex(r"\mathrm{Numeratore:\ } 1 - \beta^2", color="#ddccaa")
-
         self.play(Write(segno2, run_time=1.5))
         self.wait()
 
         self.play(Unwrite(segno2, run_time=0.6))
 
         segno3 = MathTex(r"1 - \beta^2 > 0", color="#ddccaa")
-
         self.play(Write(segno3, run_time=1.5))
         self.wait()
 
         segno4 = MathTex(r"\beta^2 < 1", color="#ddccaa")
-
         self.play(FadeTransform(segno3, segno4, run_time=1.5))
         self.wait()
 
         segno5 = MathTex(r"-1 < \beta < 1", color="#ddccaa")
-
         self.play(FadeTransform(segno4, segno5, run_time=1.5))
         self.wait()
 
         segno6 = MathTex(r"-1 < \frac{v}{c} < 1", color="#ddccaa")
-
         self.play(ReplacementTransform(segno5, segno6, run_time=1.5))
         self.wait()
 
         segno7 = MathTex(r"-c < v < c", color="#ddccaa")
-
         self.play(FadeTransform(segno6, segno7, run_time=1.5))
         self.wait()
 
@@ -462,7 +459,6 @@ class StudyDerivative(GraphScene):
         self.play(Unwrite(den, run_time=0.6))
 
         den2 = MathTex(r"(1 + \frac{\beta}{c} u')^2 > 0", color="#babaff")
-
         self.play(Write(den2, run_time=1.5))
         self.wait()
 
@@ -473,7 +469,6 @@ class StudyDerivative(GraphScene):
         self.wait()
 
         den4 = MathTex(r"u' \neq - \frac{c}{ \beta}", color="#babaff")
-
         self.play(Unwrite(den2, run_time=0.7), ReplacementTransform(den3, den4, run_time=1.5))
         self.wait()
 
