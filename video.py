@@ -669,7 +669,7 @@ class StudyDerivative(GraphScene):
         den = MathTex(r"\mathrm{Denominatore:\ } (1 + \frac{\beta}{c} u')^2", color="#babaff")
 
         self.play(Write(den, run_time=1.5))
-        self.wait()        
+        self.wait()
 
         self.play(Unwrite(den, run_time=0.6))
 
