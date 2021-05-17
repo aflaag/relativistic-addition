@@ -60,7 +60,7 @@ class CSubstitution(Scene):
         self.wait()
 
         text3 = MathTex("u\'=\\frac{c-v}{1-\\frac{v}{c}}")
-        self.play(FadeTransform(text2, text3, run_time=1.5))
+        self.play(FadeTransformPieces(text2, text3, run_time=1.5))
         self.wait()
 
         self.play(
@@ -83,7 +83,7 @@ class CSubstitution(Scene):
         self.wait()
 
         text5 = MathTex("u\'=\\frac{c-v}{c-v}c")
-        self.play(ReplacementTransform(text4, text5, run_time=1.5))
+        self.play(FadeTransformPieces(text4, text5, run_time=1.5))
         self.wait()
         
         self.play(
@@ -98,7 +98,7 @@ class CSubstitution(Scene):
         self.wait()
 
         text6 = MathTex("u\'=c")
-        self.play(ReplacementTransform(text5, text6, run_time=1.5))
+        self.play(FadeTransformPieces(text5, text6, run_time=1.5))
         self.wait(0.8)
 
         last = MathTex(r"\mathrm{Invarianza\ della\ velocit}", r"\mathrm{\grave a}", r"\ \mathrm{della\ luce}", color=RED)
@@ -117,9 +117,9 @@ class VerySmallSpeed(Scene):
 
         group = VGroup(
             MathTex("\mathrm{Se\\ }"),
-            MathTex("v<<c"),
-            MathTex("\mathrm{\\ e\\ }"),
             MathTex("u<<c"),
+            MathTex("\mathrm{\\ e\\ }"),
+            MathTex("v<<c"),
             MathTex("\mathrm{,\\ allora}")
         )
         # the order matters!
@@ -156,7 +156,7 @@ class VerySmallSpeed(Scene):
         self.wait()
 
         approx2 = MathTex("u\'\\approx u-v")
-        self.play(ReplacementTransform(approx1, approx2, run_time=1.5))
+        self.play(FadeTransformPieces(approx1, approx2, run_time=1.5))
         self.wait()
 
         text = MathTex("\mathrm{Trasformazione\\ di\\ Galileo}", color=BLUE)
@@ -214,14 +214,14 @@ class Demonstration2(Scene): # this scene is a mess!
         self.play(Indicate(group[3], color="#7cbf00"))
         self.wait()
 
-        system = MathTex("""
-\\left\{\\begin{matrix} x\'=\\gamma (x-vt)
-\\\ y\'=y
-\\\ z\'=z
-\\\ t\'=\\gamma (t-\\frac{vx}{c^2})
-\\end{matrix}\\right.
+        system = MathTex(r"""
+\begin{cases}
+    x' = \gamma(x-vt) \\
+    y' = y \\
+    z' = z \\
+    t'\, = \gamma \left(t-\frac{vx}{c^2}\right)
+\end{cases}
         """)
-
         self.play(Write(system, run_time=1.5))
         self.wait()
 
@@ -233,10 +233,10 @@ class Demonstration2(Scene): # this scene is a mess!
         lower_text.to_edge(DOWN)
         lower_text.to_edge(RIGHT)
 
-        rect1 = Rectangle(color="#e3af7f", height=0.55, width=3.1)
-        rect2 = Rectangle(color="#e3af7f", height=0.65, width=3.0)
-        rect1.shift(UP + DOWN * 0.1 + RIGHT * 0.2) # upper
-        rect2.shift(DOWN * 1 + UP * 0.1 + RIGHT * 0.2) # lower
+        rect1 = Rectangle(color="#e3af7f", height=0.6, width=3.1)
+        rect2 = Rectangle(color="#e3af7f", height=0.7, width=3.2)
+        rect1.shift(UP * 1.1 + RIGHT * 0.1) # upper
+        rect2.shift(DOWN * 1.05 + RIGHT * 0.2) # lower
 
         self.play(Create(rect1, run_time=1.5), Create(rect2, run_time=1.5), Write(lower_text, run_time=1.5))
         self.play(Uncreate(rect1), Uncreate(rect2))
@@ -262,7 +262,6 @@ class Demonstration2(Scene): # this scene is a mess!
         forgot[0][20].set_color("#e3af7f")
         forgot[0][21].set_color("#e3af7f")
         forgot[0][22].set_color("#e3af7f")
-
 
         self.play(Write(forgot, run_time=1.5))
         self.wait()
@@ -315,7 +314,7 @@ class Demonstration2(Scene): # this scene is a mess!
         formula3[0][51].set_color("#e3af7f")
         formula3[0][52].set_color("#e3af7f")
 
-        self.play(ReplacementTransform(forgot, formula3, run_time=1.5))
+        self.play(FadeTransformPieces(forgot, formula3, run_time=1.5))
         self.wait()
 
         self.play(formula3[0].animate.set_color(WHITE))
@@ -365,6 +364,8 @@ class Demonstration2(Scene): # this scene is a mess!
         self.wait()
 
         self.play(
+            Unwrite((forgot2), run_time=0.7),
+
             formula4[0][0].animate.set_color(WHITE),
             formula4[0][1].animate.set_color(WHITE),
             formula4[0][3].animate.set_color("#ff8e2b"),
@@ -449,8 +450,6 @@ class Demonstration2(Scene): # this scene is a mess!
         formula5[0][37].set_color("#ff8e2b")
         formula5[0][38].set_color("#ff8e2b")
 
-        self.wait()
-
         self.play(FadeTransform(formula4, formula5, run_time=1.5))
         self.wait()
 
@@ -471,7 +470,7 @@ class Demonstration2(Scene): # this scene is a mess!
             formula5[0][8].animate.set_color("#7cbf00"),
             formula5[0][9].animate.set_color("#7cbf00"),
 
-            formula5[0][32].animate.set_color("#7cbf00"), # TODO: HERE
+            formula5[0][32].animate.set_color("#7cbf00"),
             formula5[0][33].animate.set_color("#7cbf00"),
             formula5[0][34].animate.set_color("#7cbf00"),
             formula5[0][35].animate.set_color("#7cbf00"),
@@ -492,7 +491,6 @@ class Demonstration2(Scene): # this scene is a mess!
         formula6[0][9].set_color("#7cbf00")
         formula6[0][10].set_color("#7cbf00")
 
-        # TODO: HERE
         formula6[0][29].set_color("#7cbf00")
         formula6[0][34].set_color("#7cbf00")
         formula6[0][35].set_color("#7cbf00")
@@ -505,7 +503,7 @@ class Demonstration2(Scene): # this scene is a mess!
         self.play(FadeTransform(formula5, formula6, run_time=1.5))
         self.wait()
 
-        self.play(formula6[0].animate.set_color(WHITE), Unwrite(missing, run_time=1.5))
+        self.play(formula6[0].animate.set_color(WHITE), Unwrite(missing, run_time=0.7))
         self.wait()
 
         self.play(
@@ -564,7 +562,7 @@ class Demonstration2(Scene): # this scene is a mess!
         self.wait()
 
         formula8 = MathTex("u\'=\\frac{u-v}{1-\\frac{uv}{c^2}")
-        self.play(ReplacementTransform(formula7, formula8, run_time=1.5))
+        self.play(FadeTransformPieces(formula7, formula8, run_time=1.5))
         self.wait()
 
         self.play(Indicate(formula8, color="#7cbf00"))
@@ -573,6 +571,8 @@ class Demonstration2(Scene): # this scene is a mess!
 class Limit(Scene):
     """ Shows how to derive the vertical asymptote of the function of the relativistic addition of velocities. """
     def construct(self):
+        # FIXME: REMOVE DOMAIN SECTION (already in study)
+
         domain = MathTex("\\mathrm{D}:\\forall u\' \mid \\frac{u\'v}{c^2}+1 \\neq 0")
 
         upper_text = MathTex("u=\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}")
@@ -756,19 +756,19 @@ class StudyDerivative(GraphScene):
         self.wait()
 
         segno4 = MathTex(r"\beta^2 < 1", color="#ddccaa")
-        self.play(FadeTransform(segno3, segno4, run_time=1.5))
+        self.play(FadeTransformPieces(segno3, segno4, run_time=1.5))
         self.wait()
 
         segno5 = MathTex(r"-1 < \beta < 1", color="#ddccaa")
-        self.play(FadeTransform(segno4, segno5, run_time=1.5))
+        self.play(FadeTransformPieces(segno4, segno5, run_time=1.5))
         self.wait()
 
         segno6 = MathTex(r"-1 < \frac{v}{c} < 1", color="#ddccaa")
-        self.play(ReplacementTransform(segno5, segno6, run_time=1.5))
+        self.play(FadeTransformPieces(segno5, segno6, run_time=1.5))
         self.wait()
 
         segno7 = MathTex(r"-c < v < c", color="#ddccaa")
-        self.play(FadeTransform(segno6, segno7, run_time=1.5))
+        self.play(FadeTransformPieces(segno6, segno7, run_time=1.5))
         self.wait()
 
         segno8 = MathTex(r"\Rightarrow 1 - \beta^2 > 0 \ \forall v", color="#ddccaa")
@@ -1026,4 +1026,76 @@ class HomographicFunction(GraphScene):
         abcd[3][2].set_color("#8d88f2")
 
         self.play(Write(abcd, run_time=1.5))
+        self.wait()
+
+class StudyU(Scene):
+    def construct(self):
+        function = MathTex("u=\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}", color="#e0b1df")
+        self.play(Write(function, run_time=1.5))
+        self.wait()
+
+        function_upper = MathTex("u=\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}", color="#e0b1df")
+        function_upper.to_edge(UP)
+        function_upper.to_edge(LEFT)
+
+        self.play(ReplacementTransform(function, function_upper, run_time=1.5))
+        self.wait()
+
+        right_stuff = BulletedList(
+            "Algebrica",
+            "Razionale",
+            "Fratta",
+            "II grado"
+        )
+        right_stuff.set_color("#b291db")
+        right_stuff.to_edge(RIGHT)
+        right_stuff.to_edge(LEFT)
+        right_stuff.scale(0.9)
+
+        self.play(Write(right_stuff, run_time=1.5))
+        self.wait()
+
+        domain = MathTex("\\mathrm{D_u}:\\forall u\' \mid \\frac{u\'v}{c^2}+1 \\neq 0", color="#86e3e0")
+        self.play(Write(domain, run_time=1.5))
+        self.wait()
+
+        domain2 = MathTex("\\mathrm{D_u}:\\forall u\' \mid \\frac{u\'v}{c^2} \\neq -1", color="#86e3e0")
+        self.play(FadeTransformPieces(domain, domain2, run_time=1.5))
+        self.wait()
+
+        domain3 = MathTex("\\mathrm{D_u}:\\forall u\' \mid u\'v \\neq -c^2", color="#86e3e0")
+        self.play(FadeTransformPieces(domain2, domain3, run_time=1.5))
+        self.wait()
+
+        domain4 = MathTex("\\mathrm{D_u}:\\forall u\' \mid u\' \\neq - \\frac{c^2}{v}", color="#86e3e0")
+        self.play(FadeTransformPieces(domain3, domain4, run_time=1.5))
+        self.wait()
+
+        domain5 = MathTex("\\mathrm{D_u}:\\forall u\' \mid u\' \\neq - \\frac{c}{\\beta}", color="#86e3e0")
+        self.play(FadeTransformPieces(domain4, domain5, run_time=1.5))
+        self.wait()
+
+        domain_new = MathTex("\\mathrm{D_u}:\\forall u\' \mid u\' \\neq - \\frac{c}{\\beta}", color="#86e3e0")
+        domain_new.to_edge(UP)
+
+        self.play(FadeTransformPieces(domain5, domain_new, run_time=1.5))
+        self.wait()
+
+        systems = VGroup(
+            MathTex(r"""
+\begin{cases}
+    u' = 0 \\
+    u = \frac{0+v}{0+1} 
+\end{cases}
+        """, color="#dbeda4"),
+            MathTex(r"""
+\begin{cases}
+    u = 0 \\
+    0 = u'+v
+\end{cases}
+        """, color="#dbeda4")
+        )
+        systems.arrange(RIGHT)
+
+        self.play(Write(systems, run_time=1.5))
         self.wait()
