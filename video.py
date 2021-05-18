@@ -542,7 +542,7 @@ class Limit(Scene):
 
         arrow.next_to(system)
         results.next_to(arrow)
-        
+
         self.play(Write(arrow, run_time=1.5), Write(results, run_time=1.5))
         self.wait()
 
@@ -983,7 +983,7 @@ class StudyU(Scene):
         systems.arrange(RIGHT)
 
         # note: there is a tripe indexing!
-        set_color(systems[0], 0, [4, 7], RED)
+        set_color(systems[0], 0, [4, 7, 11], RED)
         set_color(systems[1], 0, [3, 4], RED)
 
         self.play(Write(systems, run_time=1.5))
@@ -1038,7 +1038,6 @@ class StudyU(Scene):
         self.wait()
 
         self.play(Unwrite(original, run_time=0.7))
-        self.wait()
 
         num = MathTex(r"u' + v > 0", color="#e67e6a")
         self.play(Write(num, run_time=1.5))
