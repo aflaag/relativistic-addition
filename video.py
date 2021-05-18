@@ -454,6 +454,7 @@ class Demonstration2(Scene): # this scene is a mess!
         self.play(Indicate(formula8, color="#7cbf00"))
         self.wait()
 
+# FIXME: REMOVE THIS SCENE
 class Limit(Scene):
     """ Shows how to derive the vertical asymptote of the function of the relativistic addition of velocities. """
     def construct(self):
@@ -537,13 +538,11 @@ class Limit(Scene):
 \\\ +: - \infty
 \\end{matrix}
         """)
-        #results.arrange(LEFT)
         arrow = MathTex("\\Rightarrow")
 
         arrow.next_to(system)
         results.next_to(arrow)
-
-        #self.play(ReplacementTransform(system, results, run_time=1.5))
+        
         self.play(Write(arrow, run_time=1.5), Write(results, run_time=1.5))
         self.wait()
 
@@ -983,5 +982,178 @@ class StudyU(Scene):
         )
         systems.arrange(RIGHT)
 
+        # note: there is a tripe indexing!
+        set_color(systems[0], 0, [4, 7], RED)
+        set_color(systems[1], 0, [3, 4], RED)
+
         self.play(Write(systems, run_time=1.5))
+        self.wait()
+
+        systems2 = VGroup(
+            MathTex(r"""
+\begin{cases}
+    u' = 0 \\
+    u = v
+\end{cases}
+        """, color="#dbeda4"),
+            MathTex(r"""
+\begin{cases}
+    u = 0 \\
+    u' = -v
+\end{cases}
+        """, color="#dbeda4")
+        )
+        systems2.arrange(RIGHT)
+
+        self.play(ReplacementTransform(systems, systems2, run_time=1.5))
+        self.wait()
+
+        intersections = VGroup(
+            MathTex("(0; v)"),
+            MathTex("(-v; 0)")
+        )
+        intersections.arrange(RIGHT)
+        intersections.next_to(systems2, DOWN)
+        
+        intersections.set_color("#dbeda4")
+
+        self.play(Write(intersections, run_time=1.5))
+        self.wait()
+
+        intersections_upper = VGroup(
+            MathTex("(0; v)"),
+            MathTex("(-v; 0)")
+        )
+        intersections_upper.arrange(RIGHT)
+        intersections_upper.to_edge(UP)
+        intersections_upper.to_edge(RIGHT)
+
+        intersections_upper.set_color("#dbeda4")
+
+        self.play(Unwrite(systems2, run_time=0.7), ReplacementTransform(intersections, intersections_upper, run_time=1.5))
+        self.wait()
+
+        original = MathTex("\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}>0", color="#e67e6a")
+        self.play(Write(original, run_time=1.5))
+        self.wait()
+
+        self.play(Unwrite(original, run_time=0.7))
+        self.wait()
+
+        num = MathTex(r"u' + v > 0", color="#e67e6a")
+        self.play(Write(num, run_time=1.5))
+        self.wait()
+
+        num2 = MathTex(r"u' > -v", color="#e67e6a")
+        self.play(FadeTransformPieces(num, num2, run_time=1.5))
+        self.wait()
+
+        num2_moved = MathTex(r"u' > -v", color="#e67e6a")
+        num2_moved.to_edge(RIGHT)
+
+        self.play(ReplacementTransform(num2, num2_moved, run_time=1.5))
+        self.wait()
+
+        den = MathTex(r"\frac{u'v}{c^2} + 1 > 0", color="#e67e6a")
+        self.play(Write(den, run_time=1.5))
+        self.wait()
+
+        den2 = MathTex(r"u' > - \frac{c}{\beta}", color="#e67e6a")
+        self.play(FadeTransformPieces(den, den2, run_time=1.5))
+        self.wait()
+
+        num_new = MathTex(r"u' > -v", color="#e67e6a")
+        num_new.shift(UP / 2)
+
+        den_new = MathTex(r"u' > - \frac{c}{\beta}", color="#e67e6a")
+        den_new.next_to(num_new, DOWN)
+
+        self.play(ReplacementTransform(num2_moved, num_new, run_time=1.5), ReplacementTransform(den2, den_new, run_time=1.5))
+        self.wait()
+
+        positive = VGroup(
+            MathTex(r"u>0: u'< - \frac{c}{ \beta} \vee u'>-v"),
+            MathTex(r"u=0: u'=-v"),
+            MathTex(r"u<0: \frac{c}{ \beta} <u'<-v")
+        )
+        positive.arrange(DOWN)
+        
+        positive.set_color("#e67e6a")
+
+        self.play(Unwrite(num_new, run_time=0.7), Unwrite(den_new, run_time=0.7))
+        
+        self.play(Write(positive, run_time=1.5))
+        
+        self.play(Indicate(positive[0], run_time=0.5, color="#e67e6a"))
+        self.play(Indicate(positive[1], run_time=0.5, color="#e67e6a"))
+        self.play(Indicate(positive[2], run_time=0.5, color="#e67e6a"))
+        self.wait()
+
+        # i have a severe naming problem
+        positiveness = MathTex(r"u>0: u'< - \frac{c}{ \beta} \vee u'>-v", color="#e67e6a")
+        positiveness.to_edge(DOWN)
+        positiveness.to_edge(RIGHT)
+
+        self.play(Unwrite(positive, run_time=0.7), Write(positiveness, run_time=1.5))
+        self.wait()
+        
+        limit = MathTex("\\lim_{u\' \\rightarrow - \\frac{c}{ \\beta} } {\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}}")
+        self.play(Write(limit, run_time=1.5))
+        self.wait()
+
+        limit2 = MathTex("\\frac{- \\frac{c}{ \\beta}+v}{-\\frac{cv}{\\beta c^2}+1}")
+        self.play(ReplacementTransform(limit, limit2, run_time=1.5))
+        self.wait()
+
+        limit3 = MathTex("\\frac{- \\frac{c^2}{ v}+v}{-\\frac{v}{\\beta c}+1}")
+        self.play(FadeTransformPieces(limit2, limit3, run_time=1.5))
+        self.wait()
+
+        limit4 = MathTex("\\frac{ \\frac{-c^2+v} {v} }{-\\frac{cv}{vc}+1}")
+        self.play(FadeTransformPieces(limit3, limit4, run_time=1.5))
+        self.wait()
+
+        limit5 = MathTex("\\frac{-c^2+v}{v(-1+1)}")
+        self.play(ReplacementTransform(limit4, limit5, run_time=1.5))
+        self.wait()
+
+        limit6 = MathTex("\\frac{v-c^2}{0}")
+        self.play(FadeTransformPieces(limit5, limit6, run_time=1.5))
+        self.wait()
+
+        limit6_lower = MathTex("\\frac{v-c^2}{0}")
+        limit6_lower.to_edge(UP)
+        
+        # FIXME: THIS IS BROKEN
+        system = MathTex("""
+\\left\{\\begin{matrix} v > 0: v - c^2 < 0 (0 < v < c)
+\\\ v < 0: v - c^2 < 0
+\\end{matrix}\\right.
+        """)
+        system.shift(1.3 * LEFT)
+
+        self.play(FadeTransformPieces(limit6, limit6_lower, run_time=1.5), Write(system, run_time=1.5))
+        self.wait()
+
+        results = MathTex("""
+\\begin{matrix}
+\\\ -: + \infty
+\\\ +: - \infty
+\\end{matrix}
+        """)
+        arrow = MathTex("\\Rightarrow")
+
+        arrow.next_to(system)
+        results.next_to(arrow)
+
+        self.play(Write(arrow, run_time=1.5), Write(results, run_time=1.5))
+        self.wait()
+
+        end = VGroup(
+            MathTex(r"u'=- \frac{c}{ \beta}"),
+            MathTex("\\mathrm{asintoto\\ verticale}")
+        )
+        end.arrange(DOWN)
+
+        self.play(Unwrite(system, run_time=1.5), Unwrite(results, run_time=1.5), Unwrite(arrow, run_time=1.5), Write(end, run_time=1.5))
         self.wait()
