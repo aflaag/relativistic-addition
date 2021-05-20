@@ -454,107 +454,6 @@ class Demonstration2(Scene): # this scene is a mess!
         self.play(Indicate(formula8, color="#7cbf00"))
         self.wait()
 
-# FIXME: REMOVE THIS SCENE
-class Limit(Scene):
-    """ Shows how to derive the vertical asymptote of the function of the relativistic addition of velocities. """
-    def construct(self):
-        # FIXME: REMOVE DOMAIN SECTION (already in study)
-
-        domain = MathTex("\\mathrm{D}:\\forall u\' \mid \\frac{u\'v}{c^2}+1 \\neq 0")
-
-        upper_text = MathTex("u=\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}")
-        self.play(Write(upper_text, run_time=1.5))
-        self.wait()
-
-        lower_text = MathTex("u=\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}")
-        lower_text.to_edge(UP)
-        lower_text.to_edge(LEFT)
-
-        self.play(FadeTransform(upper_text, lower_text, run_time=1.5), Write(domain, run_time=1.5))
-        self.wait()
-
-        domain2 = MathTex("\\mathrm{D}:\\forall u\' \mid \\frac{u\'v}{c^2} \\neq -1")
-        self.play(FadeTransform(domain, domain2, run_time=1.5))
-        self.wait()
-
-        domain3 = MathTex("\\mathrm{D}:\\forall u\' \mid u\'v \\neq -c^2")
-        self.play(FadeTransform(domain2, domain3, run_time=1.5))
-        self.wait()
-
-        domain4 = MathTex("\\mathrm{D}:\\forall u\' \mid u\' \\neq - \\frac{c^2}{v}")
-        self.play(FadeTransform(domain3, domain4, run_time=1.5))
-        self.wait()
-
-        domain5 = MathTex("\\mathrm{D}:\\forall u\' \mid u\' \\neq - \\frac{c}{\\beta}")
-        self.play(ReplacementTransform(domain4, domain5, run_time=1.5))
-        self.wait()
-
-        lower_domain = MathTex("\\mathrm{D}:\\forall u\' \mid u\' \\neq - \\frac{c}{\\beta}")
-
-        lower_domain.to_edge(UP)
-        lower_domain.to_edge(RIGHT)
-
-        limit = MathTex("\\lim_{u\' \\rightarrow - \\frac{c}{ \\beta} } {\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}}")
-        self.play(FadeTransform(domain5, lower_domain, run_time=1.5), Write(limit, run_time=1.5))
-        self.wait()
-
-        limit2 = MathTex("\\frac{- \\frac{c}{ \\beta}+v}{-\\frac{cv}{\\beta c^2}+1}")
-        self.play(ReplacementTransform(limit, limit2, run_time=1.5))
-        self.wait()
-
-        limit3 = MathTex("\\frac{- \\frac{c^2}{ v}+v}{-\\frac{v}{\\beta c}+1}")
-        self.play(FadeTransform(limit2, limit3, run_time=1.5))
-        self.wait()
-
-        limit4 = MathTex("\\frac{ \\frac{-c^2+v} {v} }{-\\frac{cv}{vc}+1}")
-        self.play(FadeTransform(limit3, limit4, run_time=1.5))
-        self.wait()
-
-        limit5 = MathTex("\\frac{-c^2+v}{v(-1+1)}")
-        self.play(ReplacementTransform(limit4, limit5, run_time=1.5))
-        self.wait()
-
-        limit6 = MathTex("\\frac{v-c^2}{0}")
-        self.play(FadeTransform(limit5, limit6, run_time=1.5))
-        self.wait()
-
-        limit6_lower = MathTex("\\frac{v-c^2}{0}")
-        limit6_lower.to_edge(UP)
-        
-        # FIXME: THIS IS BROKEN
-        system = MathTex("""
-\\left\{\\begin{matrix} v > 0: v - c^2 < 0 (0 < v < c)
-\\\ v < 0: v - c^2 < 0
-\\end{matrix}\\right.
-        """)
-        system.shift(1.3 * LEFT)
-
-        self.play(FadeTransform(limit6, limit6_lower, run_time=1.5), Write(system, run_time=1.5))
-        self.wait()
-
-        results = MathTex("""
-\\begin{matrix}
-\\\ -: + \infty
-\\\ +: - \infty
-\\end{matrix}
-        """)
-        arrow = MathTex("\\Rightarrow")
-
-        arrow.next_to(system)
-        results.next_to(arrow)
-
-        self.play(Write(arrow, run_time=1.5), Write(results, run_time=1.5))
-        self.wait()
-
-        end = VGroup(
-            MathTex(r"u'=- \frac{c}{ \beta}"),
-            MathTex("\\mathrm{asintoto\\ verticale}")
-        )
-        end.arrange(DOWN)
-
-        self.play(Unwrite(system, run_time=1.5), Unwrite(results, run_time=1.5), Unwrite(arrow, run_time=1.5), Write(end, run_time=1.5))
-        self.wait()
-
 class HLimit(Scene):
     """ Shows how to derive the horizontal asymptote of the function of the relativistic addition of velocities. """
     def construct(self):
@@ -915,11 +814,11 @@ class HomographicFunction(GraphScene):
 
 class StudyU(Scene):
     def construct(self):
-        function = MathTex("u=\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}", color="#e0b1df")
+        function = MathTex("u=\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}", color=GREEN)
         self.play(Write(function, run_time=1.5))
         self.wait()
 
-        function_upper = MathTex("u=\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}", color="#e0b1df")
+        function_upper = MathTex("u=\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}", color=GREEN)
         function_upper.to_edge(UP)
         function_upper.to_edge(LEFT)
 
@@ -956,14 +855,10 @@ class StudyU(Scene):
         self.play(FadeTransformPieces(domain3, domain4, run_time=1.5))
         self.wait()
 
-        domain5 = MathTex("\\mathrm{D_u}:\\forall u\' \mid u\' \\neq - \\frac{c}{\\beta}", color="#86e3e0")
-        self.play(FadeTransformPieces(domain4, domain5, run_time=1.5))
-        self.wait()
-
-        domain_new = MathTex("\\mathrm{D_u}:\\forall u\' \mid u\' \\neq - \\frac{c}{\\beta}", color="#86e3e0")
+        domain_new = MathTex("\\mathrm{D_u}:\\forall u\' \mid u\' \\neq - \\frac{c^2}{v}", color="#86e3e0")
         domain_new.to_edge(UP)
 
-        self.play(FadeTransformPieces(domain5, domain_new, run_time=1.5))
+        self.play(FadeTransformPieces(domain4, domain_new, run_time=1.5))
         self.wait()
 
         systems = VGroup(
@@ -1033,105 +928,151 @@ class StudyU(Scene):
         self.play(Unwrite(systems2, run_time=0.7), ReplacementTransform(intersections, intersections_upper, run_time=1.5))
         self.wait()
 
-        original = MathTex("\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}>0", color="#e67e6a")
+        original = MathTex("\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}>0", color="#e35235")
         self.play(Write(original, run_time=1.5))
         self.wait()
 
         self.play(Unwrite(original, run_time=0.7))
 
-        num = MathTex(r"u' + v > 0", color="#e67e6a")
+        num = MathTex(r"u' + v > 0", color="#e35235")
         self.play(Write(num, run_time=1.5))
         self.wait()
 
-        num2 = MathTex(r"u' > -v", color="#e67e6a")
+        num2 = MathTex(r"u' > -v", color="#e35235")
         self.play(FadeTransformPieces(num, num2, run_time=1.5))
         self.wait()
 
-        num2_moved = MathTex(r"u' > -v", color="#e67e6a")
+        num2_moved = MathTex(r"u' > -v", color="#e35235")
         num2_moved.to_edge(RIGHT)
 
         self.play(ReplacementTransform(num2, num2_moved, run_time=1.5))
         self.wait()
 
-        den = MathTex(r"\frac{u'v}{c^2} + 1 > 0", color="#e67e6a")
+        den = MathTex(r"\frac{u'v}{c^2} + 1 > 0", color="#e35235")
         self.play(Write(den, run_time=1.5))
         self.wait()
 
-        den2 = MathTex(r"u' > - \frac{c}{\beta}", color="#e67e6a")
+        den2 = MathTex(r"u' > - \frac{c^2}{v}", color="#e35235")
         self.play(FadeTransformPieces(den, den2, run_time=1.5))
         self.wait()
 
-        num_new = MathTex(r"u' > -v", color="#e67e6a")
+        num_new = MathTex(r"u' > -v", color="#e35235")
         num_new.shift(UP / 2)
 
-        den_new = MathTex(r"u' > - \frac{c}{\beta}", color="#e67e6a")
+        den_new = MathTex(r"u' > - \frac{c^2}{v}", color="#e35235")
         den_new.next_to(num_new, DOWN)
 
         self.play(ReplacementTransform(num2_moved, num_new, run_time=1.5), ReplacementTransform(den2, den_new, run_time=1.5))
         self.wait()
 
         positive = VGroup(
-            MathTex(r"u>0: u'< - \frac{c}{ \beta} \vee u'>-v"),
+            MathTex(r"u>0: u'< - \frac{c^2}{v} \vee u'>-v"),
             MathTex(r"u=0: u'=-v"),
-            MathTex(r"u<0: \frac{c}{ \beta} <u'<-v")
+            MathTex(r"u<0: - \frac{c^2}{v} <u'<-v")
         )
         positive.arrange(DOWN)
         
-        positive.set_color("#e67e6a")
+        positive.set_color("#e35235")
 
         self.play(Unwrite(num_new, run_time=0.7), Unwrite(den_new, run_time=0.7))
         
         self.play(Write(positive, run_time=1.5))
         
-        self.play(Indicate(positive[0], run_time=0.5, color="#e67e6a"))
-        self.play(Indicate(positive[1], run_time=0.5, color="#e67e6a"))
-        self.play(Indicate(positive[2], run_time=0.5, color="#e67e6a"))
+        self.play(Indicate(positive[0], run_time=0.5, color="#e35235"))
+        self.play(Indicate(positive[1], run_time=0.5, color="#e35235"))
+        self.play(Indicate(positive[2], run_time=0.5, color="#e35235"))
         self.wait()
 
         # i have a severe naming problem
-        positiveness = MathTex(r"u>0: u'< - \frac{c}{ \beta} \vee u'>-v", color="#e67e6a")
+        positiveness = MathTex(r"u>0: u'< - \frac{c^2}{v} \vee u'>-v", color="#e35235")
         positiveness.to_edge(DOWN)
         positiveness.to_edge(RIGHT)
 
         self.play(Unwrite(positive, run_time=0.7), Write(positiveness, run_time=1.5))
         self.wait()
         
-        limit = MathTex("\\lim_{u\' \\rightarrow - \\frac{c}{ \\beta} } {\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}}")
-        self.play(Write(limit, run_time=1.5))
+
+        limit = MathTex("\\lim_{u\' \\rightarrow - \\frac{c^2}{v} } {\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}}", color="#e78c4b")
+
+        rect = SurroundingRectangle(domain_new, color="#e78c4b")
+        self.play(Create(rect, run_time=1))
+        self.play(Uncreate(rect, run_time=1), Write(limit, run_time=1.5))
         self.wait()
 
-        limit2 = MathTex("\\frac{- \\frac{c}{ \\beta}+v}{-\\frac{cv}{\\beta c^2}+1}")
-        self.play(ReplacementTransform(limit, limit2, run_time=1.5))
+        limit2 = MathTex(r"\frac{ - \frac{c^2}{v} + v}{- \frac{c^2v}{vc^2} + 1}",color="#e78c4b")
+
+        set_color(limit2, 0, [0, 1, 2, 3, 4, 8, 9, 10, 13], color=BLUE)
+
+        self.play(FadeTransformPieces(limit, limit2, run_time=1.5))
         self.wait()
 
-        limit3 = MathTex("\\frac{- \\frac{c^2}{ v}+v}{-\\frac{v}{\\beta c}+1}")
+        self.play(limit2.animate.set_color("#e78c4b"))
+        self.wait()
+
+        self.play(
+            limit2[0][0].animate.set_color(BLUE),
+            limit2[0][1].animate.set_color(BLUE),
+            limit2[0][2].animate.set_color(BLUE),
+            limit2[0][3].animate.set_color(BLUE),
+            limit2[0][4].animate.set_color(BLUE),
+            limit2[0][5].animate.set_color(BLUE),
+            limit2[0][6].animate.set_color(BLUE),
+
+            limit2[0][8].animate.set_color(BLUE),
+            limit2[0][9].animate.set_color(BLUE),
+            limit2[0][10].animate.set_color(BLUE),
+            limit2[0][11].animate.set_color(BLUE),
+            limit2[0][12].animate.set_color(BLUE),
+            limit2[0][13].animate.set_color(BLUE),
+            limit2[0][14].animate.set_color(BLUE),
+            limit2[0][15].animate.set_color(BLUE)
+        )
+        self.wait()
+
+        limit3 = MathTex(r"\frac{ \frac{-c^2+v^2}{v}}{-1 + 1}", color="#e78c4b")
+
+        set_color(limit3, 0, [0, 1, 2, 3, 4, 5, 6, 7, 9, 10], BLUE)
+
         self.play(FadeTransformPieces(limit2, limit3, run_time=1.5))
         self.wait()
 
-        limit4 = MathTex("\\frac{ \\frac{-c^2+v} {v} }{-\\frac{cv}{vc}+1}")
+        self.play(limit3.animate.set_color("#e78c4b"))
+        self.wait()
+
+        self.play(
+            limit3[0][0].animate.set_color(BLUE),
+            limit3[0][1].animate.set_color(BLUE),
+            limit3[0][2].animate.set_color(BLUE),
+            limit3[0][3].animate.set_color(BLUE),
+            limit3[0][4].animate.set_color(BLUE),
+            limit3[0][5].animate.set_color(BLUE),
+
+            limit3[0][9].animate.set_color(BLUE),
+            limit3[0][10].animate.set_color(BLUE),
+            limit3[0][11].animate.set_color(BLUE),
+            limit3[0][12].animate.set_color(BLUE)
+        )
+        self.wait()
+
+        limit4 = MathTex(r"\frac{v^2-c^2}{0}", color="#e78c4b")
+
+        set_color(limit4, 0, [0, 1, 2, 3, 4, 6], BLUE)
+
         self.play(FadeTransformPieces(limit3, limit4, run_time=1.5))
         self.wait()
 
-        limit5 = MathTex("\\frac{-c^2+v}{v(-1+1)}")
-        self.play(ReplacementTransform(limit4, limit5, run_time=1.5))
-        self.wait()
-
-        limit6 = MathTex("\\frac{v-c^2}{0}")
-        self.play(FadeTransformPieces(limit5, limit6, run_time=1.5))
-        self.wait()
-
-        limit6_lower = MathTex("\\frac{v-c^2}{0}")
-        limit6_lower.to_edge(UP)
+        limit6_lower = MathTex(r"\frac{v^2-c^2}{0}", color="#e78c4b")
+        limit6_lower.to_edge(RIGHT)
         
-        # FIXME: THIS IS BROKEN
-        system = MathTex("""
-\\left\{\\begin{matrix} v > 0: v - c^2 < 0 (0 < v < c)
-\\\ v < 0: v - c^2 < 0
-\\end{matrix}\\right.
-        """)
-        system.shift(1.3 * LEFT)
+        system = MathTex(r"v^2 - c^2 < 0 \mathrm{\ } \forall v", color="#e78c4b")
 
-        self.play(FadeTransformPieces(limit6, limit6_lower, run_time=1.5), Write(system, run_time=1.5))
+        self.play(FadeTransformPieces(limit4, limit6_lower, run_time=1.5), Write(system, run_time=1.5))
+        self.wait()
+
+        system2 = MathTex(r"(v < c \Rightarrow v^2 < c^2 \Rightarrow v^2 - c^2 < 0)", color="#e78c4b")
+        system2.next_to(system, DOWN)
+
+        self.play(Write(system2, run_time=1.5))
         self.wait()
 
         results = MathTex("""
@@ -1140,19 +1081,39 @@ class StudyU(Scene):
 \\\ +: - \infty
 \\end{matrix}
         """)
-        arrow = MathTex("\\Rightarrow")
 
-        arrow.next_to(system)
+        results.set_color("#e78c4b")
+
+        arrow = MathTex("\\Rightarrow", color="#e78c4b")
+
         results.next_to(arrow)
+        
+        limit_final = MathTex(r"\frac{v^2-c^2}{0}", color="#e78c4b")
+        limit_final.shift(LEFT * 1.3)
 
-        self.play(Write(arrow, run_time=1.5), Write(results, run_time=1.5))
+        total = VGroup(arrow, results)
+        total.next_to(limit_final, RIGHT)
+
+        self.play(Unwrite(system2, run_time=0.7), Unwrite(system, run_time=0.7), ReplacementTransform(limit6_lower, limit_final, run_time=1.5))
+        self.wait()
+
+        self.play(Write(total, run_time=1.5))
         self.wait()
 
         end = VGroup(
-            MathTex(r"u'=- \frac{c}{ \beta}"),
+            MathTex(r"u'=- \frac{c^2}{v}"),
             MathTex("\\mathrm{asintoto\\ verticale}")
         )
         end.arrange(DOWN)
+        end.set_color("#e78c4b")
 
-        self.play(Unwrite(system, run_time=1.5), Unwrite(results, run_time=1.5), Unwrite(arrow, run_time=1.5), Write(end, run_time=1.5))
+        self.play(Unwrite(limit_final, run_time=0.7), Unwrite(total, run_time=0.7))
+        self.play(Write(end, run_time=1.5))
+        self.wait()
+
+        first_limit = MathTex(r"u' = - \frac{c^2}{v}", color="#e78c4b")
+        first_limit.to_edge(DOWN)
+        first_limit.to_edge(LEFT)
+
+        self.play(ReplacementTransform(end, first_limit, run_time=1.5))
         self.wait()
