@@ -454,38 +454,6 @@ class Demonstration2(Scene): # this scene is a mess!
         self.play(Indicate(formula8, color="#7cbf00"))
         self.wait()
 
-class HLimit(Scene):
-    """ Shows how to derive the horizontal asymptote of the function of the relativistic addition of velocities. """
-    def construct(self):
-        limit = MathTex("\\lim_{u\' \\rightarrow \infty } {\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}}")
-        
-        upper_text = MathTex("u=\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}")
-        self.play(Write(upper_text, run_time=1.5))
-        self.wait()
-
-        lower_text = MathTex("u=\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}")
-        lower_text.to_edge(UP)
-
-        self.play(FadeTransform(upper_text, lower_text, run_time=1.5), Write(limit, run_time=1.5))
-        self.wait()
-
-        limit2 = MathTex(r"\lim_{u' \rightarrow \infty} {\frac{\frac{d}{du'}(u'+v)}{\frac{d}{du'}(\frac{u'v}{c^2}+1)}}")
-        self.play(FadeTransform(limit, limit2, run_time=1.5))
-        self.wait()
-
-        limit3 = MathTex(r"\frac{1}{\frac{v}{c^2}}")
-        self.play(ReplacementTransform(limit2, limit3, run_time=1.5))
-        self.wait()
-
-        group = VGroup(
-            MathTex(r"u=\frac{c}{\beta}"),
-            MathTex("\\mathrm{asintoto\\ orizzontale}"),
-        )
-        group.arrange(DOWN)
-
-        self.play(ReplacementTransform(limit3, group, run_time=1.5))
-        self.wait()
-
 class Derivative(Scene):
     """ Shows how to calculate the derivative of the function of the relativistic addiotion of velocities. """
     def construct(self):
@@ -999,7 +967,17 @@ class StudyU(Scene):
         self.play(Uncreate(rect, run_time=1), Write(limit, run_time=1.5))
         self.wait()
 
-        limit2 = MathTex(r"\frac{ - \frac{c^2}{v} + v}{- \frac{c^2v}{vc^2} + 1}",color="#e78c4b")
+        self.play(
+            limit[0][11].animate.set_color(BLUE),
+            limit[0][12].animate.set_color(BLUE),
+
+            limit[0][16].animate.set_color(BLUE),
+            limit[0][17].animate.set_color(BLUE),
+
+        )
+        self.wait()
+
+        limit2 = MathTex(r"\frac{ - \frac{c^2}{v} + v}{- \frac{c^2v}{vc^2} + 1}", color="#e78c4b")
 
         set_color(limit2, 0, [0, 1, 2, 3, 4, 8, 9, 10, 13], color=BLUE)
 
@@ -1116,4 +1094,66 @@ class StudyU(Scene):
         first_limit.to_edge(LEFT)
 
         self.play(ReplacementTransform(end, first_limit, run_time=1.5))
+        self.wait()
+
+        limith = MathTex(r"\lim_{u' \rightarrow \pm \infty } {\frac{u'+v}{\frac{u'v}{c^2}+1}}", color="#e78c4b")
+        self.play(Write(limith, run_time=1.5))
+        self.wait()
+
+        limith2 = MathTex(r"\lim_{u' \rightarrow \pm \infty } {\frac{u'(1+ \frac{v}{u'})}{u'(\frac{v}{c^2}+\frac{1}{u'})}}", color="#e78c4b")
+        self.play(FadeTransformPieces(limith, limith2, run_time=1.5))
+        self.wait()
+
+        self.play(
+            limith2[0][8].animate.set_color(BLUE),
+            limith2[0][9].animate.set_color(BLUE),
+
+            limith2[0][19].animate.set_color(BLUE),
+            limith2[0][20].animate.set_color(BLUE)
+        )
+        self.wait()
+
+        limith3 = MathTex(r"\lim_{u' \rightarrow \pm \infty } {\frac{1+ \frac{v}{u'}}{\frac{v}{c^2}+\frac{1}{u'}}}", color="#e78c4b")
+        self.play(FadeTransformPieces(limith2, limith3, run_time=1.5))
+        self.wait()
+
+        self.play(
+            limith3[0][3].animate.set_color(BLUE),
+            limith3[0][4].animate.set_color(BLUE),
+            limith3[0][5].animate.set_color(BLUE),
+            limith3[0][6].animate.set_color(BLUE),
+            limith3[0][7].animate.set_color(BLUE),
+
+            limith3[0][10].animate.set_color(BLUE),
+            limith3[0][11].animate.set_color(BLUE),
+            limith3[0][12].animate.set_color(BLUE),
+            limith3[0][13].animate.set_color(BLUE),
+
+            limith3[0][20].animate.set_color(BLUE),
+            limith3[0][21].animate.set_color(BLUE),
+            limith3[0][22].animate.set_color(BLUE),
+            limith3[0][23].animate.set_color(BLUE)
+        )
+        self.wait()
+
+        limith4 = MathTex(r"\frac{1}{\frac{v}{c^2}}", color="#e78c4b")
+        self.play(ReplacementTransform(limith3, limith4, run_time=1.5))
+        self.wait()
+
+        limith5 = VGroup(
+            MathTex(r"u=\frac{c^2}{v}"),
+            MathTex("\\mathrm{asintoto\\ orizzontale}")
+        )
+        limith5.arrange(DOWN)
+        limith5.set_color("#e78c4b")
+
+        self.play(Unwrite(limith4, run_time=0.7))
+        self.play(Write(limith5, run_time=1.5))
+        self.wait()
+
+        limith_end = MathTex(r"u=\frac{c^2}{v}", color="#e78c4b")
+        limith_end.to_edge(DOWN)
+        limith_end.shift(LEFT * 2)
+
+        self.play(ReplacementTransform(limith5, limith_end, run_time=1.5))
         self.wait()
