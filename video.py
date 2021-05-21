@@ -781,6 +781,7 @@ class HomographicFunction(GraphScene):
         self.wait()
 
 class StudyU(Scene):
+    """ Shows the whole study of the function of the relativistic addition of velocities. """
     def construct(self):
         function = MathTex("u=\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}", color=GREEN)
         self.play(Write(function, run_time=1.5))
@@ -1156,4 +1157,230 @@ class StudyU(Scene):
         limith_end.shift(LEFT * 2)
 
         self.play(ReplacementTransform(limith5, limith_end, run_time=1.5))
+        self.wait()
+
+class UUPrime2(Scene):
+    def construct(self):
+        vech = Vector(direction=RIGHT)
+        vech.set_length(3)
+
+        vecv = Vector(direction=UP)
+        vecv.set_length(3)
+        
+        vecv.next_to(vech.get_start(), direction=UP, buff=0) # apparently buff is the distance from the two mobjects
+
+        label = MathTex(r"\mathrm{S}")
+        label.next_to(vecv, UP)
+
+        dot = Dot(point=UP)
+        dot.shift(RIGHT)
+
+        axes1 = VGroup(vecv, vech, label, dot)
+        axes1.scale(0.9)
+        
+        axes1.move_to(0)
+        axes1.shift(LEFT * 1.5)
+
+        axes1[0].set_color("#eba978")
+        axes1[1].set_color("#eba978")
+        axes1[2].set_color("#eba978")
+
+        self.play(Write(axes1, run_time=1.5))
+        self.wait()
+
+        u = Vector(direction=RIGHT)
+        u.next_to(dot.get_start(), direction=RIGHT, buff=0)
+
+        u_label = MathTex(r"\vec{u}")
+        u_label.next_to(u, UP)
+
+        u_thing = VGroup(u, u_label)
+        u_thing.set_color("#eba978")
+
+        self.play(Write(u_thing, run_time=1))
+        self.wait()
+
+        self.play(Unwrite(u_thing, run_time=0.7))
+        self.wait()
+
+        vech2 = Vector(direction=RIGHT)
+        vech2.set_length(3)
+
+        vecv2 = Vector(direction=UP)
+        vecv2.set_length(3)
+        
+        vecv2.next_to(vech2.get_start(), direction=UP, buff=0) # apparently buff is the distance from the two mobjects
+
+        label2 = MathTex(r"\mathrm{S'}")
+        label2.next_to(vecv2, UP)
+
+        axes2 = VGroup(vecv2, vech2, label2)
+        axes2.scale(0.9)
+        
+        axes2.move_to(0)
+        axes2.shift(UP / 2 + LEFT / 2)
+
+        axes2.set_color("#e65c5c")
+
+        self.play(Write(axes2, run_time=1.5))
+        self.wait()
+
+        u2 = Vector(direction=RIGHT)
+        u2.next_to(dot.get_start(), direction=RIGHT, buff=0)
+
+        u_label2 = MathTex(r"\vec{u'}")
+        u_label2.next_to(u2, UP)
+
+        u_thing2 = VGroup(u2, u_label2)
+        u_thing2.set_color("#e65c5c")
+
+        self.play(Write(u_thing2, run_time=1))
+        self.wait()
+
+        self.play(Unwrite(u_thing2, run_time=0.7))
+        self.wait()
+
+        v_vec = Vector(direction=RIGHT, color=GREEN)
+        v_vec.set_length(1)
+
+        v_vec.shift(LEFT * 1.8)
+
+        v_label = MathTex(r"\vec{v}", color=GREEN)
+        v_label.next_to(v_vec, UP)
+
+        v = VGroup(v_vec, v_label)
+
+        self.play(Write(v, run_time=1))
+        self.wait()
+
+        vech3 = Vector(direction=RIGHT)
+        vech3.set_length(3)
+
+        vecv3 = Vector(direction=UP)
+        vecv3.set_length(3)
+        
+        vecv3.next_to(vech3.get_start(), direction=UP, buff=0) # apparently buff is the distance from the two mobjects
+
+        label3 = MathTex(r"\mathrm{S'}")
+        label3.next_to(vecv3, UP)
+
+        axes3 = VGroup(vecv3, vech3, label3)
+        axes3.scale(0.9)
+        
+        axes3.move_to(0)
+        axes3.shift(UP / 2 + RIGHT * 3)
+
+        axes3.set_color("#e65c5c")
+
+        v_vec2 = Vector(direction=RIGHT, color=GREEN)
+        v_vec2.set_length(1)
+
+        v_vec2.shift(RIGHT * 1.75)
+        
+        v_label2 = MathTex(r"\vec{v}", color=GREEN)
+        v_label2.next_to(v_vec2, UP)
+
+        v2 = VGroup(v_vec2, v_label2)
+
+        self.play(ReplacementTransform(axes2, axes3, run_time=1.5), ReplacementTransform(v, v2, run_time=1.5))
+        self.wait()
+
+        title = MathTex(r"\mathrm{Trasformazioni\ di\ Galileo}", color="#99c3e8")
+        title.to_edge(UP)
+
+        transformation = MathTex(r"""
+\begin{cases}
+    x' = x - vt \\
+    y' = y \\
+    z' = z \\
+    t' = t
+\end{cases}
+        """)
+        transformation.set_color("#99c3e8")
+
+        set_color(transformation, 0, [12, 15, 19, 23, 27], "#eba978")
+        set_color(transformation, 0, [9, 10, 16, 17, 20, 21, 24, 25], "#e65c5c")
+        set_color(transformation, 0, [14], GREEN)
+
+        self.play(Unwrite(axes1, run_time=0.7), Unwrite(axes3, run_time=0.7), Unwrite(v2, run_time=0.7))
+        self.play(Write(title, run_time=1.5), Write(transformation, run_time=1.5))
+        self.wait()
+
+        transformation2 = MathTex(r"""
+\begin{cases}
+    x' = x - vt \\
+    y' = y \\
+    z' = z \\
+    t' = t
+\end{cases}
+        """)
+        transformation2.set_color("#99c3e8")
+        transformation2.shift(LEFT * 4)
+
+        set_color(transformation2, 0, [12, 15, 19, 23, 27], "#eba978")
+        set_color(transformation2, 0, [9, 10, 16, 17, 20, 21, 24, 25], "#e65c5c")
+        set_color(transformation2, 0, [14], GREEN)
+
+        self.play(ReplacementTransform(transformation, transformation2, run_time=1.5))
+        self.wait()
+
+        t3 = MathTex(r"u' = u - v")
+        t3.set_color("#99c3e8")
+        t3.shift(RIGHT * 3)
+
+        set_color(t3, 0, [0, 1], "#e65c5c")
+        set_color(t3, 0, [3], "#eba978")
+        set_color(t3, 0, [5], GREEN)
+
+        self.play(Write(t3, run_time=1.5))
+        self.wait()
+
+        t4 = MathTex(r"u' = u - v")
+        t4.set_color("#99c3e8")
+        t4.shift(RIGHT * 3 + UP * 1.5)
+
+        set_color(t4, 0, [0, 1], "#e65c5c")
+        set_color(t4, 0, [3], "#eba978")
+        set_color(t4, 0, [5], GREEN)
+
+        ex = VGroup(
+            MathTex(r"u=\frac{2}{3}c"),
+            MathTex(r"v=-\frac{2}{3}c")
+        )
+        ex.arrange(DOWN)
+        ex.shift(DOWN * 0.5 + LEFT)
+
+        ex[0][0].set_color("#eba978")
+        ex[1][0].set_color(GREEN)
+
+        self.play(ReplacementTransform(t3, t4, run_time=1.5))
+        self.play(Write(ex, run_time=1.5))
+        self.wait()
+
+        end = MathTex(r"\Rightarrow", r"u'=\frac{4}{3}c")
+        end.next_to(ex, RIGHT)
+        
+        end[0].set_color("#99c3e8")
+        end[1].set_color("#e65c5c")
+
+        self.play(Write(end, run_time=1.5))
+        self.wait()
+
+        imp = VGroup(
+            MathTex(r"u' > c"),
+            MathTex(r"\mathrm{Impossibile}")
+        )
+        imp.arrange(DOWN)
+        imp.next_to(end, RIGHT)
+        imp.shift(RIGHT)
+        
+        imp.set_color("#f2aa00")
+
+        self.play(Write(imp, run_time=1.5))
+        self.wait()
+
+        axiom = MathTex(r"\mathrm{Secondo\ assioma\ della\ relativit}", r"\mathrm{\grave a}", r"\mathrm{\ ristretta}", color="#f2aa00")
+        axiom.to_edge(DOWN)
+
+        self.play(Write(axiom, run_time=1.5))
         self.wait()
