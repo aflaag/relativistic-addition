@@ -24,4 +24,4 @@ manim video.py -a
 allows you to create every scene with one command.
 
 # Other resources
-You can find a [Desmos](https://www.desmos.com/calculator/kgjbfb4nze) link showing some of the graphs exaplained in detail in the presentation. Furthermore, you can check **MISSING LINKS** for the whole PowerPoint presentation.
+You can find a [Desmos](https://www.desmos.com/calculator/kgjbfb4nze) link in the first line of `video.py`, showing some of the graphs exaplained in detail in the presentation. Furthermore, you can check the whole PowerPoint presentation **MISSING LINK**, and the related Word script **MISSING LINK**.
