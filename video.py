@@ -1409,7 +1409,6 @@ class Einstein(Scene):
             "Le leggi della fisica sono le stesse in tutti i sistemi di riferimento inerziali",
             "La luce si propaga nel vuoto a velocità costante c, indipendentemente dallo stato di moto della sorgente o dell’osservatore"
         )
-        # axioms.arrange(DOWN)
         axioms.scale(0.7)
 
         self.play(Write(axioms, run_time=2.5))
