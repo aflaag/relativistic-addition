@@ -1673,8 +1673,6 @@ class SecondDerivative(Scene):
         der2 = MathTex("\\frac{d}{du\'} u = \\frac{1}{[\gamma (1 + \\frac{\\beta}{c} u')]^2 }")
         der2.to_edge(UP)
 
-        self.wait(2)
-
         center = MathTex("\\frac{d^2}{du\'^2} u =", "\\frac{d}{du\'} \\frac{1}{[\gamma (1 + \\frac{\\beta}{c} u')]^2 }")
 
         set_color(center, 0, [0, 1, 2, 3, 4, 5, 6], RED)
@@ -1689,7 +1687,7 @@ class SecondDerivative(Scene):
         self.play(Write(idk, run_time=1.5))
         self.wait(2)
 
-        center2 = MathTex("\\frac{d}{du'} u =", "\\frac{-2[\gamma(1+\\frac{\\beta}{c} u\')] \gamma \\frac{\\beta}{c}}{[\gamma (1 + \\frac{\\beta}{c} u')]^4}")
+        center2 = MathTex("\\frac{d^2}{du'^2} u =", "\\frac{-2[\gamma(1+\\frac{\\beta}{c} u\')] \gamma \\frac{\\beta}{c}}{[\gamma (1 + \\frac{\\beta}{c} u')]^4}")
         
         center2[1].set_color(RED)
 
@@ -1716,3 +1714,73 @@ class SecondDerivative(Scene):
             center2[1][31].animate.set_color(RED)
         )
         self.wait(2)
+
+        center3 = MathTex(r"\frac{d^2}{du'^2} u =", "\\frac{-2\gamma (1+\\frac{\\beta}{c} u\') \gamma \\frac{\\beta}{c}}{\gamma ^4 (1 + \\frac{\\beta}{c} u\')^4}")
+        
+        set_color(center3, 1, [17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28], RED)
+
+        self.play(ReplacementTransform(center2, center3, run_time=1.5))
+        self.wait(2)
+
+        self.play(center3.animate.set_color(WHITE))
+        self.wait(2)
+
+        self.play(
+            center3[1][2].animate.set_color(RED),
+            center3[1][3].animate.set_color(RED),
+            center3[1][4].animate.set_color(RED),
+            center3[1][5].animate.set_color(RED),
+            center3[1][6].animate.set_color(RED),
+            center3[1][7].animate.set_color(RED),
+            center3[1][8].animate.set_color(RED),
+            center3[1][9].animate.set_color(RED),
+            center3[1][10].animate.set_color(RED),
+            center3[1][11].animate.set_color(RED),
+            center3[1][12].animate.set_color(RED),
+            
+            center3[1][17].animate.set_color(RED),
+            center3[1][18].animate.set_color(RED),
+            center3[1][19].animate.set_color(RED),
+            center3[1][20].animate.set_color(RED),
+            center3[1][21].animate.set_color(RED),
+            center3[1][22].animate.set_color(RED),
+            center3[1][23].animate.set_color(RED),
+            center3[1][24].animate.set_color(RED),
+            center3[1][25].animate.set_color(RED),
+            center3[1][26].animate.set_color(RED),
+            center3[1][27].animate.set_color(RED),
+            center3[1][28].animate.set_color(RED)
+        )
+        self.wait(2)
+
+        center4 = MathTex(r"\frac{d^2}{du'^2} u =", r"\frac{-2 \frac{\beta }{c}}{\gamma ^2 (1 + \frac{\beta}{c} u') ^3}")
+        
+        set_color(center4, 1, [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], RED)
+
+        self.play(FadeTransformPieces(center3, center4, run_time=1.5))
+        self.wait(2)
+
+        self.play(center4.animate.set_color(WHITE))
+        self.wait(2)
+
+        left = MathTex(r"\frac{d^2}{du'^2} u =", r"\frac{-2 \frac{\beta }{c}}{\gamma ^2 (1 + \frac{\beta}{c} u') ^3}")
+        left.shift(LEFT * 2)
+
+        self.play(ReplacementTransform(center4, left, run_time=1.5))
+        self.wait(2)
+
+        right = MathTex(r"-2 \frac{\beta}{c} > 0", color="#babaff")
+        right.shift(RIGHT * 2)
+
+        self.play(
+            left[1][0].animate.set_color("#babaff"),
+            left[1][1].animate.set_color("#babaff"),
+            left[1][2].animate.set_color("#babaff"),
+            left[1][3].animate.set_color("#babaff"),
+            left[1][4].animate.set_color("#babaff"),
+
+            Write(right, run_time=1.5)
+        )
+        self.wait(2)
+
+        # under = MathTex(r"\frac{\beta}{c} = \frac{v}{c^2} \Rightarrow \frac{v}{c^2} > 0")
