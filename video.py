@@ -547,7 +547,7 @@ class Demonstration2(Scene): # this scene is a mess!
         self.wait(2)
 
 class Derivative(Scene):
-    """ Shows how to calculate the derivative of the function of the relativistic addiotion of velocities. """
+    """ Shows how to calculate the first derivative of the function of the relativistic addiotion of velocities. """
     def construct(self):
         center = MathTex("\\frac{d}{du\'} u = \\frac{d}{du\'} \\frac{u\'+v}{\\frac{u\'v}{c^2}+1}")
 
@@ -683,7 +683,7 @@ class Derivative(Scene):
         self.wait(2)
 
 class StudyDerivative(GraphScene):
-    """ Studies the graph of the derivative of the function of the relativistic addition of velocities, and then shows it. """
+    """ Studies the graph of the first derivative of the function of the relativistic addition of velocities, and then shows it. """
     def construct(self):
         segno = MathTex(r"\frac{d}{du'} u = \frac{1 - \beta^2}{(1 + \frac{\beta}{c} u')^2}", color=GREEN)
         segno.to_edge(UP)
@@ -1619,4 +1619,100 @@ class Einstein(Scene):
         self.wait(5)
 
         self.play(Unwrite(axioms, run_time=2.5))
+        self.wait(2)
+
+class SecondDerivative(Scene):
+    """ Shows how to derive the second derivative of the function of the relativistic addition of velocities. """
+    def construct(self):
+        der = MathTex(r"\frac{d}{du'} u = \frac{1 - \beta ^ 2}{(1 + \frac{\beta}{c} u') ^2}")
+        self.play(Write(der, run_time=1.5))
+        self.wait(2)
+
+        self.play(
+            der[0][7].animate.set_color(RED),
+            der[0][8].animate.set_color(RED),
+            der[0][9].animate.set_color(RED),
+            der[0][10].animate.set_color(RED)
+        )
+        self.wait(2)
+
+        forgot = MathTex(r"\gamma = \frac{1}{\sqrt{1 - \beta ^ 2} } \Rightarrow \gamma ^ {-2} = 1 - \beta ^ 2", color=BLUE)
+        forgot.next_to(der, DOWN)
+
+        forgot2 = MathTex("\\frac{d}{du\'} u = \\frac{1}{\gamma^2 (1 + \\frac{\\beta}{c} u')^2 }")
+
+        set_color(forgot2, 0, [7, 9, 10], RED)
+
+        self.play(Write(forgot, run_time=1.5))
+        self.wait(2)
+
+        self.play(FadeTransformPieces(der, forgot2, run_time=1.5))
+        self.wait(2)
+
+        self.play(forgot2.animate.set_color(WHITE))
+        self.wait(2)
+
+        self.play(
+            forgot2[0][9].animate.set_color(RED),
+            forgot2[0][10].animate.set_color(RED),
+
+            forgot2[0][20].animate.set_color(RED)
+        )
+        self.wait(2)
+
+        forgot3 = MathTex("\\frac{d}{du\'} u = \\frac{1}{[\gamma (1 + \\frac{\\beta}{c} u')]^2 }")
+
+        set_color(forgot3, 0, [9, 10, 20, 21], RED)
+
+        self.play(FadeTransformPieces(forgot2, forgot3, run_time=1.5))
+        self.wait(2)
+
+        self.play(forgot3.animate.set_color(WHITE))
+        self.wait(2)
+
+        der2 = MathTex("\\frac{d}{du\'} u = \\frac{1}{[\gamma (1 + \\frac{\\beta}{c} u')]^2 }")
+        der2.to_edge(UP)
+
+        self.wait(2)
+
+        center = MathTex("\\frac{d^2}{du\'^2} u =", "\\frac{d}{du\'} \\frac{1}{[\gamma (1 + \\frac{\\beta}{c} u')]^2 }")
+
+        set_color(center, 0, [0, 1, 2, 3, 4, 5, 6], RED)
+        set_color(center, 1, [0, 1, 2, 3, 4], RED)
+
+        self.play(ReplacementTransform(forgot3, der2, run_time=1.5), Unwrite(forgot, run_time=0.7), Write(center, run_time=1.5))
+        self.wait(2)
+
+        idk = MathTex(r"\frac{d}{dx} \frac{1}{f(x)} = - \frac{f'(x)}{f(x)^2}", color=BLUE)
+        idk.to_edge(DOWN)
+
+        self.play(Write(idk, run_time=1.5))
+        self.wait(2)
+
+        center2 = MathTex("\\frac{d}{du'} u =", "\\frac{-2[\gamma(1+\\frac{\\beta}{c} u\')] \gamma \\frac{\\beta}{c}}{[\gamma (1 + \\frac{\\beta}{c} u')]^4}")
+        
+        center2[1].set_color(RED)
+
+        self.play(ReplacementTransform(center, center2, run_time=1.5))
+        self.play(Unwrite(idk, run_time=1.5))
+        self.wait(2)
+
+        self.play(center2.animate.set_color(WHITE))
+        self.wait(2)
+
+        self.play(
+            center2[1][19].animate.set_color(RED),
+            center2[1][20].animate.set_color(RED),
+            center2[1][21].animate.set_color(RED),
+            center2[1][22].animate.set_color(RED),
+            center2[1][23].animate.set_color(RED),
+            center2[1][24].animate.set_color(RED),
+            center2[1][25].animate.set_color(RED),
+            center2[1][26].animate.set_color(RED),
+            center2[1][27].animate.set_color(RED),
+            center2[1][28].animate.set_color(RED),
+            center2[1][29].animate.set_color(RED),
+            center2[1][30].animate.set_color(RED),
+            center2[1][31].animate.set_color(RED)
+        )
         self.wait(2)
