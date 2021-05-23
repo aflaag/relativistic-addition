@@ -4,7 +4,7 @@ A Manim project for the relativistic addition of velocity.
 # Requisites
 - [Python 3.x](https://www.python.org/downloads/)
 - [pip](https://pip.pypa.io/en/stable/installing/) (latest version)
-- [Manim](https://github.com/3b1b/manim) (the code works on version 0.5.0)
+- [Manim](https://github.com/3b1b/manim) (the code works on version 0.6.0)
 - [FFmpeg](https://github.com/BtbN/FFmpeg-Builds/releases)
 - [LaTeX](https://www.latex-project.org/get/) 
 
