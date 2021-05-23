@@ -1255,12 +1255,11 @@ class StudyU(Scene):
         self.play(Write(system2, run_time=1.5))
         self.wait(2)
 
-        results = MathTex("""
-\\begin{matrix}
-\\\ -: + \infty
-\\\ +: - \infty
-\\end{matrix}
-        """)
+        results = VGroup(
+            MathTex(r"\lim_{u' \rightarrow - \frac{c^2}{v} ^ -} {u} = + \infty"),
+            MathTex(r"\lim_{u' \rightarrow - \frac{c^2}{v} ^ +} {u} = - \infty")
+        )
+        results.arrange(DOWN)
 
         results.set_color("#e78c4b")
 
@@ -1763,24 +1762,122 @@ class SecondDerivative(Scene):
         self.play(center4.animate.set_color(WHITE))
         self.wait(2)
 
-        left = MathTex(r"\frac{d^2}{du'^2} u =", r"\frac{-2 \frac{\beta }{c}}{\gamma ^2 (1 + \frac{\beta}{c} u') ^3}")
-        left.shift(LEFT * 2)
+        self.play(
+            center4[1][2].animate.set_color(RED),
+            center4[1][3].animate.set_color(RED),
+            center4[1][4].animate.set_color(RED),
 
-        self.play(ReplacementTransform(center4, left, run_time=1.5))
+            center4[1][11].animate.set_color(RED),
+            center4[1][12].animate.set_color(RED),
+            center4[1][13].animate.set_color(RED),
+        )
         self.wait(2)
 
-        right = MathTex(r"-2 \frac{\beta}{c} > 0", color="#babaff")
-        right.shift(RIGHT * 2)
+        center5 = MathTex(r"\frac{d^2}{du'^2} u =", r"\frac{-2 \frac{v}{c^2}}{\gamma^2 (1+ \frac{v}{c^2} u')^3}")
+
+        set_color(center5, 1, [2, 3, 4, 5, 12, 13, 14, 15], RED)
+
+        self.play(ReplacementTransform(center4, center5, run_time=1.5))
+        self.wait(2)
 
         self.play(
-            left[1][0].animate.set_color("#babaff"),
-            left[1][1].animate.set_color("#babaff"),
-            left[1][2].animate.set_color("#babaff"),
-            left[1][3].animate.set_color("#babaff"),
-            left[1][4].animate.set_color("#babaff"),
+            center5[1][12].animate.set_color(WHITE),
+            center5[1][13].animate.set_color(WHITE),
+            center5[1][14].animate.set_color(WHITE),
+            center5[1][15].animate.set_color(WHITE),
+        )
+        self.wait() # no 2 sec waiting
+
+        center6 = MathTex(r"\frac{d^2}{du'^2} u =", r"\frac{-2 v}{c^2 \gamma^2 (1+ \frac{v}{c^2} u')^3}")
+
+        set_color(center6, 1, [2, 4, 5], RED)
+
+        self.play(FadeTransformPieces(center5, center6, run_time=1.5))
+        # no waiting
+
+        self.play(center6.animate.set_color(WHITE))
+        
+        self.wait(2)
+
+        left = MathTex(r"\frac{d^2}{du'^2} u =", r"\frac{-2 v}{c^2 \gamma^2 (1+ \frac{v}{c^2} u')^3}")
+        left.shift(LEFT * 3.5)
+
+        self.play(ReplacementTransform(center6, left, run_time=1.5))
+        self.wait(2)
+
+        right = MathTex(r"(1+ \frac{v}{c^2} u')^3 > 0 \mathrm{\ } \forall u', v", color="#babaff")
+        right.shift(RIGHT * 3.5)
+
+        self.play(
+            left[1][8].animate.set_color("#babaff"),
+            left[1][9].animate.set_color("#babaff"),
+            left[1][10].animate.set_color("#babaff"),
+            left[1][11].animate.set_color("#babaff"),
+            left[1][12].animate.set_color("#babaff"),
+            left[1][13].animate.set_color("#babaff"),
+            left[1][14].animate.set_color("#babaff"),
+            left[1][15].animate.set_color("#babaff"),
+            left[1][16].animate.set_color("#babaff"),
+            left[1][17].animate.set_color("#babaff"),
+            left[1][18].animate.set_color("#babaff"),
 
             Write(right, run_time=1.5)
         )
         self.wait(2)
 
-        # under = MathTex(r"\frac{\beta}{c} = \frac{v}{c^2} \Rightarrow \frac{v}{c^2} > 0")
+        right_under = MathTex(r"(\frac{u'v}{c^2} > -1 \Rightarrow u'v > -c^2 \mathrm{\ } \forall u', v)", color="#babaff")
+        right_under.next_to(right, DOWN)
+
+        self.play(Write(right_under, run_time=1.5))
+        self.wait(2)
+
+        self.play(Unwrite(right, run_time=0.7), Unwrite(right_under, run_time=0.7), left.animate.set_color(WHITE))
+        self.wait(2)
+
+        right2 = VGroup(
+            MathTex(r"v \mathrm{\ cambia}"),
+            MathTex(r"\mathrm{la \ concavit}", r"\mathrm{\grave a}"),
+            MathTex(r"(v > 0 \Rightarrow -2v < 0)")
+        )
+        right2.arrange(DOWN)
+        right2.shift(RIGHT * 3.5)
+        
+        right2.set_color("#babaff")
+
+        self.play(
+            left[1][0].animate.set_color("#babaff"),
+            left[1][1].animate.set_color("#babaff"),
+            left[1][2].animate.set_color("#babaff"),
+
+            Write(right2, run_time=1.5)
+        )
+        self.wait(2)
+
+class FinalGraph(GraphScene):
+    def construct(self):
+        # self.x_axis_label = "$u\'$"
+        # self.y_axis_label = "$u$"
+        # self.x_min = -20
+        # self.x_max = 20
+        # self.y_min = -2
+        # self.y_max = 12
+        # self.graph_origin = ORIGIN + 3 * DOWN + 1.5 * LEFT
+        # self.x_axis_config = { "tick_frequency": 5 }
+        # self.y_axis_config = { "tick_frequency": 2 }
+
+        # self.setup_axes(animate=True)
+
+        # v = 1
+        # c = 3
+
+        # beta = v / c
+        # n = 1 - beta ** 2
+
+        # derivative = lambda x: n / (1 + beta * x / c) ** 2
+
+        # graph_before = self.get_graph(derivative, x_min=-20, x_max=1.1 * - c / beta, y_min=-5, y_max=20, color=GREEN)
+        # graph_after = self.get_graph(derivative, x_min=0.9 * - c / beta, x_max=20, y_min=-5, y_max=20, color=GREEN)
+
+        # asymptote = self.get_vertical_line_to_graph(1.001 * -c / beta, graph_before, color="#babaff")
+
+        # self.play(Create(graph_before, run_time=0.75))
