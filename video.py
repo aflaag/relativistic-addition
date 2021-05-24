@@ -1874,6 +1874,7 @@ class SecondDerivative(Scene):
         self.wait(2)
 
 class FinalGraph(GraphScene):
+    """ The final scene which draws the graph from the previous elements. """
     def construct(self):
         v = 2.25
         c = 3
