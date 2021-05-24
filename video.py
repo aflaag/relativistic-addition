@@ -862,7 +862,11 @@ class UGraph(GraphScene):
         graph_before2 = self.get_graph(u_func, x_min=-40, x_max=1.05 * - c / beta, y_min=-80, y_max=80, color=GREEN)
         graph_after2 = self.get_graph(u_func, x_min=0.957 * - c / beta, x_max=40, y_min=-80, y_max=80, color=GREEN)
 
-        self.play(var_tracker.animate.set_value(beta), ReplacementTransform(graph_before1, graph_before2), ReplacementTransform(graph_after1, graph_after2))
+        self.play(
+            var_tracker.animate.set_value(beta),
+            ReplacementTransform(graph_before1, graph_before2),
+            ReplacementTransform(graph_after1, graph_after2)
+        )
         self.wait(2)
 
         v = 0.6
@@ -873,7 +877,11 @@ class UGraph(GraphScene):
         
         var_tracker = on_screen_var.tracker
 
-        self.play(var_tracker.animate.set_value(beta), ReplacementTransform(graph_before2, graph_before3), ReplacementTransform(graph_after2, graph_after3))
+        self.play(
+            var_tracker.animate.set_value(beta),
+            ReplacementTransform(graph_before2, graph_before3),
+            ReplacementTransform(graph_after2, graph_after3)
+        )
         self.wait(2)
 
         v = 1.8
@@ -884,18 +892,30 @@ class UGraph(GraphScene):
         
         var_tracker = on_screen_var.tracker
 
-        self.play(var_tracker.animate.set_value(beta), ReplacementTransform(graph_before3, graph_before4), ReplacementTransform(graph_after3, graph_after4))
+        self.play(
+            var_tracker.animate.set_value(beta),
+            ReplacementTransform(graph_before3, graph_before4),
+            ReplacementTransform(graph_after3, graph_after4)
+        )
         self.wait(2)
 
-        v = 1.5
+        v = -1.5
         beta = v / c
 
-        graph_before5 = self.get_graph(u_func, x_min=-40, x_max=1.05 * - c / beta, y_min=-80, y_max=80, color=GREEN)
-        graph_after5 = self.get_graph(u_func, x_min=0.95 * - c / beta, x_max=40, y_min=-80, y_max=80, color=GREEN)
+        approach = 0.2
+
+        graph_before5 = self.get_graph(u_func, x_min=-40, x_max=- c / beta - approach, y_min=-80, y_max=80, color=GREEN)
+        graph_after5 = self.get_graph(u_func, x_min=- c / beta + approach, x_max=40, y_min=-80, y_max=80, color=GREEN)
         
         var_tracker = on_screen_var.tracker
 
-        self.play(var_tracker.animate.set_value(beta), ReplacementTransform(graph_before4, graph_before5), ReplacementTransform(graph_after4, graph_after5))
+        self.play(
+            var_tracker.animate.set_value(beta),
+            FadeTransform(graph_before4, graph_before5),
+            FadeTransform(graph_after4, graph_after5),
+
+            c_label.animate.shift(RIGHT * 0.3)
+        )
         self.wait(2)
 
 class HomographicFunction(GraphScene):
@@ -1855,29 +1875,71 @@ class SecondDerivative(Scene):
 
 class FinalGraph(GraphScene):
     def construct(self):
-        # self.x_axis_label = "$u\'$"
-        # self.y_axis_label = "$u$"
-        # self.x_min = -20
-        # self.x_max = 20
-        # self.y_min = -2
-        # self.y_max = 12
-        # self.graph_origin = ORIGIN + 3 * DOWN + 1.5 * LEFT
-        # self.x_axis_config = { "tick_frequency": 5 }
-        # self.y_axis_config = { "tick_frequency": 2 }
+        v = 2.25
+        c = 3
 
-        # self.setup_axes(animate=True)
+        beta = v / c
+        
+        u = lambda x: (x + v) / (1 + x * v / c ** 2)
 
-        # v = 1
-        # c = 3
+        self.x_axis_label = "$u\'$"
+        self.y_axis_label = "$u$"
+        self.x_min = -20
+        self.x_max = 20
+        self.y_min = -20
+        self.y_max = 20
+        self.graph_origin = ORIGIN
+        self.x_axis_config = { "tick_frequency": 2.5 }
+        self.y_axis_config = { "tick_frequency": 5 }
 
-        # beta = v / c
-        # n = 1 - beta ** 2
+        self.setup_axes(animate=True)
 
-        # derivative = lambda x: n / (1 + beta * x / c) ** 2
+        points = VGroup(
+            MathTex(r"(-v; 0)"),
+            MathTex(r"(0; v)"),
+        )
+        points.arrange(DOWN)
+        points.to_edge(LEFT)
+        points.to_edge(UP)
 
-        # graph_before = self.get_graph(derivative, x_min=-20, x_max=1.1 * - c / beta, y_min=-5, y_max=20, color=GREEN)
-        # graph_after = self.get_graph(derivative, x_min=0.9 * - c / beta, x_max=20, y_min=-5, y_max=20, color=GREEN)
+        points.set_color("#dbeda4")
 
-        # asymptote = self.get_vertical_line_to_graph(1.001 * -c / beta, graph_before, color="#babaff")
+        p1 = Dot(color="#dbeda4")
+        p1.shift(UP / 3)
 
-        # self.play(Create(graph_before, run_time=0.75))
+        p2 = Dot(color="#dbeda4")
+        p2.shift(LEFT * 0.5)
+
+        self.play(Write(points, run_time=1.5), Write(p1, run_time=1.5), Write(p2, run_time=1.5))
+        self.wait(2)
+
+        graph_before = self.get_graph(u, x_min=-20, x_max=1.06 * - c / beta, y_min=-5, y_max=20, color=GREEN)
+        graph_after = self.get_graph(u, x_min=0.95 * - c / beta, x_max=20, y_min=-5, y_max=20, color=GREEN)
+        
+        minus_x = -0.9
+        y_value = 4
+        non_dashed_asymptote_v = Line((minus_x, y_value, 0), (minus_x, - y_value, 0), color="#e78c4b")
+        asymptote_v = DashedVMobject(non_dashed_asymptote_v, positive_space_ratio=0.6)
+
+        plus_y = 0.6
+        x_value = 4.5
+        non_dashed_asymptote_h = Line((- x_value, plus_y, 0), (x_value, plus_y, 0), color="#e78c4b")
+        asymptote_h = DashedVMobject(non_dashed_asymptote_h, positive_space_ratio=0.6)
+
+        vertical = MathTex(r"u' = \frac{-c^2}{v}", color="#e78c4b")        
+        vertical.to_edge(LEFT)
+        vertical.shift(UP / 2)
+
+        horizontal = MathTex(r"u = \frac{c^2}{v}", color="#e78c4b")
+        horizontal.next_to(vertical, DOWN)
+
+        self.play(Write(vertical, run_time=1.5), Write(horizontal, run_time=1.5), Write(asymptote_v, run_time=0.7), Write(asymptote_h, run_time=0.7))
+        self.wait(2)
+
+        u_func = MathTex(r"u = \frac{u' + v}{1 + \frac{u'v}{c^2}}", color=GREEN)
+        u_func.to_edge(RIGHT)
+        u_func.to_edge(UP)
+
+        self.play(Write(graph_before, run_time=0.75))
+        self.play(Write(graph_after, run_time=0.75), Write(u_func, run_time=1.2))
+        self.wait(2)
