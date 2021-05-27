@@ -12,13 +12,13 @@ A Manim project for the relativistic addition of velocity.
 If you have every requisite listed above (on Windows, you must have everything added to `PATH`), by calling
 
 ```sh
-manim video.py [SCENE NAME]
+manim src/video.py [SCENE NAME]
 ```
 
 you should be able to generate every scene of the script one by one, or if you prefer
 
 ```sh
-manim video.py -a
+manim src/video.py -a
 ```
 
 allows you to create every scene with one command.
