@@ -26,4 +26,4 @@ allows you to create every scene with one command.
 The script of the video was made by using MiKTeX (and the VSCode LaTeX extension), and you can find the PDF file in the root of the repo as well.
 
 # Other resources
-You can find a [Desmos link](https://www.desmos.com/calculator/fa2rrfpa6x) in the first line of `video.py`, showing some of the graphs exaplained in detail in the presentation. Furthermore, you can check the whole PowerPoint presentation **MISSING LINK**.
+You can find a [Desmos link](https://www.desmos.com/calculator/fa2rrfpa6x) in the first line of `src/video.py`, showing some of the graphs exaplained in detail in the presentation. Furthermore, you can check the whole PowerPoint presentation **MISSING LINK**.
