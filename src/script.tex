@@ -4,12 +4,21 @@
 \usepackage{graphicx} % used to insert pictures
 \usepackage{mathtools} % imports some math tools
 \usepackage{indentfirst} % adds the spacing at the beginning of every paragraph
+\usepackage[margin = 1.0in]{geometry} % changes the size of the margins
+\usepackage{pgfplots} % used to plot graphs
+\usepackage{xcolor} % used to import more color names
 
-\setlength{\parindent}{3em}
+\setlength{\parindent}{3em} % changes the size of the paragraph spacing
+
+% check documentation for the lines below
+\setlength{\voffset}{-0.5in}
+\setlength{\footskip}{0.4in}
+\setlength{\textheight}{690pt}
+\pgfplotsset{width = 10cm,compat = 1.9} 
 
 \begin{document}
 
-\title{\textbf{Composizione relativistica della velocità}}
+\title{\textbf{La composizione relativistica delle velocità}}
 \author{\textit{Alessio Bandiera}}
 \date{} % empty date, so no date will show up in the document
 
@@ -35,7 +44,20 @@ intorno agli inizi del 1600, il quale era riuscito a formulare
 delle trasformazioni che permettessero di mettere in relazione
 le 4 dimensioni (\textit{3 spaziali e quella temporale}), di due
 sistemi di riferimento inerziali, nella condizione in cui uno
-dei due fosse in moto relativamente rispetto all'altro. Tali
+dei due fosse in moto relativamente rispetto all'altro.
+
+\begin{equation}
+    \left\{
+        \begin{aligned}
+        x' &= x - vt \\
+        y' &= y \\
+        z' &= z \\
+        t' &= t
+        \end{aligned}
+    \right.
+\end{equation}
+
+Tali
 trasformazioni prendono il nome di "\textbf{\textit{Trasformazioni di Galileo}}",
 dalle quali è possibile ricavare la legge che mette in relazione
 le due velocità del punto materiale, \(u\) e \(u'\), rispetto
@@ -60,7 +82,7 @@ una grandezza fisica che nessuno, prima di lui, aveva mai pensato
 di analizzare da un punto di vista più relativo: il tempo. Infatti,
 all'interno della teoria della relatività (\textit{in particolare quella
 ristretta}), Einstein spiega che il tempo non è una grandezza
-assoluta, e ciò deriva dei due postulati sui quali si fonda
+assoluta, e ciò deriva dai due postulati sui quali si fonda
 la sua teoria.
 
 \begin{itemize}
@@ -84,6 +106,19 @@ invariante in ogni sistema di riferimento.
     c = 299.792 \textrm{\ km/s}
 \end{equation}
 
+Infatti, ad esempio, prendendo valori come \(u = \frac{2}{3}c\) e \(v = - \frac{2}{3}c\),
+(\textit{ovvero, il sistema di riferimento \(S'\) si muoverebbe in verso opposto rispetto
+al sistema \(S\)}) allora, applicando la legge derivata dalle trasformazioni
+di Galileo, otterremmo
+
+\begin{equation}
+    u' = u - v = \frac{2}{3}c - (- \frac{2}{3}c) = \frac{4}{3}c
+\end{equation}
+
+Ma questo valore non può essere ritenuto valido, in quanto nessuna
+velocità può superare quella della luce; dunque, risulta ovvio che le
+trasformazioni di Galileo debbano essere necessariamente modificate.
+
 \begin{figure}[htbp]
     \label{einstein}
     \centerline{\includegraphics[scale=0.2]{einstein.jpg}}
@@ -92,10 +127,11 @@ invariante in ogni sistema di riferimento.
 
 \section{Le trasformazioni di Lorentz}
 Grazie ai contributi dati, inizialmente da Larmor nel 1887, successivamente
-da Poincarè nel 1905, alla relativitò ristretta, vennero definite le
+da Poincarè nel 1905, alla relatività ristretta, vennero definite le
 cosiddette "\textbf{\textit{Trasformazioni di Lorentz}}". Tale nome venne
-scelto da Larmor stesso, in quanto tali trasformazioni sono caratterizzate
-dalla presenza del cosiddetto "\textit{fattore Lorentziano}".
+scelto da Larmor stesso, in quanto queste trasformazioni sono caratterizzate
+dalla presenza del cosiddetto "\textit{fattore Lorentziano}", indicato con
+la lettera greca \(\gamma\), ed è pari a
 
 \begin{equation}
     \label{gamma}
@@ -103,7 +139,7 @@ dalla presenza del cosiddetto "\textit{fattore Lorentziano}".
 \end{equation}
 
 Le trasformazioni di Lorentz sono trasformazioni lineari di coordinate
-che permettono di descrivere come varia la misura del tempo e dello spazio,
+che permettono di descrivere come variano le misure del tempo e dello spazio,
 tra due sistemi di riferimento inerziali, riuscendo a tenere conto
 dell'invarianza della velocità della luce.
 
@@ -118,21 +154,24 @@ dell'invarianza della velocità della luce.
     \right.
 \end{equation}
 
-\section{Composizione relativitstica delle velocità}
-Mediante le trasformazion di Lorentz, è possibile risolvere il
+\section{La composizione relativistica delle velocità}
+Mediante le trasformazioni di Lorentz, è possibile risolvere il
 problema che caratterizzava le trasformazioni galileiane, e trovare
 una formula che possa esprimere la relazione tra \(u\) e \(u'\),
-tenendo in considerazione la velocità della luce:
+che tenga in considerazione la velocità della luce:
 
 \begin{equation}
     u' = \frac{u - v}{1 - \frac{uv}{c^2}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ u = \frac{u' + v}{1 + \frac{u'v}{c^2}} % this is terrible, i know, i'm sorry, i'm lazy
 \end{equation}
 
 \subsection{Dimostrazione della formula}
+A partire dall'uguaglianza
 
 \begin{equation}
     \frac{\Delta x'}{\Delta t'} = \frac{x_2' - x_1'}{t_1' - t_1'}
 \end{equation}
+
+riscriviamo il secondo membro mediante le trasformazioni di Lorentz
 
 \begin{equation}
     \left\{
@@ -145,42 +184,179 @@ tenendo in considerazione la velocità della luce:
     \frac{\Delta x'}{\Delta t'} = \frac{(x_2 - vt_2) - (x_1 - vt_1)}{(t_2 - \frac{v}{c^2} x_2) - (t_1 - \frac{v}{c^2} x_1)}
 \end{equation}
 
+e, successivamente, svolgendo i calcoli, otterremo
+
 \begin{equation}
     u' = \frac{\Delta x'}{\Delta t'} = \frac{x_2 - vt_2 - x_1 + vt_1}{t_2 - \frac{v}{c^2} x_2 - t_1 + \frac{v}{c^2} x_1} = \frac{(x_2 - x_1) - v(t_2 - t_1)}{(t_2 - t_1) - \frac{v}{c^2}(x_2 - x_1)}
 \end{equation}
 
+ma sapendo che \(x = ut\), e quindi \(\Delta x = u \Delta t\), allora
+
 \begin{equation}
-    x = ut \Rightarrow \Delta x = u \Delta t \Rightarrow u' = \frac{u(t_2 - t_1) - v(t_2 - t_1)}{(t_2 - t_1)-\frac{uv}{c^2}(t_2 - t_1)}
+    u' = \frac{u(t_2 - t_1) - v(t_2 - t_1)}{(t_2 - t_1)-\frac{uv}{c^2}(t_2 - t_1)}
 \end{equation}
+
+ed infine
 
 \begin{equation}
     u' = \frac{(t_2 - t_1)(u - v)}{(t_2 - t_1)\left(1 - \frac{uv}{c^2}\right)} = \frac{u - v}{1 - \frac{uv}{c^2}}
 \end{equation}
 
-% [DIMOSTRAZIONE] (1/2)
-
 \subsection{Invarianza di \(c\)}
-% [INVARIANZA DI C]
-Placeholder
+\`{E} possibile dimostrare che tale formula tiene conto dell'invarianza della velocità
+della luce, semplicemente ponendo \(u = c\), e svolgendo i calcoli, si otterrà
+
+\begin{equation}
+    u' = \frac{c - v}{1 - \frac{cv}{c^2}} = \frac{c - v}{1 - \frac{v}{c}} = \frac{c - v}{\frac{c - v}{c}} = \frac{c - v}{c - v}c = c
+\end{equation}
+
+e dunque, per \(u = c\), \(u'\) sarà pari a \(c\) indipendentemente dalla velocità \(v\).
 
 \subsection{Velocità molto piccole rispetto a \(c\)}
-% [VELOCITA' MOLTO PICCOLE RISPETTO A C]
-Placeholder
+Le trasformazioni di Galileo erano state ritenute valide fino alla
+teoria della relatività, poiché è possibile dimostrare che per
+velocità \(u\) ed \(u'\) di molto inferiori rispetto a \(c\),
+le trasformazioni di Lorentz possono essere approssimate a quelle
+di Galileo. Infatti, le trasformazioni di Galileo risultano essere un caso
+particolare delle trasformazioni di Lorentz, in quanto ponendo
+\(u << c\) e \(v << c\), allora \(\frac{uv}{c^2} \approx 0\), e dunque
+
+\begin{equation}
+    u' \approx \frac{u - v}{1 - 0} \approx u - v
+\end{equation}
+
+ovvero, approssimativamente la formula \((2)\).
 
 \section{Analisi matematica della composzione relativistica delle velocità}
-Placeholder
+Per comodità, studieremo la funzione della composizione relativistica
+delle velocità, nella forma
 
-% [U IN FUNZIONE DI U'] % TODO: FALLO PRIMA
+\begin{equation}
+    u = \frac{u' + v}{1 + \frac{u'v}{c^2}}
+\end{equation}
 
 \subsection{Funzione omografica}
 % [FUNZIONE OMOGRAFICA]
-Placeholder
+La cosiddetta \textit{funzione omografica}, è una funzione del tipo
+
+\begin{equation}
+    y = \frac{ax + b}{cx + d}\ \ \ (c \neq 0)
+\end{equation}
+
+Ad esempio, il grafico di \(y = \frac{1}{x}\), un caso di funzione
+omografica molto semplice, è
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        axis lines = center,
+        xlabel = $x$,
+        ylabel = {$y$},
+    ]
+        \addplot [
+            domain = -10:-0.1, 
+            samples = 100, 
+            color = teal,
+        ] {1 / x};
+        \addplot [
+            domain = 0.1:10,
+            samples = 100, 
+            color = teal,
+        ] {1 / x};
+        \addlegendentry{$\frac{1}{x}$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+Inoltre, la funzione \(u(u')\) risulta proprio essere una
+funzione omografica, ed in particolare
+
+\begin{equation}
+    a = 1\ \ \ \ \ b = v\ \ \ \ \ c = \frac{v}{c^2}\ \ \ \ \ d = 1
+\end{equation}
 
 \subsection{Studio della funzione}
 % [STUDIO DELLA FUNZIONE]
-Placeholder
+Partiamo dal classificare la funzione: essa è una \textit{funzione
+algebrica razionale fratta}, e non è definita per tutto l'asse reale,
+infatti il dominio è
 
-\subsection{Analisi derivata prima}
+\begin{equation}
+    D_u = \forall u'\ |\ 1 + \frac{u'v}{c^2} \neq 0
+\end{equation}
+
+e dunque
+
+\begin{equation}
+    D_u = \forall u'\ |\ u' \neq - \frac{c^2}{v}
+\end{equation}
+
+Le intersezioni della curva con gli assi possono essere calcolate
+risolvendo due semplici sistemi:
+
+\begin{equation}
+    \left\{
+        \begin{aligned}
+        u' &= 0 \\
+        u &= \frac{0 + v}{1 + 0}
+        \end{aligned}
+    \right.
+    \ \ \
+    \left\{
+        \begin{aligned}
+        u &= 0 \\
+        0 &= \frac{u' + v}{1 + \frac{u'v}{c^2}}
+        \end{aligned}
+    \right.
+    \Rightarrow
+    \left\{
+        \begin{aligned}
+        u' &= 0 \\
+        u &= v
+        \end{aligned}
+    \right.
+    \ \ \
+    \left\{
+        \begin{aligned}
+        u &= 0 \\
+        u' &= -v
+        \end{aligned}
+    \right.
+\end{equation}
+
+e dunque i punti di intersezione con gli assi sono
+
+\begin{equation}
+    (0;\ v)\ \ \ (-v;\ 0)
+\end{equation}
+
+
+Successivamente, andiamo a studiare gli intervalli di \(u'\)
+per i quali la funzione risulta essere positiva, negativa e nulla. Per
+far questo, basterà imporre \(u > 0\), e dunque
+
+\begin{equation}
+    \frac{u' + v}{1 + \frac{u'v}{c^2}} > 0
+\end{equation}
+
+Facendo lo studio del segno della funzione, otterremo che il numeratore
+è maggiore per
+
+\begin{equation}
+    u' + v > ' \Rightarrow u ' > -v
+\end{equation}
+
+mentre il denominatore è maggiore per
+
+\begin{equation}
+    1 + \frac{u'v}{c^2} > 0 \Rightarrow u' > - \frac{u'v}{c^2}
+\end{equation}
+
+Quindi, complessivamente, lo studio della funzione mostra che
+
+% TODO: keep from here
+
+\subsection{Analisi della derivata prima}
 % [CALCOLO DELLA DERIVATA PRIMA]
 % [STUDIO DEL SEGNO DELLA DERIVATA PRIMA]
 Placeholder
