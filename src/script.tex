@@ -6,6 +6,7 @@
 \usepackage{indentfirst} % adds the spacing at the beginning of every paragraph
 \usepackage[margin = 1.0in]{geometry} % changes the size of the margins
 \usepackage{pgfplots} % used to plot graphs
+\usepackage{hyperref} % used for hyperlinks
 
 \setlength{\parindent}{3em} % changes the size of the paragraph spacing
 
@@ -13,7 +14,7 @@
 \setlength{\voffset}{-0.5in}
 \setlength{\footskip}{0.4in}
 \setlength{\textheight}{690pt}
-\pgfplotsset{width = 10cm,compat = 1.9} 
+\pgfplotsset{width = 10cm, compat = 1.9} 
 
 \definecolor{light_green}{RGB}{20, 150, 63}
 \definecolor{light_purple}{RGB}{131, 118, 227}
@@ -613,7 +614,6 @@ mentre avrà la concavità verso il basso per \(u' > - \frac{c^2}{v}\).
 Disponendo ora di tutti gli elementi necessari,
 possiamo finalmente tracciare il grafico di \(u(u')\):
 
-% TODO: CAMBIA IL GRAFICO
 % in this example, v = 2 and c = 3
 \begin{center}
     \begin{tikzpicture}
@@ -634,7 +634,14 @@ possiamo finalmente tracciare il grafico di \(u(u')\):
             \addplot +[
                 mark = none,
                 color = orange,
+                dashed,
             ] coordinates {(-9 / 2, -18) (-9 / 2, 27)};
+
+            \addplot +[
+                mark = none,
+                color = orange,
+                dashed,
+            ] coordinates {(-10, 9 / 2) (10, 9 / 2)};
 
             \addplot [
                 domain = -9 / 2 + 0.5:10,
@@ -661,13 +668,64 @@ Tale grafico è stato rappresentato per un valore di
 ed in maniera analoga, \(\frac{c^2}{v}\); di conseguenza
 gli asintoti invertono il loro segno, mentre la concavità,
 per quanto mostrato precedentemente, non cambia.
-Di seguito è riportato un grafico con \(v < 0\)
+Di seguito è riportato un grafico con \(v < 0\), più
+precisamente il valore opposto al grafico precedente
 (\textit{valgono le stesse considerazioni del
 grafico precedente}):
 
-% [GRAFICO CON V < 0]
+\begin{center}
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines = center,
+            thick,
+            xlabel = {$u'$},
+            ylabel = {$u$},
+            legend pos = outer north east,
+            legend style={/tikz/every even column/.append style = {row sep=0.1cm}},
+        ]
+            \addplot [
+                domain = -10:9 / 2 - 0.5, 
+                samples = 100, 
+                color = light_green,
+            ] {(x - 2) / (1 + x * (-2) / 9)};
+            
+            \addplot [color = white] {x - 10}; % i know, this solution is terrible, but i wasn't able to change the size of the legend box
+
+            \addplot [
+                domain = 9 / 2 + 0.5:10,
+                samples = 100, 
+                color = light_green,
+            ] {(x - 2) / (1 + x * (-2) / 9)};
+
+            \legend{$\frac{u' + v}{1 + \frac{u'v}{c^2}}$, $ $};
+        \end{axis}
+    \end{tikzpicture}
+\end{center}
+
+\section{Postfazione}
+Questo elaborato, assieme alla presentazione visiva, è il
+risultato di numerose ore di lavoro, ed è stato realizzato
+utilizzando: \textbf{Manim}, per la parte delle animazioni
+dell'elaborato; \textbf{LaTeX}, per la realizzazione di questo
+PDF; \textbf{Visual Studio Code}, piattaforma sulla quale
+è stato scritto tutto il codice dell'elaborato; \textbf{Python},
+il linguaggio con cui è scritto Manim; \textbf{Desmos}, per la
+realizzazione di grafici dinamici; \textbf{Sony Vegas Pro},
+con il quale sono state rielaborate le animazioni prodotte
+tramite Manim per adattarle ai tempi della presentazione;
+\textbf{PowerPoint}, contenente le varie animazioni della
+presentazione; infine, \textbf{Word}, utilizzato per scrivere
+la bozza iniziale del contenuto da trattare.\hfill\break
+
+L'elaborato è interamente \textit{open source},
+ed è disponibile su \textbf{GitHub} al seguente link, all'interno
+del quale è possibile trovare tutto il codice ed il materiale
+utilizzato per realizzarlo:
+
+\url{https://github.com/ph04/relativistic-addition}\hfill\break
+
+Si ringrazia la commissione per l'attenzione.
 
 \end{document}
 
 % TODO: INDEX
-% TODO: BIBLIOGRAFIA
