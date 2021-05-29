@@ -34,7 +34,7 @@ riferimento inerziale \(S'\), in movimento con velocità
 agli assi sovrapposti \(x\) ed \(x'\), che \(S\) ed \(S'\) siano
 paralleli ed equiversi, e che all'istante \(t=t'=0\) s, \(S\)
 ed \(S'\) si sovrappongano; rispetto ad \(S'\), il punto
-materiale in \(S\) si muove di velocità \(u'\). \`E possibile
+materiale in \(S\) si muove con velocità \(u'\). \`E possibile
 trovare una legge che sia in grado di mettere in relazione
 le due velocità \(u\) ed \(u'\)?
 
@@ -141,7 +141,7 @@ la lettera greca \(\gamma\), ed è pari a
 Le trasformazioni di Lorentz sono trasformazioni lineari di coordinate
 che permettono di descrivere come variano le misure del tempo e dello spazio,
 tra due sistemi di riferimento inerziali, riuscendo a tenere conto
-dell'invarianza della velocità della luce.
+dell'invarianza della velocità della luce:
 
 \begin{equation}
     \left\{
@@ -236,7 +236,6 @@ delle velocità, nella forma
 \end{equation}
 
 \subsection{Funzione omografica}
-% [FUNZIONE OMOGRAFICA]
 La cosiddetta \textit{funzione omografica}, è una funzione del tipo
 
 \begin{equation}
@@ -244,7 +243,7 @@ La cosiddetta \textit{funzione omografica}, è una funzione del tipo
 \end{equation}
 
 Ad esempio, il grafico di \(y = \frac{1}{x}\), un caso di funzione
-omografica molto semplice, è
+omografica molto semplice, è il seguente
 
 \begin{center}
 \begin{tikzpicture}
@@ -268,7 +267,7 @@ omografica molto semplice, è
 \end{tikzpicture}
 \end{center}
 
-Inoltre, la funzione \(u(u')\) risulta proprio essere una
+La funzione \(u(u')\) risulta dunque essere proprio una
 funzione omografica, ed in particolare
 
 \begin{equation}
@@ -276,19 +275,19 @@ funzione omografica, ed in particolare
 \end{equation}
 
 \subsection{Studio della funzione}
-% [STUDIO DELLA FUNZIONE]
+% [STUDIO DELLA FUNZIONE] % TODO: rimuovi
 Partiamo dal classificare la funzione: essa è una \textit{funzione
 algebrica razionale fratta}, e non è definita per tutto l'asse reale,
 infatti il dominio è
 
 \begin{equation}
-    D_u = \forall u'\ |\ 1 + \frac{u'v}{c^2} \neq 0
+    \mathrm{D}_u = \forall u'\ |\ 1 + \frac{u'v}{c^2} \neq 0
 \end{equation}
 
 e dunque
 
 \begin{equation}
-    D_u = \forall u'\ |\ u' \neq - \frac{c^2}{v}
+    \mathrm{D}_u = \forall u'\ |\ u' \neq - \frac{c^2}{v}
 \end{equation}
 
 Le intersezioni della curva con gli assi possono essere calcolate
@@ -330,7 +329,6 @@ e dunque i punti di intersezione con gli assi sono
     (0;\ v)\ \ \ (-v;\ 0)
 \end{equation}
 
-
 Successivamente, andiamo a studiare gli intervalli di \(u'\)
 per i quali la funzione risulta essere positiva, negativa e nulla. Per
 far questo, basterà imporre \(u > 0\), e dunque
@@ -339,7 +337,7 @@ far questo, basterà imporre \(u > 0\), e dunque
     \frac{u' + v}{1 + \frac{u'v}{c^2}} > 0
 \end{equation}
 
-Facendo lo studio del segno della funzione, otterremo che il numeratore
+Studiando il segno della funzione, otterremo che il numeratore
 è maggiore per
 
 \begin{equation}
@@ -354,7 +352,39 @@ mentre il denominatore è maggiore per
 
 Quindi, complessivamente, lo studio della funzione mostra che
 
-% TODO: keep from here
+\begin{align*}
+    u > 0 &:\ u' < - \frac{c^2}{v} \vee u' > -v  \\
+    u = 0 &:\ u' = -v \\
+    u < 0 &:\ - \frac{c^2}{v} < u' < -v
+\end{align*}
+
+Procedendo con lo studio della funzione, andiamo alla ricerca
+di eventuali limiti verticali, facendo tendere la variabile
+indipendente al valore che non fa parte del dominio della
+funzione (19), quindi calcolando
+
+\begin{equation}
+    \lim_{u' \rightarrow - \frac{c^2}{v}}{\frac{u' + v}{1 + \frac{u'v}{c^2}}}
+\end{equation}
+
+che è pari a
+
+\begin{equation}
+    \frac{- \frac{c^2}{v} + v}{1 - \frac{c^2v}{vc^2}} = \frac{\frac{-c^2 + v^2}{v}}{1 - 1} = \frac{v^2 - c^2}{0}
+\end{equation}
+
+Il numeratore di tale frazione è sempre negativo,
+in quanto \(v < c\ \Rightarrow\ v^2 < c^2\ \Rightarrow\ v^2 - c^2 < 0\),
+dunque
+
+\begin{align*}
+    \lim_{u' \rightarrow - \frac{c^2}{v}^-}{u} = + \infty \\
+    \lim_{u' \rightarrow - \frac{c^2}{v}^+}{u} = - \infty
+\end{align*}
+
+quindi \(u' = - \frac{c^2}{v}\) risulta essere un asintoto verticale.
+
+% TODO: from here
 
 \subsection{Analisi della derivata prima}
 % [CALCOLO DELLA DERIVATA PRIMA]
@@ -366,3 +396,6 @@ Placeholder
 yo mamma's so overweight
 
 \end{document}
+
+% TODO: INDEX
+% TODO: BIBLIOGRAFIA
