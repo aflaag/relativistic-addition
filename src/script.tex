@@ -237,6 +237,14 @@ delle velocità, nella forma
     u = \frac{u' + v}{1 + \frac{u'v}{c^2}}
 \end{equation}
 
+Inoltre, a partire da questa sezione in poi, la funzione
+verrà analizzata da un punto di vista puramente matematico,
+in quanto è bene ricordare che \(-c < u' < c\), ma diremo
+che il dominio della funzione coincide con l'asse reale
+privato del punto in cui il denominatore si annulla,
+per semplicità di intenti (\textit{la condizione
+\(-c < v < c\) verrà comunque tenuta in considerazione}).
+
 \subsection{Funzione omografica}
 La cosiddetta \textit{funzione omografica}, è una funzione del tipo
 
@@ -362,6 +370,13 @@ Quindi, complessivamente, lo studio della funzione mostra che
     u < 0 &:\ - \frac{c^2}{v} < u' < -v
 \end{align*}
 
+\textit{Per quanto detto nel paragrafo 7, bisogna comunque
+tenere a mente che, da un punto di vista fisico, la disequazione
+\(u'v > -c^2\) è sempre verificata, poichè \(u'\) e \(v\)
+saranno sempre maggiori di \(-c\), e dunque il primo membro, anche
+nel caso in cui \(u'\) e \(v\) fossero discordi, non
+sarà mai pari o inferiore a \(-c^2\).}\hfill\break
+
 Procedendo con lo studio della funzione, andiamo alla ricerca
 di eventuali limiti verticali, facendo tendere la variabile
 indipendente al valore che non fa parte del dominio della
@@ -480,8 +495,10 @@ anch'esso sempre positivo, dunque complessivamente
 la funzione è sempre positiva, quindi si troverà nel
 I e nel II quadrante, e presenta un asintoto verticale
 che coincide con l'asintoto verticale della funzione
-di partenza. Tracciando il grafico della derivata prima,
-otterremo dunque il seguente (\textit{nel grafico riportato
+di partenza.\hfill\break
+
+Dunque, tracciando il grafico della derivata prima,
+otterremo il seguente (\textit{nel grafico riportato
 sono stati utilizzati valori di \(c\) e di \(v\)
 non realistici, in quanto sono stati posti \(c = 3\) e \(v = 2\),
 ma esclusivamente per ragioni di comodità nel tracciare
@@ -505,6 +522,7 @@ in scala di un fattore pari a circa \(10^8\)}):
                 samples = 100, 
                 color = light_green,
             ] {(1 - 2^2 / 9) / (1 + 2 * x / 9)^2};
+
             \addplot +[
                 mark = none,
                 color = light_purple,
@@ -526,8 +544,6 @@ lo studio della funzione è la derivata seconda. Ma prima di
 calcolarla, riscriviamo la funzione utilizzando la formula (5)
 che definisce il fattore Lorentziano:
 
-% TODO: from here
-
 \begin{equation}
     \begin{aligned}
         \frac{d}{du'} u = \frac{1 - \beta^2}{\left(1 + \frac{u'v}{c^2}\right)^2} \\
@@ -536,8 +552,120 @@ che definisce il fattore Lorentziano:
     \Rightarrow\ \frac{d}{du'} u = \frac{1}{\gamma^2\left(1 + \frac{u'v}{c^2}\right)^2} = \frac{1}{\left[\gamma \left(1 + \frac{u'v}{c^2}\right)\right]^2}
 \end{equation}
 
-% [CALCOLO DELLA DERIVATA SECONDA E STUDIO DEL SEGNO]
-% yo mamma's so overweight
+Utilizzando la formula (31), possiamo calcolare la derivata
+seconda della funzione in esame, ottenendo
+
+\begin{equation}
+    \frac{d^2}{du'^2} u = \frac{-2\left[\gamma \left(1 + \frac{u'v}{c^2}\right)\right] \gamma \frac{v}{c^2}}{\left[\gamma \left(1 + \frac{u'v}{c^2}\right)\right]^4} = \frac{-2v}{c^2\gamma^2 \left(1 + \frac{u'v}{c^2}\right)^3}
+\end{equation}
+
+Studiandone il segno, poniamo la funzione maggiore di 0
+
+\begin{equation}
+    \frac{-2v}{c^2\gamma^2 \left(1 + \frac{u'v}{c^2}\right)^3} > 0
+\end{equation}
+
+e partendo dal denominatore,
+osserviamo che la disequazione
+
+\begin{equation}
+    c^2\gamma^2 \left(1 + \frac{u'v}{c^2}\right)^3 > 0
+\end{equation}
+
+presenta il termine \(c^2 \gamma^2\),
+il quale è sempre positivo, mentre il termine
+\(\left(1 + \frac{u'v}{c^2}\right)^3\)
+necessita di essere analizzato più approfonditamente.
+Infatti, essendo un termine che vede \(v\)
+come parametro, e potendo quest'ultimo assumere valore negativo,
+per poter procedere con il calcolo è necessario
+tenere in considerazione il suo segno. Infatti se \(v > 0\),
+allora il numeratore \(-2v\) sarà complessivamente negativo, e
+di conseguenza per essere positiva la frazione, il
+denominatore deve assumere segno negativo, e dunque
+
+\begin{equation}
+    \left(1 + \frac{u'v}{c^2}\right)^3 < 0\ \Rightarrow\ 1 + \frac{u'v}{c^2} < 0\ \Rightarrow\ \frac{u'v}{c^2} < -1\ \Rightarrow\ u' < - \frac{c^2}{v}
+\end{equation}
+
+e in particolare, nell'ultimo passaggio non è
+necessario invertire il segno della disequazione in
+quanto \(v\) è positivo in ipotesi. Differentemente,
+se poniamo \(v < 0\), allora il numeratore sarà
+complessivamente positivo, e dunque per assumere
+segno positivo la frazione, il denominatore dovrà
+essere necessariamente positivo, quindi
+
+\begin{equation}
+    \left(1 + \frac{u'v}{c^2}\right)^3 > 0\ \Rightarrow\ 1 + \frac{u'v}{c^2} > 0\ \Rightarrow\ \frac{u'v}{c^2} > -1\ \Rightarrow\ u' < - \frac{c^2}{v}
+\end{equation}
+
+e, nell'ultimo passaggio, bisogna fare attenzione
+ad invertire il segno della disequazione, in quanto
+\(v < 0\) in ipotesi. Abbiamo dunque trovato un risultato
+molto interessante: \textit{la concavità della funzione
+non dipende dalla velocita \(v\) del secondo sistema di
+riferimento}. Infatti, in entrambi i casi, la funzione
+avrà la concavità verso l'alto per \(u' < - \frac{c^2}{v}\),
+mentre avrà la concavità verso il basso per \(u' > - \frac{c^2}{v}\).
+
+\section{Grafico della funzione}
+Disponendo ora di tutti gli elementi necessari,
+possiamo finalmente tracciare il grafico di \(u(u')\):
+
+% TODO: CAMBIA IL GRAFICO
+% in this example, v = 2 and c = 3
+\begin{center}
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines = center,
+            thick,
+            xlabel = {$u'$},
+            ylabel = {$u$},
+            legend pos = outer north east,
+            legend style={/tikz/every even column/.append style = {row sep=0.5cm}},
+        ]
+            \addplot [
+                domain = -10:-9 / 2 - 0.5, 
+                samples = 100, 
+                color = light_green,
+            ] {(x + 2) / (1 + x * 2 / 9)};
+
+            \addplot +[
+                mark = none,
+                color = orange,
+            ] coordinates {(-9 / 2, -18) (-9 / 2, 27)};
+
+            \addplot [
+                domain = -9 / 2 + 0.5:10,
+                samples = 100, 
+                color = light_green,
+            ] {(x + 2) / (1 + x * 2 / 9)};
+
+            \legend{
+                $\frac{u' + v}{1 + \frac{u'v}{c^2}}$,
+                $- \frac{c^2}{v}$,
+                $\frac{c^2}{v}$
+            };
+        \end{axis}
+    \end{tikzpicture}
+\end{center}
+
+(\textit{nel grafico rappresentato valgono le stesse
+considerazioni che sono state utilizzate per
+tracciare il grafico della formula \((33)\)})\hfill\break
+
+Tale grafico è stato rappresentato per un valore di
+\(v\) positivo, poiché quando \(v < 0\), il valore
+\(- \frac{c^2}{v}\) sarà positivo e non più negativo,
+ed in maniera analoga, \(\frac{c^2}{v}\); di conseguenza
+gli asintoti invertono il loro segno, mentre la concavità,
+per quanto mostrato precedentemente, non cambia.
+Di seguito è riportato un grafico con \(v < 0\)
+(\textit{valgono le stesse considerazioni del
+grafico precedente}):
+
+% [GRAFICO CON V < 0]
 
 \end{document}
 
