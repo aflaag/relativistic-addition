@@ -1981,7 +1981,6 @@ class EndingSequence(Scene):
         python.next_to(vsc, DOWN)
         python.shift(DOWN * 0.2)
 
-        # this needs to be fixed in post
         desmos_icon = SVGMobject("assets/desmos.svg").scale(0.5)
         desmos_label = MathTex(r"\mathrm{Desmos}").scale(0.5)
 
