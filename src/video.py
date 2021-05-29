@@ -1944,3 +1944,82 @@ class FinalGraph(GraphScene):
         self.play(Write(graph_before, run_time=0.75))
         self.play(Write(graph_after, run_time=0.75), Write(u_func, run_time=1.2))
         self.wait(2)
+
+class EndingSequence(Scene):
+    """ Shows the ending sequence, which shows the programs used to make the presentation. """
+    def construct(self):
+        text = MathTex(r"\mathrm{La\ presentazione\ è\ stata\ realizzata\ utilizzando}")
+        text.to_edge(UP)
+        self.play(Write(text, run_time=1.5))
+        self.wait()
+
+        manim_icon = ManimBanner().scale(0.2)
+        manim_label = MathTex(r"\mathrm{Manim}").scale(0.6)
+        
+        manim = VGroup(manim_icon, manim_label).arrange(RIGHT)
+        manim.to_edge(LEFT)
+        manim.shift(UP / 2)
+
+        latex_icon = Tex(r"\LaTeX")
+        latex_label = MathTex(r"\mathrm{LaTeX}").scale(0.6)
+
+        latex = VGroup(latex_icon, latex_label).arrange(RIGHT)
+        latex.next_to(manim, DOWN)
+        latex.shift(DOWN * 0.6)
+
+        vsc_icon = SVGMobject("assets/vsc.svg").scale(0.5)
+        vsc_label = MathTex(r"\mathrm{Visual\ Studio\ Code}").scale(0.5)
+
+        vsc = VGroup(vsc_icon, vsc_label)
+        vsc.arrange(RIGHT)
+        vsc.shift(LEFT * 1.7 + UP / 2)
+
+        python_icon = SVGMobject("assets/python.svg").scale(0.5)
+        python_label = MathTex(r"\mathrm{Python}").scale(0.5)
+
+        python = VGroup(python_icon, python_label).arrange(RIGHT)
+        python.next_to(vsc, DOWN)
+        python.shift(DOWN * 0.2)
+
+        # this needs to be fixed in post
+        desmos_icon = SVGMobject("assets/desmos.svg").scale(0.5)
+        desmos_label = MathTex(r"\mathrm{Desmos}").scale(0.5)
+
+        desmos = VGroup(desmos_icon, desmos_label).arrange(RIGHT)
+        desmos.shift(RIGHT * 2 + UP / 2)
+
+        vegas_icon = SVGMobject("assets/vegas.svg").scale(0.5)
+        vegas_label = MathTex(r"\mathrm{Sony\ Vegas\ Pro}").scale(0.5)
+
+        vegas = VGroup(vegas_icon, vegas_label).arrange(RIGHT)
+        vegas.next_to(desmos, DOWN)
+        vegas.shift(DOWN * 0.2)
+
+        powerpoint_icon = SVGMobject("assets/powerpoint.svg").scale(0.5)
+        powerpoint_label = MathTex(r"\mathrm{PowerPoint}").scale(0.5)
+
+        powerpoint = VGroup(powerpoint_icon, powerpoint_label).arrange(RIGHT)
+        powerpoint.to_edge(RIGHT)
+        powerpoint.shift(UP / 2)
+
+        word_icon = SVGMobject("assets/word.svg").scale(0.5)
+        word_label = MathTex(r"\mathrm{Word}").scale(0.5)
+
+        word = VGroup(word_icon, word_label).arrange(RIGHT)
+        word.next_to(powerpoint, DOWN)
+        word.shift(DOWN * 0.2)
+
+        self.play(
+            Write(manim, run_time=1.5),
+            Write(latex, run_time=1.5),
+
+            Write(vsc, run_rime=1.5),
+            Write(python, run_time=1.5),
+            
+            Write(desmos, run_time=1.5),
+            Write(vegas, run_time=1.5),
+
+            Write(powerpoint, run_time=1.5),
+            Write(word, run_time=1.5)
+        )
+        self.wait(2)
