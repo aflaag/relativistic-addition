@@ -6,7 +6,6 @@
 \usepackage{indentfirst} % adds the spacing at the beginning of every paragraph
 \usepackage[margin = 1.0in]{geometry} % changes the size of the margins
 \usepackage{pgfplots} % used to plot graphs
-\usepackage{xcolor} % used to import more color names
 
 \setlength{\parindent}{3em} % changes the size of the paragraph spacing
 
@@ -15,6 +14,9 @@
 \setlength{\footskip}{0.4in}
 \setlength{\textheight}{690pt}
 \pgfplotsset{width = 10cm,compat = 1.9} 
+
+\definecolor{light_green}{RGB}{20, 150, 63}
+\definecolor{light_purple}{RGB}{131, 118, 227}
 
 \begin{document}
 
@@ -83,7 +85,7 @@ di analizzare da un punto di vista più relativo: il tempo. Infatti,
 all'interno della teoria della relatività (\textit{in particolare quella
 ristretta}), Einstein spiega che il tempo non è una grandezza
 assoluta, e ciò deriva dai due postulati sui quali si fonda
-la sua teoria.
+la sua teoria:
 
 \begin{itemize}
     \item{\textbf{Le leggi della meccanica, dell'elettromagnetismo e
@@ -243,28 +245,31 @@ La cosiddetta \textit{funzione omografica}, è una funzione del tipo
 \end{equation}
 
 Ad esempio, il grafico di \(y = \frac{1}{x}\), un caso di funzione
-omografica molto semplice, è il seguente
+omografica molto semplice, è il seguente:
 
 \begin{center}
-\begin{tikzpicture}
-    \begin{axis}[
-        axis lines = center,
-        xlabel = $x$,
-        ylabel = {$y$},
-    ]
-        \addplot [
-            domain = -10:-0.1, 
-            samples = 100, 
-            color = teal,
-        ] {1 / x};
-        \addplot [
-            domain = 0.1:10,
-            samples = 100, 
-            color = teal,
-        ] {1 / x};
-        \addlegendentry{$\frac{1}{x}$};
-    \end{axis}
-\end{tikzpicture}
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines = center,
+            thick,
+            xlabel = {$x$},
+            ylabel = {$y$},
+        ]
+            \addplot [
+                domain = -10:-0.1, 
+                samples = 100, 
+                color = teal,
+            ] {1 / x};
+
+            \addplot [
+                domain = 0.1:10,
+                samples = 100, 
+                color = teal,
+            ] {1 / x};
+
+            \legend{$\frac{1}{x}$};
+        \end{axis}
+    \end{tikzpicture}
 \end{center}
 
 La funzione \(u(u')\) risulta dunque essere proprio una
@@ -275,7 +280,6 @@ funzione omografica, ed in particolare
 \end{equation}
 
 \subsection{Studio della funzione}
-% [STUDIO DELLA FUNZIONE] % TODO: rimuovi
 Partiamo dal classificare la funzione: essa è una \textit{funzione
 algebrica razionale fratta}, e non è definita per tutto l'asse reale,
 infatti il dominio è
@@ -382,18 +386,158 @@ dunque
     \lim_{u' \rightarrow - \frac{c^2}{v}^+}{u} = - \infty
 \end{align*}
 
-quindi \(u' = - \frac{c^2}{v}\) risulta essere un asintoto verticale.
+quindi \(u' = - \frac{c^2}{v}\) risulta essere un asintoto verticale. Invece,
+per quanto riguarda gli eventuali asintoti orizzontali, calcoliamo
+
+\begin{equation}
+    \lim_{u' \rightarrow \pm \infty}{\frac{u' + v}{1 + \frac{u'v}{c^2}}}
+\end{equation}
+
+e per calcolarlo, è necessario mettere in evidenza \(u'\) sia al numeratore
+che al denominatore, e dunque possiamo riscrivere il limite come
+
+\begin{equation}
+    \lim_{u' \rightarrow \pm \infty}{\frac{u'(1 + \frac{v}{u'})}{u'(\frac{1}{u'} + \frac{v}{c^2})}}
+\end{equation}
+
+e semplificando \(u'\), possiamo snellire ulteriormente il limite,
+in quanto se
+
+\begin{equation}
+    u' \rightarrow \pm \infty\ \Rightarrow\
+    \begin{aligned}
+        \frac{v}{u'} \rightarrow 0 \\
+        \frac{1}{u'} \rightarrow 0
+    \end{aligned}
+\end{equation}
+
+dunque
+
+\begin{equation}
+    \frac{(1 + 0)}{(0 + \frac{v}{c^2})} = \frac{1}{\frac{v}{c^2}} = \frac{c^2}{v}
+\end{equation}
+
+quindi \(u = \frac{c^2}{v}\) è un asintoto orizzontale. In seguito,
+andremo a calcolare la derivata prima della funzione, per cercare
+eventuali punti di non derivabilità, e punti di minimo e/o punti di massimo.
+La derivata prima di \(u\) è possibile calcolarla ricordando che
+
+\begin{equation}
+    \frac{d}{dx} \frac{f(x)}{g(x)} = \frac{f'(x) g(x) - f(x) g'(x)}{g(x)^2}
+\end{equation}
+
+e quindi, la derivata di \(u(u')\) sarà
+
+\begin{equation}
+    \frac{d}{du'} u = \frac{(1 + \frac{u'v}{c^2}) - (u' + v) \frac{v}{c^2}}{\left(1 + \frac{u'v}{c^2}\right)^2} = \frac{1 + \frac{u'v}{c^2} - \frac{u'v}{c^2} - \frac{v^2}{c^2}}{\left(1 + \frac{u'v}{c^2}\right)^2} = \frac{1 - \frac{v^2}{c^2}}{\left(1 + \frac{u'v}{c^2}\right)^2}
+\end{equation}
+
+o, alternativamente, poiché \(\beta = \frac{v}{c}\), possiamo
+riscrivere la derivata come
+
+\begin{equation}
+    \frac{d}{du'} u = \frac{1 - \beta^2}{\left(1 + \frac{u'v}{c^2}\right)^2}
+\end{equation}
+
+Ora, proseguiamo studiando il segno della derivata prima, e dunque
+
+\begin{equation}
+    1 - \beta^2 > 0\ \Rightarrow\ \beta^2 < 1\ \Rightarrow\ -1 < \beta < 1
+\end{equation}
+
+e poiché \(\beta = \frac{v}{c}\), allora
+
+\begin{equation}
+    -1 < \frac{v}{c} < 1\ \Rightarrow\ -c < v < c
+\end{equation}
+
+e ciò è sempre vero per il secondo assioma della relatività
+ristretta, di conseguenza il numeratore è sempre positivo. Invece,
+per quanto riguarda il numeratore, ponendolo maggiore di
+0 otterremo
+
+\begin{equation}
+    (1 + \frac{u'v}{c^2})^2 > 0
+\end{equation}
+
+ed essendo un quadrato, è verificato per
+
+\begin{equation}
+    \forall u'\ |\ 1 + \frac{u'v}{c^2} \neq 0
+\end{equation}
+
+ovvero
+
+\begin{equation}
+    \forall u'\ |\ u' \neq - \frac{c^2}{v}
+\end{equation}
+
+Tale punto non costituisce un punto di non derivabilità
+in quanto il dominio della funzione è (19), e dunque
+il punto \(u' = - \frac{c^2}{v}\) non fa parte del
+dominio di \(u\). Di conseguenza, il denominatore è
+anch'esso sempre positivo, dunque complessivamente
+la funzione è sempre positiva, quindi si troverà nel
+I e nel II quadrante, e presenta un asintoto verticale
+che coincide con l'asintoto verticale della funzione
+di partenza. Tracciando il grafico della derivata prima,
+otterremo dunque il seguente (\textit{nel grafico riportato
+sono stati utilizzati valori di \(c\) e di \(v\)
+non realistici, in quanto sono stati posti \(c = 3\) e \(v = 2\),
+ma esclusivamente per ragioni di comodità nel tracciare
+il grafico, l'andamento di questo risulta lo stesso con i
+valori reali, in quanto risulta solamente rappresentato
+in scala di un fattore pari a circa \(10^8\)}):
+
+% in this example, v = 2 and c = 3
+\begin{center}
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines = center,
+            thick,
+            xlabel = {$u'$},
+            ylabel = {$u$},
+            legend pos = outer north east,
+            legend style={/tikz/every even column/.append style = {row sep=0.5cm}},
+        ]
+            \addplot [
+                domain = -6:-9 / 2 - 0.1, 
+                samples = 100, 
+                color = light_green,
+            ] {(1 - 2^2 / 9) / (1 + 2 * x / 9)^2};
+            \addplot +[
+                mark = none,
+                color = light_purple,
+            ] coordinates {(-9 / 2, 0) (-9 / 2, 1130)};
+
+            \addplot [
+                domain = -9 / 2 + 0.1:1,
+                samples = 100, 
+                color = light_green,
+            ] {(1 - 2^2 / 9) / (1 + 2 * x / 9)^2};
+
+            \legend{$\frac{1 - \beta^2}{\left(1 + \frac{u'v}{c^2}\right)^2}$, $- \frac{c^2}{v}$};
+        \end{axis}
+    \end{tikzpicture}
+\end{center}
+
+L'ultimo elemento che bisogna analizzare per completare
+lo studio della funzione è la derivata seconda. Ma prima di
+calcolarla, riscriviamo la funzione utilizzando la formula (5)
+che definisce il fattore Lorentziano:
 
 % TODO: from here
 
-\subsection{Analisi della derivata prima}
-% [CALCOLO DELLA DERIVATA PRIMA]
-% [STUDIO DEL SEGNO DELLA DERIVATA PRIMA]
-Placeholder
+\begin{equation}
+    \begin{aligned}
+        \frac{d}{du'} u = \frac{1 - \beta^2}{\left(1 + \frac{u'v}{c^2}\right)^2} \\
+        \gamma = \frac{1}{\sqrt{1 - \beta^2}}\ \Rightarrow\ \gamma^{-2} = 1 - \beta^2
+    \end{aligned}
+    \Rightarrow\ \frac{d}{du'} u = \frac{1}{\gamma^2\left(1 + \frac{u'v}{c^2}\right)^2} = \frac{1}{\left[\gamma \left(1 + \frac{u'v}{c^2}\right)\right]^2}
+\end{equation}
 
-\subsection{Analisi della derivata seconda}
 % [CALCOLO DELLA DERIVATA SECONDA E STUDIO DEL SEGNO]
-yo mamma's so overweight
+% yo mamma's so overweight
 
 \end{document}
 
