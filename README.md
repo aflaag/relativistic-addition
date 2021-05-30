@@ -22,6 +22,9 @@ manim src/video.py -a
 
 allows you to create every scene with one command.
 
+The scene called `EndingSequence` imports some SVGs, placed into `assets`: almost every SVG was made using [Inkscape](https://inkscape.org/it/),
+and a little bit of manual editing for some color adjustments.
+
 The script of the video was made by using MiKTeX (and the VSCode LaTeX extension), and you can find the PDF file in the root of the repo as well.
 
 # Other resources
