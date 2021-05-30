@@ -133,7 +133,7 @@ Grazie ai contributi dati, inizialmente da Larmor nel 1887, successivamente
 da Poincarè nel 1905, alla relatività ristretta, vennero definite le
 cosiddette ``\textbf{\textit{Trasformazioni di Lorentz}}". Tale nome venne
 scelto da Larmor stesso, in quanto queste trasformazioni sono caratterizzate
-dalla presenza del cosiddetto ``\textit{fattore Lorentziano}", indicato con
+dalla presenza del cosiddetto ``\textit{fattore di Lorentz}", indicato con
 la lettera greca \(\gamma\), ed è pari a
 
 \begin{equation}
@@ -160,8 +160,8 @@ dell'invarianza della velocità della luce:
 \section{La composizione relativistica delle velocità}
 Mediante le trasformazioni di Lorentz, è possibile risolvere il
 problema che caratterizzava le trasformazioni galileiane, e trovare
-una formula che possa esprimere la relazione tra \(u\) e \(u'\),
-che tenga in considerazione la velocità della luce:
+una formula che possa esprimere la relazione tra \(u\) e \(u'\), e
+che tenga in considerazione l'invarianza della velocità della luce:
 
 \begin{equation}
     u' = \frac{u - v}{1 - \frac{uv}{c^2}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ u = \frac{u' + v}{1 + \frac{u'v}{c^2}} % this is terrible, i know, i'm sorry, i'm lazy
@@ -171,7 +171,7 @@ che tenga in considerazione la velocità della luce:
 A partire dall'uguaglianza
 
 \begin{equation}
-    \frac{\Delta x'}{\Delta t'} = \frac{x_2' - x_1'}{t_1' - t_1'}
+    \frac{\Delta x'}{\Delta t'} = \frac{x_2' - x_1'}{t_2' - t_1'}
 \end{equation}
 
 riscriviamo il secondo membro mediante le trasformazioni di Lorentz
@@ -218,7 +218,7 @@ e dunque, per \(u = c\), \(u'\) sarà pari a \(c\) indipendentemente dalla veloc
 \subsection{Velocità molto piccole rispetto a \textit{c}}
 Le trasformazioni di Galileo erano state ritenute valide fino alla
 teoria della relatività, poiché è possibile dimostrare che per
-velocità \(u\) ed \(u'\) di molto inferiori rispetto a \(c\),
+valori di \(u\) e di \(v\) di molto inferiori rispetto a \(c\),
 le trasformazioni di Lorentz possono essere approssimate a quelle
 di Galileo. Infatti, le trasformazioni di Galileo risultano essere un caso
 particolare delle trasformazioni di Lorentz, in quanto ponendo
@@ -230,7 +230,7 @@ particolare delle trasformazioni di Lorentz, in quanto ponendo
 
 ovvero, approssimativamente la formula \((2)\).
 
-\section{Analisi matematica della composzione relativistica delle velocità}
+\section{Analisi matematica della composizione relativistica delle velocità}
 Per comodità, studieremo la funzione della composizione relativistica
 delle velocità, nella forma
 
@@ -294,13 +294,13 @@ algebrica razionale fratta}, e non è definita per tutto l'asse reale,
 infatti il dominio è
 
 \begin{equation}
-    \mathrm{D}_u = \forall u'\ |\ 1 + \frac{u'v}{c^2} \neq 0
+    \mathrm{D}_u:\ \forall u'\ |\ 1 + \frac{u'v}{c^2} \neq 0
 \end{equation}
 
 e dunque
 
 \begin{equation}
-    \mathrm{D}_u = \forall u'\ |\ u' \neq - \frac{c^2}{v}
+    \mathrm{D}_u:\ \forall u'\ |\ u' \neq - \frac{c^2}{v}
 \end{equation}
 
 Le intersezioni della curva con gli assi possono essere calcolate
@@ -440,9 +440,9 @@ dunque
     \frac{(1 + 0)}{(0 + \frac{v}{c^2})} = \frac{1}{\frac{v}{c^2}} = \frac{c^2}{v}
 \end{equation}
 
-quindi \(u = \frac{c^2}{v}\) è un asintoto orizzontale. In seguito,
+quindi \(u = \frac{c^2}{v}\) risulta essere un asintoto orizzontale. In seguito,
 andremo a calcolare la derivata prima della funzione, per cercare
-eventuali punti di non derivabilità, e punti di minimo e/o punti di massimo.
+eventuali punti di non derivabilità, e punti di minimo e/o di massimo.
 La derivata prima di \(u\) è possibile calcolarla ricordando che
 
 \begin{equation}
@@ -475,9 +475,9 @@ e poiché \(\beta = \frac{v}{c}\), allora
 \end{equation}
 
 e ciò è sempre vero per il secondo assioma della relatività
-ristretta, di conseguenza il numeratore è sempre positivo. Invece,
-per quanto riguarda il numeratore, ponendolo maggiore di
-0 otterremo
+ristretta (\textit{paragrafo \(3\)}); di conseguenza,
+il numeratore è sempre positivo. Invece, per quanto riguarda
+il denominatore, ponendolo maggiore di 0, otterremo
 
 \begin{equation}
     \left(1 + \frac{u'v}{c^2}\right)^2 > 0
@@ -509,9 +509,9 @@ Dunque, tracciando il grafico della derivata prima,
 otterremo il seguente (\textit{nel grafico riportato
 sono stati utilizzati valori di \(c\) e di \(v\)
 non realistici, in quanto sono stati posti \(c = 3\) e \(v = 2\),
-ma esclusivamente per ragioni di comodità nel tracciare
-il grafico, l'andamento di questo risulta lo stesso con i
-valori reali, in quanto risulta solamente rappresentato
+ma esclusivamente per ragioni di comodità nella rappresentazione
+del grafico, infatti l'andamento di questo risulta lo stesso con i
+valori reali, in quanto è soltanto raffigurato
 in scala di un fattore pari a circa \(10^8\)}):
 
 % in this example, v = 2 and c = 3
@@ -549,8 +549,8 @@ in scala di un fattore pari a circa \(10^8\)}):
 
 L'ultimo elemento che bisogna analizzare per completare
 lo studio della funzione è la derivata seconda. Ma prima di
-calcolarla, riscriviamo la funzione utilizzando la formula (5)
-che definisce il fattore Lorentziano:
+calcolarla, riscriviamo la derivata prima utilizzando la formula
+(5) che definisce il fattore di Lorentz:
 
 \begin{equation}
     \begin{aligned}
