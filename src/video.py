@@ -683,9 +683,9 @@ class Derivative(Scene):
         self.wait(2)
 
 class StudyDerivative(GraphScene):
-    """ Studies the graph of the first derivative of the function of the relativistic addition of velocities, and then shows it. """
+    """ Studies the first derivative of the function of the relativistic addition of velocities. """
     def construct(self):
-        segno = MathTex(r"\frac{d}{du'} u = \frac{1 - \beta^2}{(1 + \frac{\beta}{c} u')^2}", color=GREEN)
+        segno = MathTex(r"\frac{d}{du'} u = \frac{1 - \beta^2}{\left(1 + \frac{\beta}{c} u'\right)^2}", color=GREEN)
         segno.to_edge(UP)
 
         self.play(Write(segno, run_time=1.5))
@@ -697,12 +697,7 @@ class StudyDerivative(GraphScene):
         domain.shift(DOWN * 0.2)
 
         self.play(Write(domain, run_time=1.5))
-        
-        segno2 = MathTex(r"\mathrm{Numeratore:\ } 1 - \beta^2", color="#ddccaa")
-        self.play(Write(segno2, run_time=1.5))
         self.wait(2)
-
-        self.play(Unwrite(segno2, run_time=0.6))
 
         segno3 = MathTex(r"1 - \beta^2 > 0", color="#ddccaa")
         self.play(Write(segno3, run_time=1.5))
@@ -733,14 +728,7 @@ class StudyDerivative(GraphScene):
         self.play(Unwrite(segno7, run_time=0.6), Unwrite(segno8, run_time=0.6))
         self.wait(2)
 
-        den = MathTex(r"\mathrm{Denominatore:\ } (1 + \frac{\beta}{c} u')^2", color="#babaff")
-
-        self.play(Write(den, run_time=1.5))
-        self.wait(2)
-
-        self.play(Unwrite(den, run_time=0.6))
-
-        den2 = MathTex(r"(1 + \frac{\beta}{c} u')^2 > 0", color="#babaff")
+        den2 = MathTex(r"\left(1 + \frac{\beta}{c} u'\right)^2 > 0", color="#babaff")
         self.play(Write(den2, run_time=1.5))
         self.wait(2)
 
@@ -748,7 +736,7 @@ class StudyDerivative(GraphScene):
         den3.next_to(den2, DOWN)
 
         self.play(Write(den3, run_time=1.5))
-        self.wait(2)
+        self.wait(4) # not 2
 
         den4 = MathTex(r"u' \neq - \frac{c}{ \beta}", color="#babaff")
         self.play(Unwrite(den2, run_time=0.7), ReplacementTransform(den3, den4, run_time=1.5))
@@ -767,42 +755,6 @@ class StudyDerivative(GraphScene):
 
         self.play(Create(rect))
         self.play(Uncreate(rect))
-
-        den6 = MathTex(r"u' = - \frac{c}{ \beta}", color="#babaff")
-        den6.to_edge(RIGHT)
-
-        self.play(FadeTransform(den4, den6), Unwrite(den5))
-
-        self.x_axis_label = "$u\'$"
-        self.y_axis_label = "$u$"
-        self.x_min = -20
-        self.x_max = 20
-        self.y_min = -2
-        self.y_max = 12
-        self.graph_origin = ORIGIN + 3 * DOWN + 1.5 * LEFT
-        self.x_axis_config = { "tick_frequency": 5 }
-        self.y_axis_config = { "tick_frequency": 2 }
-
-        self.setup_axes(animate=True)
-
-        v = 1
-        c = 3
-
-        beta = v / c
-        n = 1 - beta ** 2
-
-        derivative = lambda x: n / (1 + beta * x / c) ** 2
-
-        graph_before = self.get_graph(derivative, x_min=-20, x_max=1.1 * - c / beta, y_min=-5, y_max=20, color=GREEN)
-        graph_after = self.get_graph(derivative, x_min=0.9 * - c / beta, x_max=20, y_min=-5, y_max=20, color=GREEN)
-
-        asymptote = self.get_vertical_line_to_graph(1.001 * -c / beta, graph_before, color="#babaff")
-
-        self.play(Create(graph_before, run_time=0.75))
-        self.play(Create(graph_after, run_time=0.75))
-        self.wait(2)
-
-        self.play(Create(asymptote, run_time=1))
         self.wait(2)
 
 class UGraph(GraphScene):
@@ -1142,45 +1094,66 @@ class StudyU(Scene):
         self.play(Write(den, run_time=1.5))
         self.wait(2)
 
+        fix = MathTex(r"v > 0", color="#e35235")
+        fix.next_to(den, UP)
+
+        self.play(Write(fix, run_time=1.5))
+        self.wait(2)
+
         den2 = MathTex(r"u' > - \frac{c^2}{v}", color="#e35235")
         self.play(FadeTransformPieces(den, den2, run_time=1.5))
         self.wait(2)
 
-        num_new = MathTex(r"u' > -v", color="#e35235")
-        num_new.shift(UP / 2)
-
-        den_new = MathTex(r"u' > - \frac{c^2}{v}", color="#e35235")
-        den_new.next_to(num_new, DOWN)
-
-        self.play(ReplacementTransform(num2_moved, num_new, run_time=1.5), ReplacementTransform(den2, den_new, run_time=1.5))
+        self.play(
+            fix.animate.shift(LEFT * 2),
+            den2.animate.shift(LEFT * 2),
+        )
         self.wait(2)
+
+        fix2 = MathTex(r"v < 0", color="#e35235")
+        fix2.next_to(fix, RIGHT)
+        fix2.shift(RIGHT * 2) # TODO: idk? maybe 1.5
+
+        fix3 = MathTex(r"u' < - \frac{c^2}{v}", color="#e35235")
+        fix3.next_to(fix2, DOWN)
+
+        self.play(Write(fix2, run_time=1.5), Write(fix3, run_time=1.5))
+        self.wait(2)
+
+        self.play(Unwrite(fix, run_time=1), Unwrite(den2, run_time=1), Unwrite(fix2, run_time=1), Unwrite(fix3, run_time=1), Unwrite(num2_moved, run_time=1))
 
         positive = VGroup(
-            MathTex(r"u>0: u'< - \frac{c^2}{v} \vee u'>-v"),
-            MathTex(r"u=0: u'=-v"),
-            MathTex(r"u<0: - \frac{c^2}{v} <u'<-v")
+            MathTex(r"u>0 :\ u'< - \frac{c^2}{v} \vee u'>-v"),
+            MathTex(r"u=0 :\ u'=-v"),
+            MathTex(r"u<0 :\ - \frac{c^2}{v} <u'<-v")
         )
-        positive.arrange(DOWN)
-        
+        positive.scale(0.7)
+        positive.arrange(DOWN, aligned_edge=LEFT)
+        positive.shift(UP + RIGHT * 0.8)
         positive.set_color("#e35235")
 
-        self.play(Unwrite(num_new, run_time=0.7), Unwrite(den_new, run_time=0.7))
-        
-        self.play(Write(positive, run_time=1.5))
-        
-        self.play(Indicate(positive[0], run_time=0.5, color="#e35235"))
-        self.play(Indicate(positive[1], run_time=0.5, color="#e35235"))
-        self.play(Indicate(positive[2], run_time=0.5, color="#e35235"))
-        self.wait(2)
+        boh = MathTex(r"v > 0:", color="#e35235")
+        boh.next_to(positive, LEFT)
 
-        # i have a severe naming problem
-        positiveness = MathTex(r"u>0: u'< - \frac{c^2}{v} \vee u'>-v", color="#e35235")
-        positiveness.to_edge(DOWN)
-        positiveness.to_edge(RIGHT)
+        positive2 = VGroup(
+            MathTex(r"u>0 :\ -v < u' < - \frac{c^2}{v}"),
+            MathTex(r"u=0 :\ u'=-v"),
+            MathTex(r"u<0 :\ u' < -v \vee u' > - \frac{c^2}{v}")
+        )
+        positive2.scale(0.7)
+        positive2.arrange(DOWN, aligned_edge=LEFT)
+        positive2.next_to(positive, DOWN)
+        positive2.shift(DOWN * 0.4)
+        positive2.set_color("#e35235")
 
-        self.play(Unwrite(positive, run_time=0.7), Write(positiveness, run_time=1.5))
-        self.wait(2)
+        boh2 = MathTex(r"v < 0:", color="#e35235")
+        boh2.next_to(positive2, LEFT)
         
+        self.play(Write(boh, run_time=1.5), Write(boh2, run_time=1.5), Write(positive, run_time=1.5), Write(positive2, run_time=1.5))
+        self.wait(4) # not 2
+
+        self.play(Unwrite(boh, run_time=1.5), Unwrite(boh2, run_time=1.5), Unwrite(positive, run_time=1.5), Unwrite(positive2, run_time=1.5))
+        self.wait(3) # not 4
 
         limit = MathTex("\\lim_{u\' \\rightarrow - \\frac{c^2}{v} } {\\frac{u\'+v}{\\frac{u\'v}{c^2}+1}}", color="#e78c4b")
 
@@ -1643,9 +1616,11 @@ class Einstein(Scene):
 class SecondDerivative(Scene):
     """ Shows how to derive the second derivative of the function of the relativistic addition of velocities. """
     def construct(self):
+        # THE WAITING TIMES OF THIS WHOLE ANIMATION ARE COMPLETELY DIFFERENT FROM THE OTHER ANIMATIONS
+
         der = MathTex(r"\frac{d}{du'} u = \frac{1 - \beta ^ 2}{(1 + \frac{\beta}{c} u') ^2}")
         self.play(Write(der, run_time=1.5))
-        self.wait(2)
+        self.wait()
 
         self.play(
             der[0][7].animate.set_color(RED),
@@ -1653,7 +1628,7 @@ class SecondDerivative(Scene):
             der[0][9].animate.set_color(RED),
             der[0][10].animate.set_color(RED)
         )
-        self.wait(2)
+        self.wait()
 
         forgot = MathTex(r"\gamma = \frac{1}{\sqrt{1 - \beta ^ 2} } \Rightarrow \gamma ^ {-2} = 1 - \beta ^ 2", color=BLUE)
         forgot.next_to(der, DOWN)
@@ -1663,13 +1638,13 @@ class SecondDerivative(Scene):
         set_color(forgot2, 0, [7, 9, 10], RED)
 
         self.play(Write(forgot, run_time=1.5))
-        self.wait(2)
+        self.wait()
 
         self.play(FadeTransformPieces(der, forgot2, run_time=1.5))
-        self.wait(2)
+        self.wait()
 
         self.play(forgot2.animate.set_color(WHITE))
-        self.wait(2)
+        self.wait()
 
         self.play(
             forgot2[0][9].animate.set_color(RED),
@@ -1677,17 +1652,17 @@ class SecondDerivative(Scene):
 
             forgot2[0][20].animate.set_color(RED)
         )
-        self.wait(2)
+        self.wait()
 
         forgot3 = MathTex("\\frac{d}{du\'} u = \\frac{1}{[\gamma (1 + \\frac{\\beta}{c} u')]^2 }")
 
         set_color(forgot3, 0, [9, 10, 20, 21], RED)
 
         self.play(FadeTransformPieces(forgot2, forgot3, run_time=1.5))
-        self.wait(2)
+        self.wait()
 
         self.play(forgot3.animate.set_color(WHITE))
-        self.wait(2)
+        self.wait()
 
         der2 = MathTex("\\frac{d}{du\'} u = \\frac{1}{[\gamma (1 + \\frac{\\beta}{c} u')]^2 }")
         der2.to_edge(UP)
@@ -1698,13 +1673,13 @@ class SecondDerivative(Scene):
         set_color(center, 1, [0, 1, 2, 3, 4], RED)
 
         self.play(ReplacementTransform(forgot3, der2, run_time=1.5), Unwrite(forgot, run_time=0.7), Write(center, run_time=1.5))
-        self.wait(2)
+        self.wait()
 
         idk = MathTex(r"\frac{d}{dx} \frac{1}{f(x)} = - \frac{f'(x)}{f(x)^2}", color=BLUE)
         idk.to_edge(DOWN)
 
         self.play(Write(idk, run_time=1.5))
-        self.wait(2)
+        self.wait()
 
         center2 = MathTex("\\frac{d^2}{du'^2} u =", "\\frac{-2[\gamma(1+\\frac{\\beta}{c} u\')] \gamma \\frac{\\beta}{c}}{[\gamma (1 + \\frac{\\beta}{c} u')]^4}")
         
@@ -1712,10 +1687,10 @@ class SecondDerivative(Scene):
 
         self.play(ReplacementTransform(center, center2, run_time=1.5))
         self.play(Unwrite(idk, run_time=1.5))
-        self.wait(2)
+        self.wait()
 
         self.play(center2.animate.set_color(WHITE))
-        self.wait(2)
+        self.wait()
 
         self.play(
             center2[1][19].animate.set_color(RED),
@@ -1732,17 +1707,17 @@ class SecondDerivative(Scene):
             center2[1][30].animate.set_color(RED),
             center2[1][31].animate.set_color(RED)
         )
-        self.wait(2)
+        self.wait()
 
         center3 = MathTex(r"\frac{d^2}{du'^2} u =", "\\frac{-2\gamma (1+\\frac{\\beta}{c} u\') \gamma \\frac{\\beta}{c}}{\gamma ^4 (1 + \\frac{\\beta}{c} u\')^4}")
         
         set_color(center3, 1, [17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28], RED)
 
         self.play(ReplacementTransform(center2, center3, run_time=1.5))
-        self.wait(2)
+        self.wait()
 
         self.play(center3.animate.set_color(WHITE))
-        self.wait(2)
+        self.wait()
 
         self.play(
             center3[1][2].animate.set_color(RED),
@@ -1770,17 +1745,17 @@ class SecondDerivative(Scene):
             center3[1][27].animate.set_color(RED),
             center3[1][28].animate.set_color(RED)
         )
-        self.wait(2)
+        self.wait()
 
         center4 = MathTex(r"\frac{d^2}{du'^2} u =", r"\frac{-2 \frac{\beta }{c}}{\gamma ^2 (1 + \frac{\beta}{c} u') ^3}")
         
         set_color(center4, 1, [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], RED)
 
         self.play(FadeTransformPieces(center3, center4, run_time=1.5))
-        self.wait(2)
+        self.wait()
 
         self.play(center4.animate.set_color(WHITE))
-        self.wait(2)
+        self.wait()
 
         self.play(
             center4[1][2].animate.set_color(RED),
@@ -1791,14 +1766,14 @@ class SecondDerivative(Scene):
             center4[1][12].animate.set_color(RED),
             center4[1][13].animate.set_color(RED),
         )
-        self.wait(2)
+        self.wait()
 
         center5 = MathTex(r"\frac{d^2}{du'^2} u =", r"\frac{-2 \frac{v}{c^2}}{\gamma^2 (1+ \frac{v}{c^2} u')^3}")
 
         set_color(center5, 1, [2, 3, 4, 5, 12, 13, 14, 15], RED)
 
         self.play(ReplacementTransform(center4, center5, run_time=1.5))
-        self.wait(2)
+        self.wait()
 
         self.play(
             center5[1][12].animate.set_color(WHITE),
@@ -1806,7 +1781,7 @@ class SecondDerivative(Scene):
             center5[1][14].animate.set_color(WHITE),
             center5[1][15].animate.set_color(WHITE),
         )
-        self.wait() # no 2 sec waiting
+        self.wait()
 
         center6 = MathTex(r"\frac{d^2}{du'^2} u =", r"\frac{-2 v}{c^2 \gamma^2 (1+ \frac{v}{c^2} u')^3}")
 
@@ -1817,61 +1792,25 @@ class SecondDerivative(Scene):
 
         self.play(center6.animate.set_color(WHITE))
         
-        self.wait(2)
+        self.wait()
 
         left = MathTex(r"\frac{d^2}{du'^2} u =", r"\frac{-2 v}{c^2 \gamma^2 (1+ \frac{v}{c^2} u')^3}")
         left.shift(LEFT * 3.5)
 
         self.play(ReplacementTransform(center6, left, run_time=1.5))
-        self.wait(2)
+        self.wait()
 
-        right = MathTex(r"(1+ \frac{v}{c^2} u')^3 > 0 \mathrm{\ } \forall u', v", color="#babaff")
+        right = VGroup(
+            MathTex(r"v > 0:\ u' < - \frac{c^2}{v}"),
+            MathTex(r"v < 0:\ u' < - \frac{c^2}{v}"),
+        )
+        right.arrange(DOWN)
         right.shift(RIGHT * 3.5)
-
-        self.play(
-            left[1][8].animate.set_color("#babaff"),
-            left[1][9].animate.set_color("#babaff"),
-            left[1][10].animate.set_color("#babaff"),
-            left[1][11].animate.set_color("#babaff"),
-            left[1][12].animate.set_color("#babaff"),
-            left[1][13].animate.set_color("#babaff"),
-            left[1][14].animate.set_color("#babaff"),
-            left[1][15].animate.set_color("#babaff"),
-            left[1][16].animate.set_color("#babaff"),
-            left[1][17].animate.set_color("#babaff"),
-            left[1][18].animate.set_color("#babaff"),
-
-            Write(right, run_time=1.5)
-        )
-        self.wait(2)
-
-        right_under = MathTex(r"(\frac{u'v}{c^2} > -1 \Rightarrow u'v > -c^2 \mathrm{\ } \forall u', v)", color="#babaff")
-        right_under.next_to(right, DOWN)
-
-        self.play(Write(right_under, run_time=1.5))
-        self.wait(2)
-
-        self.play(Unwrite(right, run_time=0.7), Unwrite(right_under, run_time=0.7), left.animate.set_color(WHITE))
-        self.wait(2)
-
-        right2 = VGroup(
-            MathTex(r"v \mathrm{\ cambia}"),
-            MathTex(r"\mathrm{la \ concavit}", r"\mathrm{\grave a}"),
-            MathTex(r"(v > 0 \Rightarrow -2v < 0)")
-        )
-        right2.arrange(DOWN)
-        right2.shift(RIGHT * 3.5)
         
-        right2.set_color("#babaff")
+        right.set_color("#babaff")
 
-        self.play(
-            left[1][0].animate.set_color("#babaff"),
-            left[1][1].animate.set_color("#babaff"),
-            left[1][2].animate.set_color("#babaff"),
-
-            Write(right2, run_time=1.5)
-        )
-        self.wait(2)
+        self.play(Write(right, run_time=1.5))
+        self.wait(8) # not 2
 
 class FinalGraph(GraphScene):
     """ The final scene which draws the graph from the previous elements. """
@@ -2021,4 +1960,32 @@ class EndingSequence(Scene):
             Write(powerpoint, run_time=1.5),
             Write(word, run_time=1.5)
         )
+        self.wait(2)
+
+class EndingEnding(Scene):
+    """ Shows the GitHub logo and where the repository can be found. """ 
+    def construct(self):
+        github_icon = SVGMobject("assets/github.svg").scale(3)
+        github_icon.shift(UP / 2)
+
+        github_label = MathTex(r"\mathrm{https://github.com/ph04/relativistic-addition}")
+        github_label.next_to(github_icon, DOWN)
+
+        self.play(Write(github_icon, run_time=3), Write(github_label, run_time=1.5))
+        self.wait(6) # not 2
+
+class Intro(Scene):
+    """ Shows the title of the presentation, and author's name. """ 
+    def construct(self):
+        text = MathTex(r"\mathrm{La\ composizione\ relativistica\ delle\ velocit}", r"\mathrm{\grave a}")
+        text.scale(1.2)
+
+        name = MathTex(r"Alessio\ Bandiera")
+        name.next_to(text, DOWN)
+
+        self.play(Write(text, run_time=2))
+        self.play(Write(name, run_time=2))
+        self.wait(2)
+
+        self.play(Unwrite(text, run_time=1.5), Unwrite(name, run_time=1.5))
         self.wait(2)
