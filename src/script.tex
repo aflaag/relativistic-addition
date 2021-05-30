@@ -205,7 +205,7 @@ ed infine
     u' = \frac{(t_2 - t_1)(u - v)}{(t_2 - t_1)\left(1 - \frac{uv}{c^2}\right)} = \frac{u - v}{1 - \frac{uv}{c^2}}
 \end{equation}
 
-\subsection{Invarianza di \(c\)}
+\subsection{Invarianza di \textit{c}}
 \`{E} possibile dimostrare che tale formula tiene conto dell'invarianza della velocità
 della luce, semplicemente ponendo \(u = c\), e svolgendo i calcoli, si otterrà
 
@@ -215,7 +215,7 @@ della luce, semplicemente ponendo \(u = c\), e svolgendo i calcoli, si otterrà
 
 e dunque, per \(u = c\), \(u'\) sarà pari a \(c\) indipendentemente dalla velocità \(v\).
 
-\subsection{Velocità molto piccole rispetto a \(c\)}
+\subsection{Velocità molto piccole rispetto a \textit{c}}
 Le trasformazioni di Galileo erano state ritenute valide fino alla
 teoria della relatività, poiché è possibile dimostrare che per
 velocità \(u\) ed \(u'\) di molto inferiori rispetto a \(c\),
@@ -357,21 +357,28 @@ Studiando il segno della funzione, otterremo che il numeratore
     u' + v > 0 \Rightarrow u ' > -v
 \end{equation}
 
-mentre il denominatore è maggiore per
-
-\begin{equation}
-    1 + \frac{u'v}{c^2} > 0 \Rightarrow u' > - \frac{u'v}{c^2}
-\end{equation}
-
-Quindi, complessivamente, lo studio della funzione mostra che
+mentre il denominatore dipende dal segno di \(v\):
 
 \begin{align*}
-    u > 0 &:\ u' < - \frac{c^2}{v} \vee u' > -v  \\
-    u = 0 &:\ u' = -v \\
-    u < 0 &:\ - \frac{c^2}{v} < u' < -v
+    v > 0:\ 1 + \frac{u'v}{c^2} > 0\ \Rightarrow\ u'v > -c^2\ \Rightarrow\ u' > - \frac{c^2}{v} \\
+    v < 0:\ 1 + \frac{u'v}{c^2} > 0\ \Rightarrow\ u'v > -c^2\ \Rightarrow\ u' < - \frac{c^2}{v}
 \end{align*}
 
-\textit{Per quanto detto nel paragrafo 7, bisogna comunque
+facendo attenzione ad invertire il segno della disequazione
+nell'ultimo passaggio, poiché stiamo dividendo per \(v < 0\).
+Quindi, complessivamente, lo studio della funzione mostra che
+
+% these abominations happen when you run out of time
+\begin{align*}
+    \ \ \ \ \ u > 0 &:\ u' < - \frac{c^2}{v} \vee u' > -v\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ u > 0 :\ -v < u' < - \frac{c^2}{v} \\
+    v > 0:\ \ u = 0 &:\ u' = -v\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ v < 0:\ \ u = 0 :\ u' = -v \\
+    \ \ \ \ \ u < 0 &:\ - \frac{c^2}{v} < u' < -v\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ u < 0 :\ u' < -v \vee u' > - \frac{c^2}{v}
+\end{align*}
+
+in quanto, se \(v < 0\), allora \(-v < - \frac{c^2}{v}\)
+(\textit{poiché \(v\) deve essere minore di \(c\)}).\hfill\break
+
+\textit{Per quanto detto nel paragrafo \(7\), bisogna comunque
 tenere a mente che, da un punto di vista fisico, la disequazione
 \(u'v > -c^2\) è sempre verificata, poichè \(u'\) e \(v\)
 saranno sempre maggiori di \(-c\), e dunque il primo membro, anche
@@ -553,7 +560,7 @@ che definisce il fattore Lorentziano:
     \Rightarrow\ \frac{d}{du'} u = \frac{1}{\gamma^2\left(1 + \frac{u'v}{c^2}\right)^2} = \frac{1}{\left[\gamma \left(1 + \frac{u'v}{c^2}\right)\right]^2}
 \end{equation}
 
-Utilizzando la formula (31), possiamo calcolare la derivata
+Utilizzando la formula (30), possiamo calcolare la derivata
 seconda della funzione in esame, ottenendo
 
 \begin{equation}
@@ -660,7 +667,7 @@ possiamo finalmente tracciare il grafico di \(u(u')\):
 
 (\textit{nel grafico rappresentato valgono le stesse
 considerazioni che sono state utilizzate per
-tracciare il grafico della formula \((33)\)})\hfill\break
+tracciare il grafico della formula \((32)\)})\hfill\break
 
 Tale grafico è stato rappresentato per un valore di
 \(v\) positivo, poiché quando \(v < 0\), il valore
