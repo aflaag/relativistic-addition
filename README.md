@@ -1,5 +1,5 @@
 # relativistic-addition
-A presentation about the relativistic addition of velocities
+A presentation about the relativistic addition of velocities.
 
 # Requisites
 - [Python 3.x](https://www.python.org/downloads/)
